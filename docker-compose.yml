@@ -1,0 +1,52 @@
+version: "3"
+services:
+  mariadb:
+    build:
+      context: "."
+      dockerfile: "docker/mariadb.Dockerfile"
+    ports:
+      - "3360:3306"
+    networks:
+      - "default"
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "learning_site"
+      MYSQL_USER: "jack"
+      MYSQL_PASSWORD: "hello"
+  php:
+    depends_on:
+      - "mariadb"
+      - "frontend"
+    build:
+      context: "."
+      dockerfile: "docker/php.Dockerfile"
+    ports:
+      - "8080:80"
+    networks:
+      - "default"
+    volumes:
+      - "./site:/var/www/html"
+      - "./python:/home/"
+  composer:
+    image: "composer:1.8"
+    volumes:
+      - "./site:/app"
+      - "~/.composer:/tmp"
+    command: "composer about"
+    networks:
+      - "default"
+  frontend:
+    build:
+      context: "."
+      dockerfile: "docker/frontend.Dockerfile"
+    expose:
+      - "4000"
+    ports:
+      - "4000:3000"
+    volumes:
+      - "./front-end/src:/usr/src/app/src"
+      - "./front-end/public:/usr/src/app/public"
+    networks:
+      - "default"
+networks:
+  default:
