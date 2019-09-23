@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+:root {
+    --main-colour: #FE7860;
+    --secondary-colour: #506CF0;
+    --third-colour: #A7C0CD;
+    --plain: #ffffff;
+}
+body, html{
+    height: 100%;
+    font-family: 'Muli', sans-serif;
+    margin: 0;
+}
+
+.nav {
+    background-image: var(--secondary-colour);
+
+}
+
+.nav-box {
+    display: flex;
+}
+
+.containers {
+    /*background-color: var(--plain);*/
+    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+    /*height: 100vh;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    font-size: 1.1em;
+}
+
+.form-input {
+    display: block;
+    padding: 10px;
+    height: 35px;
+    margin: 25px;
+    border-style: none;
+    line-height: 20px;
+    font-size: 1.4em;
+}
+
+.form {
+    background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
+    padding: 0.2rem;
+    margin-top: 4em;
+}
+
+.auth-button {
+    border-style: none;
+    height: 2em;
+    width: 8em;
+}
+.auth-button:hover {
+    background-color: var(--third-colour);
+}
+.home{
+
+}
+.about{
+    background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    font-size: 1.1em;
+}
+
+
+.home, .about {
+    position: absolute;
+    height: 90vh;
+    width: 100%;
+}
+.home-content{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+height: 100%;
+}
+
+.nav-list {
+    height: 10vh;
+    display: flex;
+    /*background-image: var(--secondary-colour);*/
+    width: 50%;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: auto;
+    list-style: none;
+}
+.nav-links{
+    color: black;
+    text-decoration: none;
+    font-size: 1.5rem;
+}

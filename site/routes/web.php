@@ -11,7 +11,15 @@
 |
 */
 
+//Route::get('/', function () {
+//    return view('welcome');
+////});
+//Route::get('/test', 'TestController@index');
+//Route::get('/test', 'TestController@index');
 Route::get('/', function () {
-    return view('welcome');
+    return view('Auth.registration');
 });
-Route::get('/test', 'TestController@index');
+Route::get('/create', 'registration' );
+Route::get('/login', function () {
+    return view('Auth.login');
+});
