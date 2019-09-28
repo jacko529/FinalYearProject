@@ -5,6 +5,7 @@ import store from './stores/store'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {loadUser} from './actions/authActions'
+import SideNav from "./components/SideNav";
 
 
 class App extends Component {
@@ -15,7 +16,9 @@ class App extends Component {
     return (
     <Provider store={store}>
     <div className="App">
-        <AppNavBar/>
+      <AppNavBar/>
+      <SideNav/>
+
     </div>
     </Provider>
   );

@@ -1,0 +1,15 @@
+.sidePanel{
+    width: 20%;
+    background-color:  #F9785A;
+    height: 100vh;
+    margin-top: -3rem;
+}
+.hover-tab:hover{
+    background-color: #FF9C85;
+}
+.hover-tab{
+    text-align: center;
+}
+.navBar{
+    background-color: #991F02;
+}
