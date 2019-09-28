@@ -2,31 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
 use App\Repository\Repository;
 use Illuminate\Http\Request;
-use App\User;
 
-class UserController extends Controller
+class CourseController extends Controller
 {
+
     protected $model;
 
-    /**
-     * UserController constructor.
-     * @param User $user
-     */
-    public function __construct(User $user){
-        $this->model = new Repository($user);
-    }
-
-    /**
-     * @param Request $request
-     * // @todo change to fillable actions only
-     * @return mixed
-     */
-    public function create(Request $request){
-        $this->model->create($request->json()->all());
-//      $this->model->create($request->only($this->model->getModel()->fillable));
-        return response()->json($this->user);
+    public function __construct(Course $course)
+    {
+        $this->model = new Repository($course);
     }
 
     public function index()
@@ -52,6 +39,17 @@ class UserController extends Controller
     public function destroy($id)
     {
         return $this->model->delete($id);
+    }
+
+
+    /**
+     * @param Request $request
+     * // @todo change to fillable actions only
+     * @return mixed
+     */
+    public function create(Request $request){
+        $this->model->create($request->json()->all());
+        return response()->json($this->user);
     }
 
 

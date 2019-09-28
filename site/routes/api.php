@@ -20,7 +20,7 @@ Route::post('/create', 'UserController@create');
 
 Route::group([
 
-    'middleware' => 'api',
+    'middleware' => ['api'],
     'prefix' => 'auth'
 
 ], function ($router) {

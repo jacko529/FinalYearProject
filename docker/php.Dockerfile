@@ -14,7 +14,8 @@ RUN docker-php-ext-install \
     pdo \
     pdo_mysql \
     tokenizer \
-    xml
+    xml \
+    mysqli
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
@@ -22,11 +23,4 @@ RUN a2enmod rewrite && service apache2 restart
 
 COPY docker/000-default.conf /etc/apache2/sites-available/000-default.conf
 
-RUN docker-php-ext-install mysqli
-RUN apt-get -y install python3
-RUN apt-get -y install python3-pip
 
-WORKDIR /home/
-COPY /docker/requirments.txt ./
-RUN pip3 install --no-cache-dir -r requirments.txt
-RUN pip3 install lightfm
