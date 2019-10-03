@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Course extends Model
+class Question extends Model
 {
-
     public $timestamps = false;
 
     protected $fillable = [
-        'name',
-        'topic'
+
     ];
+
+
 }

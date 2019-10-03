@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\Responses\JsonResponses;
 use App\Course;
 use App\Repository\Repository;
 use Illuminate\Http\Request;
 
-class CourseController extends Controller
+class ExamController extends Controller
 {
-
     protected $model;
 
     public function __construct(Course $course)
@@ -50,8 +48,7 @@ class CourseController extends Controller
      */
     public function create(Request $request){
         $this->model->create($request->json()->all());
-        return ApiJsonResponse::createOk([$this->user]);
+        return response()->json($this->user);
     }
-
 
 }

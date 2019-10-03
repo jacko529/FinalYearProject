@@ -31,3 +31,10 @@ Route::group([
     Route::post('me', 'AuthController@me');
 
 });
+
+Route::post('course', 'CourseController@create');
+//Route::post('logout', 'CourseController@logout');
+//Route::post('refresh', 'CourseController@refresh');
+//Route::post('login', 'CourseController@login');
+//Route::post('logout', 'ExamController@logout');
+//Route::post('refresh', 'ExamController@refresh');

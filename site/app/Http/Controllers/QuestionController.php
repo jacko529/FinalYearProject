@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\Responses\JsonResponses;
-use App\Course;
+use App\Question;
 use App\Repository\Repository;
 use Illuminate\Http\Request;
 
-class CourseController extends Controller
+class QuestionController extends Controller
 {
-
     protected $model;
 
-    public function __construct(Course $course)
+    public function __construct(Question $question)
     {
-        $this->model = new Repository($course);
+        $this->model = new Repository($question);
     }
 
     public function index()
@@ -50,8 +48,7 @@ class CourseController extends Controller
      */
     public function create(Request $request){
         $this->model->create($request->json()->all());
-        return ApiJsonResponse::createOk([$this->user]);
+        return response()->json($this->user);
     }
-
 
 }
