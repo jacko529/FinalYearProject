@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Responses\JsonResponses;
 use App\Course;
+use App\Exam;
 use App\Repository\Repository;
 use Illuminate\Http\Request;
 
@@ -10,7 +12,7 @@ class ExamController extends Controller
 {
     protected $model;
 
-    public function __construct(Course $course)
+    public function __construct(Exam $course)
     {
         $this->model = new Repository($course);
     }
@@ -48,7 +50,7 @@ class ExamController extends Controller
      */
     public function create(Request $request){
         $this->model->create($request->json()->all());
-        return response()->json($this->user);
+        return JsonResponses::createOk(['success']);
     }
 
 }

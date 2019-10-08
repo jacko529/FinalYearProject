@@ -3,21 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Question;
+use App\Exam;
 use App\Repository\Repository;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
-    protected $model;
+    protected $questionModel;
+    protected $examModel;
 
-    public function __construct(Question $question)
+    public function __construct(Question $question, Exam $exam)
     {
-        $this->model = new Repository($question);
+        $this->questionModel = new Repository($question);
+        $this->examModel = new Repository($exam);
     }
 
+    /**
+     * all questions by exam id
+     *
+     * @param $id
+     * @return mixed
+     */
     public function index()
     {
-        return $this->model->all();
+        return $this->questionModel->with('courses');
     }
 
     public function show($id)

@@ -15,13 +15,12 @@ class Questions extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
 
-      $table->bigIncrements('id')->index();
+      $table->bigIncrements('id')->unsigned();
         $table->string('name');
         $table->date('date_taken');
-        $table->date('date_finished');
-        $table->integer('student_id');
-        $table->integer('course_id');
-        $table->integer('teacher_id');
+        $table->integer('marks')->nullable();
+        $table->bigInteger('exam_id')->unsigned();
+        $table->foreign('exam_id')->references('id')->on('exam');
         });
     }
 

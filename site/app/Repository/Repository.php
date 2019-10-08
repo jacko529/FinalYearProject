@@ -38,7 +38,7 @@ class Repository implements RepositoryInterface
 
     public function show($id)
     {
-        return $this->model->findOrFail($id);
+        return $this->model->findOrFail($id, );
     }
 
     public function getModel()

@@ -33,6 +33,29 @@ Route::group([
 });
 
 Route::post('course', 'CourseController@create');
+Route::get('course/{id}', 'CourseController@show');
+Route::get('course', 'CourseController@index');
+Route::patch('course/{id}', 'CourseController@create');
+Route::put('course/{id}', 'CourseController@create');
+Route::delete('course/{id}', 'CourseController@destroy');
+
+
+Route::post('exam', 'ExamController@create');
+Route::get('exam/{id}', 'ExamController@show');
+Route::get('exam', 'ExamController@index');
+Route::patch('exam/{id}', 'ExamController@create');
+Route::put('exam/{id}', 'ExamController@create');
+Route::delete('exam/{id}', 'ExamController@destroy');
+
+Route::post('question', 'QuestionController@create');
+Route::get('question/{id}', 'QuestionController@show');
+Route::get('question', 'QuestionController@index');
+Route::patch('question/{id}', 'QuestionController@create');
+Route::put('question/{id}', 'QuestionController@create');
+Route::delete('question/{id}', 'QuestionController@destroy');
+
+
+
 //Route::post('logout', 'CourseController@logout');
 //Route::post('refresh', 'CourseController@refresh');
 //Route::post('login', 'CourseController@login');

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Responses\JsonResponses;
+use App\Http\Requests\UserRequest;
 use App\Repository\Repository;
 use Illuminate\Http\Request;
 use App\User;
@@ -23,10 +25,9 @@ class UserController extends Controller
      * // @todo change to fillable actions only
      * @return mixed
      */
-    public function create(Request $request){
-        $this->model->create($request->json()->all());
-//      $this->model->create($request->only($this->model->getModel()->fillable));
-        return response()->json($this->user);
+    public function create(UserRequest $request){
+        $this->model->create($request->only($this->model->getModel()->fillable));
+        return JsonResponses::createOk(['success']);
     }
 
     public function index()

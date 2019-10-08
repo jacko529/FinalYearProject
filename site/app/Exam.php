@@ -6,16 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Exam extends Model
 {
+        protected $table = 'exam';
+        public $timestamps = false;
         protected $fillable = [
             'name',
             'exam_date',
-            'topic_id',
-            'teacher_id',
-            'student_id',
+            'course_id',
         ];
 
         public function questions()
         {
             return $this->hasMany('App\Question');
+        }
+
+        public function setExamDateAttribute($examDate)
+        {
+            $this->attributes["exam_date"] =  strtotime(str_replace('/', '-', $examDate));
         }
 }

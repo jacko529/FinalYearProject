@@ -19,12 +19,12 @@ class CourseController extends Controller
 
     public function index()
     {
-        return $this->model->all();
+        return JsonResponses::createOk([$this->model->all()]);
     }
 
     public function show($id)
     {
-        return $this->model->show($id);
+        return JsonResponses::createOk([$this->model->show($id)]);
     }
 
     /**
@@ -49,8 +49,8 @@ class CourseController extends Controller
      * @return mixed
      */
     public function create(Request $request){
-        $this->model->create($request->json()->all());
-        return ApiJsonResponse::createOk([$this->user]);
+        $this->model->create($request->only($this->model->getModel()->fillable));
+        return JsonResponses::createOk(['success']);
     }
 
 
