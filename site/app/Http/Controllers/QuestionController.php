@@ -26,7 +26,9 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return $this->questionModel->with('courses');
+        dd($this->questionModel->with('exam'));
+//        return
+
     }
 
     public function show($id)

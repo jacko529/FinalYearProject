@@ -3,20 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="78098f88-2b19-4108-a517-33c192de8add" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/app/Course.php" beforeDir="false" afterPath="$PROJECT_DIR$/site/app/Course.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/app/Exam.php" beforeDir="false" afterPath="$PROJECT_DIR$/site/app/Exam.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/site/app/Http/Controllers/AuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/app/Http/Controllers/CourseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/site/app/Http/Controllers/CourseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/app/Http/Controllers/ExamController.php" beforeDir="false" afterPath="$PROJECT_DIR$/site/app/Http/Controllers/ExamController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/site/app/Http/Controllers/QuestionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/site/app/Http/Controllers/QuestionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/site/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/app/Question.php" beforeDir="false" afterPath="$PROJECT_DIR$/site/app/Question.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/app/Repository/Repository.php" beforeDir="false" afterPath="$PROJECT_DIR$/site/app/Repository/Repository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/site/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/database/migrations/2019_09_27_075731_courses.php" beforeDir="false" afterPath="$PROJECT_DIR$/site/database/migrations/2019_09_27_075731_courses.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/database/migrations/2019_09_30_092959_exam.php" beforeDir="false" afterPath="$PROJECT_DIR$/site/database/migrations/2019_09_30_092959_exam.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/database/migrations/2019_10_02_211344_questions.php" beforeDir="false" afterPath="$PROJECT_DIR$/site/database/migrations/2019_10_02_211344_questions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/site/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/database/factories/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/site/database/factories/UserFactory.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -222,6 +210,7 @@
       <workItem from="1569822991745" duration="3329000" />
       <workItem from="1570045251477" duration="2439000" />
       <workItem from="1570083397888" duration="12011000" />
+      <workItem from="1570568332608" duration="2016000" />
     </task>
     <servers />
   </component>

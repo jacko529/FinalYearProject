@@ -1,6 +1,5 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
 use App\User;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
@@ -18,10 +17,37 @@ use Faker\Generator as Faker;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        'first_name' => $faker->name,
+        'surname' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'password' => 'Botte', // password
         'remember_token' => Str::random(10),
+    ];
+});
+$factory->define(\App\Question::class, function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+        'date_taken' => '2019/06/05',
+        'marks' => '45',
+        'exam_id' => function(){
+            return factory('App\Exam')->create()->id;
+        }, // password
+    ];
+});$factory->define(\App\Exam::class, function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+        'exam_date' => '2019/06/05',
+        'course_id' => function(){
+            return factory('App\Course')->create()->id;
+        }, // password
+    ];
+});
+$factory->define(\App\Course::class, function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+        'user_id' => function(){
+            return factory('App\User')->create()->id;
+        }, // password
     ];
 });
