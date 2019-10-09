@@ -54,7 +54,7 @@ class Repository implements RepositoryInterface
 
     public function with($relations)
     {
-        return $this->model->with($relations);
+        return $this->model->with($relations)->get();
     }
 
 }

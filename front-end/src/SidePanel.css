@@ -3,6 +3,7 @@
     background-color:  #F9785A;
     height: 100vh;
     margin-top: -3rem;
+    flex: 0.5;
 }
 .hover-tab:hover{
     background-color: #FF9C85;
@@ -12,4 +13,22 @@
 }
 .navBar{
     background-color: #991F02;
+}
+.mainPanel{
+    width: 80%;
+    background-color: white;
+    height: 100vh;
+    flex: 2;
+}
+.container-flex{
+    display: flex;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -webkit-align-items: stretch;
+    align-items: stretch;
+}
+.hide-register{
+    display: none;
 }

@@ -5,21 +5,24 @@ namespace App\Http\Controllers;
 use App\Classes\Responses\JsonResponses;
 use App\Course;
 use App\Exam;
+use App\Question;
 use App\Repository\Repository;
 use Illuminate\Http\Request;
 
 class ExamController extends Controller
 {
     protected $model;
+    protected $questionModel;
 
-    public function __construct(Exam $course)
+    public function __construct(Exam $exam, Question $question)
     {
-        $this->model = new Repository($course);
+        $this->model = new Repository($exam);
+        $this->questionModel = new Repository($question);
     }
 
     public function index()
     {
-        return $this->model->all();
+        return ($this->model->all());
     }
 
     public function show($id)

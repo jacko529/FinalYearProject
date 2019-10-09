@@ -5,6 +5,7 @@ import NavTab from './Nav/Tab';
 import '../SidePanel.css';
 
 import Logout from './auth/Logout';
+import RegisterModal from "./auth/RegisterModel";
 
 class SideNav extends Component {
     state = {
@@ -22,8 +23,8 @@ class SideNav extends Component {
     };
 
     render() {
-
         return (
+            <div className="container-flex">
             <div className="sidePanel">
                 <div className="new">
                     <NavTab value="Hello" />
@@ -31,6 +32,10 @@ class SideNav extends Component {
                     <NavTab value="Hello" />
                     <NavTab value="Hello" />
                 </div>
+            </div>
+            <div className="mainPanel">
+                <RegisterModal />
+            </div>
             </div>
         );
     }

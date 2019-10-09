@@ -9,13 +9,11 @@ use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
-    protected $questionModel;
-    protected $examModel;
+    protected $model;
 
-    public function __construct(Question $question, Exam $exam)
+    public function __construct(Question $question)
     {
-        $this->questionModel = new Repository($question);
-        $this->examModel = new Repository($exam);
+        $this->model = new Repository($question);
     }
 
     /**
@@ -26,8 +24,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        dd($this->questionModel->with('exam'));
-//        return
+        return $this->model->with('exam');
 
     }
 

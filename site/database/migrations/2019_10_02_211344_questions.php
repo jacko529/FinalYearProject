@@ -17,7 +17,7 @@ class Questions extends Migration
 
       $table->bigIncrements('id')->unsigned();
         $table->string('name');
-        $table->date('date_taken');
+        $table->integer('date_taken');
         $table->integer('marks')->nullable();
         $table->bigInteger('exam_id')->unsigned();
         $table->foreign('exam_id')->references('id')->on('exam');

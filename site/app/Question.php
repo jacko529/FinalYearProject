@@ -15,8 +15,8 @@ class Question extends Model
         'exam_id',
     ];
 
-    public function exams(){
-        return $this->hasOne('App\Exam');
+    public function exam(){
+        return $this->belongsTo(Exam::class);
     }
 
     public function setDateTakenAttribute($examDate)

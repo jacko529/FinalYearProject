@@ -51,7 +51,7 @@ class AppNavbar extends Component {
     const guestLinks = (
         <Fragment>
           <NavItem>
-            <RegisterModal />
+              <div> <a href='#' className='nav-link'>Register</a></div>
           </NavItem>
           <NavItem>
             <LoginModal />
