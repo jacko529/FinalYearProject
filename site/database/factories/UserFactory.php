@@ -25,6 +25,13 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
     ];
 });
+$factory->define(\App\QuestionAnswer::class, function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+        'isAnswer' => 'no',
+        'question_id'=> '5', // password
+    ];
+    });
 $factory->define(\App\Question::class, function (Faker $faker) {
     return [
         'name' => $faker->name,

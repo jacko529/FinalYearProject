@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import NavTab from './Nav/Tab';
+import MasterForm from './Mutliple/MasterForm';
+
 import '../SidePanel.css';
 
 import Logout from './auth/Logout';
@@ -27,14 +29,14 @@ class SideNav extends Component {
             <div className="container-flex">
             <div className="sidePanel">
                 <div className="new">
-                    <NavTab value="Hello" />
-                    <NavTab value="Hello" />
+                    <NavTab value="Login" />
+                    <NavTab value="Register" />
                     <NavTab value="Hello" />
                     <NavTab value="Hello" />
                 </div>
             </div>
             <div className="mainPanel">
-                <RegisterModal />
+                <MasterForm />
             </div>
             </div>
         );

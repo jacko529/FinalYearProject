@@ -3,45 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Classes\Responses\JsonResponses;
-use App\Course;
-use App\Repository\Repository;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
 
-    protected $model;
+    protected Course $courseNeo;
 
     public function __construct(Course $course)
     {
-        $this->model = new Repository($course);
+        $this->courseNeo = $course;
     }
-
-    public function index()
-    {
-        return JsonResponses::createOk([$this->model->all()]);
-    }
-
-    public function show($id)
-    {
-        return JsonResponses::createOk([$this->model->show($id)]);
-    }
-
-    /**
-     * @todo add only fillable update items
-     * @param Request $request
-     * @param $id
-     */
-    public function update(Request $request, $id)
-    {
-        $this->model->update($request->json()->all(), $id);
-    }
-
-    public function destroy($id)
-    {
-        return $this->model->delete($id);
-    }
-
 
     /**
      * @param Request $request
@@ -49,9 +22,16 @@ class CourseController extends Controller
      * @return mixed
      */
     public function create(Request $request){
-        $this->model->create($request->only($this->model->getModel()->fillable));
+        $this->courseNeo->insert($request->input('course'),
+                                 $request->input('user'));
+
         return JsonResponses::createOk(['success']);
     }
 
+    public function delete(Request $request){
+        $this->courseNeo->delete($request->input('name'));
+        return JsonResponses::createOk(['success']);
+
+    }
 
 }

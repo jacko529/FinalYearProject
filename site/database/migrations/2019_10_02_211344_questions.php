@@ -15,7 +15,7 @@ class Questions extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
 
-      $table->bigIncrements('id')->unsigned();
+        $table->bigIncrements('id')->unsigned();
         $table->string('name');
         $table->integer('date_taken');
         $table->integer('marks')->nullable();

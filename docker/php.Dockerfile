@@ -16,7 +16,8 @@ RUN docker-php-ext-install \
     tokenizer \
     xml \
     mysqli
-
+# RUN apt-get install php7.3-bcmath
+RUN docker-php-ext-install bcmath.
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 RUN a2enmod rewrite && service apache2 restart

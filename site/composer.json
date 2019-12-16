@@ -11,10 +11,11 @@
         "php": "^7.1.3",
         "barryvdh/laravel-cors": "^0.11.4",
         "fideloper/proxy": "^4.0",
-        "laravel/framework": "5.8.*",
+        "graphaware/neo4j-php-client": "^4.8",
+        "laravel/framework": "^6.2",
         "laravel/tinker": "^1.0",
         "symfony/yaml": "^4.3",
-        "tymon/jwt-auth": "dev-develop"
+        "tymon/jwt-auth": "1.0.0-rc.5"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

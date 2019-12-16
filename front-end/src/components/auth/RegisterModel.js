@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import {
   Form,
   FormGroup,
@@ -83,7 +84,7 @@ class RegisterModal extends Component {
             ) : null}
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <label for='first_name'>Name</label>
+                <label>Name</label>
                 <input
                     type='text'
                     name='first_name'

@@ -4,55 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Classes\Responses\JsonResponses;
 use App\Http\Requests\UserRequest;
+use App\Models\User;
 use App\Repository\Repository;
 use Illuminate\Http\Request;
-use App\User;
 
 class UserController extends Controller
 {
-    protected $model;
+    protected User $userNeo;
 
     /**
      * UserController constructor.
-     * @param User $user
+     * @param User $userNeo
      */
-    public function __construct(User $user){
-        $this->model = new Repository($user);
+    public function __construct(User $userNeo){
+        $this->userNeo = $userNeo;
     }
 
-    /**
-     * @param Request $request
-     * // @todo change to fillable actions only
-     * @return mixed
-     */
-    public function create(UserRequest $request){
-        $this->model->create($request->only($this->model->getModel()->fillable));
-        return JsonResponses::createOk(['success']);
-    }
-
-    public function index()
+    public function create(UserRequest $request)
     {
-        return $this->model->all();
+        $user =  $this->userNeo->insert($request->input('first_name'),
+                                $request->input('surname'),
+                                $request->input('email'),
+                                $request->input('password'),
+                                $request->input('teacher')
+                                );
+        return JsonResponses::createOk([$user]);
     }
 
-    public function show($id)
+    public function login()
     {
-        return $this->model->show($id);
-    }
 
-    /**
-     * @todo add only fillable update items
-     * @param Request $request
-     * @param $id
-     */
-    public function update(Request $request, $id)
-    {
-        $this->model->update($request->json()->all(), $id);
-    }
-
-    public function destroy($id)
-    {
-        return $this->model->delete($id);
     }
 
 

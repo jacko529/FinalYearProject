@@ -1,22 +1,18 @@
 version: "3"
 services:
-  mariadb:
-    build:
-      context: "."
-      dockerfile: "docker/mariadb.Dockerfile"
+  neo4j:
+    image: "neo4j:latest"
     ports:
-      - "3360:3306"
+      - "7474:7474"
+      - "7687:7687"
     networks:
       - "default"
     environment:
-      MYSQL_ROOT_PASSWORD: "root"
-      MYSQL_DATABASE: "learning_site"
-      MYSQL_USER: "jack"
-      MYSQL_PASSWORD: "hello"
+     NEO4J_AUTH: neo4j/jack
   php:
     depends_on:
-      - "mariadb"
       - "frontend"
+      - "neo4j"
     build:
       context: "."
       dockerfile: "docker/php.Dockerfile"
