@@ -1,0 +1,4 @@
+users_read_all:
+    path: api/users
+    controller: App\Controller\UserController::index
+    methods: POST
