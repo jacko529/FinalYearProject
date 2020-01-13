@@ -21,12 +21,11 @@ services:
     networks:
       - "default"
     volumes:
-      - "./site:/var/www/html"
-      - "./python:/home/"
+      - "./learning_made_easy:/var/www/html"
   composer:
     image: "composer:1.8"
     volumes:
-      - "./site:/app"
+      - "./learning_made_easy:/app"
       - "~/.composer:/tmp"
     command: "composer about"
     networks:

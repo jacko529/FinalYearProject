@@ -2,45 +2,125 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="78098f88-2b19-4108-a517-33c192de8add" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/front-end/src/Services/UserService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/src/components/Exam/AnswerOption.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/src/components/Exam/Exam.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/src/components/Exam/Question.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/src/components/Exam/QuestionCount.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/src/components/Mutliple/MasterForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/src/components/Mutliple/Multistep.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/site/app/Models/Connector/Neo4J.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/site/app/Models/Course.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/site/app/Models/CourseResources.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/site/app/Models/Exam.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/site/app/Models/User.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/site/database/migrations/2019_10_09_205056_question_choices.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/learning_made_easy/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/frontend.Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/frontend.Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker/php.Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/php.Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/SidePanel.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/SidePanel.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/SideNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/SideNav.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/RegisterModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/RegisterModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/app/Course.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/app/Exam.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/app/Http/Controllers/CourseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/site/app/Http/Controllers/CourseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/app/Http/Controllers/ExamController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/app/Http/Controllers/QuestionController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/site/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/app/Http/Requests/UserRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/site/app/Http/Requests/UserRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/app/Question.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/app/Repository/Repository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/app/Repository/RepositoryInterface.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/app/User.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/site/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/site/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/database/factories/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/site/database/factories/UserFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/database/migrations/2019_10_02_211344_questions.php" beforeDir="false" afterPath="$PROJECT_DIR$/site/database/migrations/2019_10_02_211344_questions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/site/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learning_made_easy/.env" beforeDir="false" afterPath="$PROJECT_DIR$/learning_made_easy/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learning_made_easy/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/learning_made_easy/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learning_made_easy/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/learning_made_easy/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learning_made_easy/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/learning_made_easy/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learning_made_easy/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/learning_made_easy/config/routes.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learning_made_easy/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/learning_made_easy/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learning_made_easy/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/learning_made_easy/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/Classify.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/.env.example" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/.styleci.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Classes/Responses/JsonResponses.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Console/Kernel.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Exceptions/Handler.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Http/Controllers/Auth/ForgotPasswordController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Http/Controllers/Auth/ResetPasswordController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Http/Controllers/Auth/VerificationController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Http/Controllers/AuthController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Http/Controllers/Controller.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Http/Controllers/CourseController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Http/Controllers/UserController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Http/Kernel.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Http/Middleware/Authenticate.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Http/Middleware/CheckForMaintenanceMode.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Http/Middleware/EncryptCookies.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Http/Middleware/RedirectIfAuthenticated.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Http/Middleware/TrimStrings.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Http/Middleware/TrustProxies.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Http/Middleware/VerifyCsrfToken.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Http/Requests/UserRequest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Models/Connector/Neo4J.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Models/Course.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Models/CourseResources.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Models/Exam.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Models/User.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Providers/AppServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Providers/AuthServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Providers/BroadcastServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Providers/EventServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/app/Providers/RouteServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/artisan" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/bootstrap/app.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/bootstrap/cache/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/composer.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/composer.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/config/app.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/config/auth.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/config/broadcasting.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/config/cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/config/cors.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/config/database.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/config/filesystems.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/config/hashing.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/config/jwt.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/config/logging.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/config/mail.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/config/queue.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/config/services.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/config/session.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/config/view.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/database/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/database/factories/UserFactory.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/database/migrations/2014_10_12_100000_create_password_resets_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/database/migrations/2019_09_27_075731_courses.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/database/migrations/2019_09_30_092959_exam.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/database/migrations/2019_10_02_211344_questions.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/database/migrations/2019_10_04_132038_user_preferences.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/database/migrations/2019_10_09_205056_course_resources.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/database/migrations/2019_10_09_205056_question_choices.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/database/seeds/DatabaseSeeder.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/phpunit.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/public/.htaccess" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/public/css/app.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/public/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/public/js/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/public/web.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/resources/js/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/resources/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/resources/js/components/ExampleComponent.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/resources/lang/en/auth.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/resources/lang/en/pagination.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/resources/lang/en/passwords.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/resources/lang/en/validation.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/resources/sass/_variables.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/resources/sass/app.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/resources/views/welcome.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/routes/api.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/routes/channels.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/routes/console.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/routes/web.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/server.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/storage/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/storage/app/public/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/storage/framework/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/storage/framework/cache/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/storage/framework/cache/data/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/storage/framework/sessions/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/storage/framework/testing/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/storage/framework/views/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/storage/logs/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/tests/CreatesApplication.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/tests/Feature/ExampleTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/tests/TestCase.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/tests/Unit/ExampleTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/webpack.mix.js" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -77,7 +157,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/learning_made_easy" />
   </component>
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
@@ -270,6 +350,10 @@
       <workItem from="1575995745411" duration="708000" />
       <workItem from="1576016049796" duration="9930000" />
       <workItem from="1576189337894" duration="3934000" />
+      <workItem from="1577643308771" duration="8000" />
+      <workItem from="1578740948259" duration="3462000" />
+      <workItem from="1578906947366" duration="5640000" />
+      <workItem from="1578936484861" duration="7932000" />
     </task>
     <servers />
   </component>
