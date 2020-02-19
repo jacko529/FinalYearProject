@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import NavTab from './Nav/Tab';
 import MasterForm from './Mutliple/MasterForm';
 
 import '../SidePanel.css';
@@ -27,24 +26,16 @@ class SideNav extends Component {
     render() {
         return (
             <div className="container-flex">
-            <div className="sidePanel">
-                <div className="new">
-                    <NavTab value="Login" />
-                    <NavTab value="Register" />
-                    <NavTab value="Hello" />
-                    <NavTab value="Hello" />
-                </div>
-            </div>
             <div className="mainPanel">
-                <MasterForm />
+                {/*<MasterForm />*/}
             </div>
             </div>
         );
     }
 }
-
 const mapStateToProps = state => ({
     auth: state.auth
+
 });
 
 export default connect(

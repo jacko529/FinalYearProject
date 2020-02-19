@@ -1,4 +1,55 @@
-users_read_all:
-    path: api/users
+create_user:
+    path: /api/register
+    controller: App\Controller\UserController::create
+    methods: POST
+
+me:
+    path: /api/me
     controller: App\Controller\UserController::index
     methods: POST
+
+api_login_check:
+    path: /api/login
+    defaults: { _controller: App\Controller\TokenController::Token }
+    methods: ['POST']
+
+create_course:
+    path: /api/course
+    controller: App\Controller\CourseController::create
+    methods: POST
+
+create_learning_resource:
+    path: /api/coure-resource
+    controller: App\Controller\LearningResourceController::upload
+    methods: POST
+
+create_learning_resources:
+    path: /api/coure-resources
+    controller: App\Controller\LearningResourceController::index
+    methods: POST
+
+users_active:
+    path: /api/next-active
+    controller: App\Controller\LearningResourceController::userFindFirst
+    methods: GET
+
+get_learning_resource:
+    path: /api/coure-resource
+    controller: App\Controller\LearningResourceController::getS3
+    methods: GET
+
+learning_style:
+    path: /api/learning-style
+    controller: App\Controller\LearningQuizController::Calculate
+    methods: Post
+
+user_time:
+    path: /api/user-time
+    controller: App\Controller\UserController::saveTime
+    methods: Post
+
+test:
+    path: /api/test
+    controller: App\Controller\TokenController::Test
+    methods: GET
+

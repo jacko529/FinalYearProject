@@ -16,9 +16,9 @@ import {
 export const loadUser = () => (dispatch, getState) => {
   // User loading
   dispatch({ type: USER_LOADING });
-
+console.log(getState);
   axios
-    .post('http://localhost:8080/api/auth/me', '', tokenConfig(getState))
+    .post('http://localhost:8080/api/me', '', tokenConfig(getState))
     .then(res =>
       dispatch({
         type: USER_LOADED,
@@ -26,6 +26,7 @@ export const loadUser = () => (dispatch, getState) => {
       })
     )
     .catch(err => {
+      console.log(err.response)
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
         type: AUTH_ERROR
@@ -46,7 +47,7 @@ export const register = ({ first_name, surname, email, password }) => dispatch =
   const body = JSON.stringify({ first_name, surname, email, password });
 
   axios
-    .post('http://localhost:8080/api/create', body, config)
+    .post('http://localhost:8080/api/register', body, config)
     .then(res =>
       dispatch({
         type: REGISTER_SUCCESS,
@@ -64,7 +65,7 @@ export const register = ({ first_name, surname, email, password }) => dispatch =
 };
 
 // Login User
-export const login = ({ email, password }) => dispatch => {
+export const login = ({ username, password }) => dispatch => {
   // Headers
   const config = {
     headers: {
@@ -73,16 +74,18 @@ export const login = ({ email, password }) => dispatch => {
   };
 
   // Request body
-  const body = JSON.stringify({ email, password });
+  const body = JSON.stringify({ username, password });
 
   axios
-    .post('http://localhost:8080/api/auth/login', body, config)
+    .post('http://localhost:8080/api/login', body, config)
     .then(res =>
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data
       })
-    )
+).then(res =>
+      localStorage.setItem('access_token', res.payload.access_token)
+  )
     .catch(err => {
       dispatch(
         returnErrors(err.response.data, err.response.status, 'LOGIN_FAIL')
@@ -103,7 +106,7 @@ export const logout = () => {
 // Setup config/headers and token
 export const tokenConfig = getState => {
   // Get token from localstorage
-  const access_token = getState().auth.access_token;
+  const access_token = localStorage.getItem('access_token');
 
   // Headers
   const config = {
@@ -117,6 +120,6 @@ export const tokenConfig = getState => {
   if (access_token) {
     config.headers['Authorization'] =  `bearer ${access_token}`;
   }
-
+  console.log(config)
   return config;
 };

@@ -15,13 +15,15 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/authActions';
 import { clearErrors } from '../../actions/errorActions';
+import { Redirect } from 'react-router-dom';
 
 class LoginModal extends Component {
   state = {
     modal: false,
-    email: '',
+    username: '',
     password: '',
-    msg: null
+    msg: null,
+    redirect: false
   };
 
   static propTypes = {
@@ -45,7 +47,9 @@ class LoginModal extends Component {
     // If authenticated, close modal
     if (this.state.modal) {
       if (isAuthenticated) {
+
         this.toggle();
+
       }
     }
   }
@@ -65,10 +69,10 @@ class LoginModal extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const { email, password } = this.state;
+    const { username, password } = this.state;
 
     const user = {
-      email,
+      username,
       password
     };
 
@@ -77,6 +81,7 @@ class LoginModal extends Component {
   };
 
   render() {
+
     return (
       <div>
         <NavLink onClick={this.toggle} href='#'>
@@ -91,12 +96,12 @@ class LoginModal extends Component {
             ) : null}
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <Label for='email'>Email</Label>
+                <Label for='username'>Email</Label>
                 <Input
-                  type='email'
-                  name='email'
-                  id='email'
-                  placeholder='Email'
+                  type='username'
+                  name='username'
+                  id='username'
+                  placeholder='username'
                   className='mb-3'
                   onChange={this.onChange}
                 />

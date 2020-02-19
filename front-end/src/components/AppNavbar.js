@@ -12,6 +12,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import RegisterModal from './auth/RegisterModel';
 import LoginModal from './auth/LoginModel';
+import { Redirect, withRouter } from 'react-router-dom';
+import { createBrowserHistory } from "history";
+
 import '../Loader.css';
 import '../SidePanel.css';
 
@@ -33,13 +36,14 @@ class AppNavbar extends Component {
   };
 
   render() {
-    const { isLoading, isAuthenticated, user } = this.props.auth;
+      const { isLoading, isAuthenticated, user } = this.props.auth;
+
 
     const authLinks = (
         <Fragment>
           <NavItem>
           <span className='navbar-text mr-3'>
-            <strong>{user ? `Welcome ${user.first_name}` : ''}</strong>
+            <strong style={{color: '#006494'}}>{user ? `Welcome ${user.first_name}` : ''}</strong>
           </span>
           </NavItem>
           <NavItem>
@@ -51,11 +55,11 @@ class AppNavbar extends Component {
     const guestLinks = (
         <Fragment>
           <NavItem>
-              <div> <a href='#' className='nav-link'>Register</a></div>
+              <LoginModal />
           </NavItem>
-          <NavItem>
-            <LoginModal />
-          </NavItem>
+            <NavItem>
+                <RegisterModal />
+            </NavItem>
         </Fragment>
     );
 
@@ -80,7 +84,6 @@ class AppNavbar extends Component {
 
     );
 
-
     let navOutput = 0;
     if(!isLoading && isAuthenticated ){
       navOutput = 1;
@@ -88,11 +91,14 @@ class AppNavbar extends Component {
       navOutput = 2;
     }
 
+
     return (
+
         <div>
           <Navbar  expand='sm' className='mb-5 navBar'>
+
             <Container>
-              <NavbarBrand href='/'>Easy Learning</NavbarBrand>
+                {isAuthenticated ?  <NavbarBrand href='/me'>Easy Learning</NavbarBrand>: <NavbarBrand href='/'>Easy Learning</NavbarBrand>}
               <NavbarToggler onClick={this.toggle} />
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className='ml-auto' navbar>

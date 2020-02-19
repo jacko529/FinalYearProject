@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 
 import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
   Form,
   FormGroup,
+  Label,
+  Input,
+  NavLink,
   Alert
 } from 'reactstrap';
 import { connect } from 'react-redux';
@@ -77,15 +84,20 @@ class RegisterModal extends Component {
 
   render() {
     return (
-      <div className='hide-register'>
-          <div toggle={this.toggle}>Register</div>
+        <div>
+          <NavLink onClick={this.toggle} href='#'>
+            Register
+          </NavLink>
+        <Modal isOpen={this.state.modal} toggle={this.toggle}>
+          <ModalHeader toggle={this.toggle}>Register</ModalHeader>
+          <ModalBody>
             {this.state.msg ? (
-              <Alert color='danger'>{this.state.msg}</Alert>
+                <Alert color='danger'>{this.state.msg}</Alert>
             ) : null}
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <label>Name</label>
-                <input
+                <Label for='first_name'>Name</Label>
+                <Input
                     type='text'
                     name='first_name'
                     id='first_name'
@@ -94,8 +106,8 @@ class RegisterModal extends Component {
                     onChange={this.onChange}
                 />
 
-                <label for='surname'>Surname</label>
-                <input
+                <Label for='surname'>Surname</Label>
+                <Input
                     type='text'
                     name='surname'
                     id='surname'
@@ -104,8 +116,8 @@ class RegisterModal extends Component {
                     onChange={this.onChange}
                 />
 
-                <label for='email'>Email</label>
-                <input
+                <Label for='email'>Email</Label>
+                <Input
                   type='email'
                   name='email'
                   id='email'
@@ -114,8 +126,8 @@ class RegisterModal extends Component {
                   onChange={this.onChange}
                 />
 
-                <label for='password'>Password</label>
-                <input
+                <Label for='password'>Password</Label>
+                <Input
                   type='password'
                   name='password'
                   id='password'
@@ -123,12 +135,14 @@ class RegisterModal extends Component {
                   className='mb-3'
                   onChange={this.onChange}
                 />
-                <button color='dark' style={{ marginTop: '2rem' }} block>
+                <Button color='dark' style={{ marginTop: '2rem' }} block>
                   Register
-                </button>
+                </Button>
               </FormGroup>
             </Form>
-      </div>
+          </ModalBody>
+        </Modal>
+        </div>
     );
   }
 }

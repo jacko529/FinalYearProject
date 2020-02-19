@@ -7,6 +7,8 @@
         "ext-iconv": "*",
         "graphaware/neo4j-php-client": "^4.8",
         "graphaware/neo4j-php-ogm": "@rc",
+        "lexik/jwt-authentication-bundle": "^2.6",
+        "nelmio/cors-bundle": "^2.0",
         "neo4j/neo4j-bundle": "^0.4.2",
         "symfony-bundles/json-request-bundle": "^3.0",
         "symfony/apache-pack": "^1.0",

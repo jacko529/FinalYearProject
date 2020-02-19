@@ -22,6 +22,14 @@ class Course
     private $name;
 
     /**
+     * @var \DateTime
+     *
+     * @OGM\Property()
+     *
+     */
+    protected $dateTime;
+
+    /**
      * @var User[]|Collection
      *
      * @OGM\Relationship(type="CREATED_BY", direction="INCOMING", collection=true, mappedBy="users", targetEntity="User")
@@ -46,6 +54,27 @@ class Course
     {
         $this->name = $name;
 
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateCreated()
+    {
+        return $this->dateTime;
+    }
+
+
+    public function setDateCreated( $dateTime): self
+    {
+        $this->dateTime = $dateTime;
+        return $this;
+    }
+
+    public function setUser($user)
+    {
+        $this->users = $user;
         return $this;
     }
 }

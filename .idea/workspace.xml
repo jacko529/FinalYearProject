@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="78098f88-2b19-4108-a517-33c192de8add" name="Default Changelist" comment="" />
+    <list default="true" id="78098f88-2b19-4108-a517-33c192de8add" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/front-end/public/brainprocess.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end/src/components/Home/CourseTile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end/src/components/Home/Entry.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end/src/components/Home/NonUser.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end/src/components/Home/NormalTile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end/src/components/Home/Tiles.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end/src/components/Mutliple/RadioButton.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end/src/components/auth/PrivateRoute.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/000-default.conf" beforeDir="false" afterPath="$PROJECT_DIR$/docker/000-default.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/SidePanel.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/SidePanel.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/actions/authActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/actions/authActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/AppNavbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/AppNavbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/Mutliple/MasterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Mutliple/MasterForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/Nav/Tab.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/SideNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/SideNav.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/LoginModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/LoginModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/Logout.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/Logout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/RegisterModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/RegisterModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/serviceWorker.js" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +64,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/learning_made_easy" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
@@ -139,7 +166,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../php-test" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -151,15 +178,16 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/front-end/public" />
       <recent name="$PROJECT_DIR$/site/database/migrations" />
       <recent name="$PROJECT_DIR$/docker" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/learning_made_easy/src/Security/Guard" />
       <recent name="$PROJECT_DIR$/site/app" />
       <recent name="$PROJECT_DIR$/front-end/src/Services" />
       <recent name="$PROJECT_DIR$/front-end/src/components/Mutliple" />
       <recent name="$PROJECT_DIR$/front-end" />
-      <recent name="$PROJECT_DIR$/front-end/src" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -233,7 +261,19 @@
       <workItem from="1577643308771" duration="8000" />
       <workItem from="1578740948259" duration="3462000" />
       <workItem from="1578906947366" duration="5640000" />
-      <workItem from="1578936484861" duration="8569000" />
+      <workItem from="1578936484861" duration="8756000" />
+      <workItem from="1579963760478" duration="31000" />
+      <workItem from="1580068796377" duration="360000" />
+      <workItem from="1580108469110" duration="54154000" />
+      <workItem from="1580484261293" duration="38814000" />
+      <workItem from="1580728712154" duration="19237000" />
+      <workItem from="1580852852153" duration="8534000" />
+      <workItem from="1581324887455" duration="2065000" />
+      <workItem from="1581373211171" duration="24000" />
+      <workItem from="1581618432801" duration="133000" />
+      <workItem from="1581853027326" duration="80000" />
+      <workItem from="1581869384149" duration="31448000" />
+      <workItem from="1582056335020" duration="10608000" />
     </task>
     <servers />
   </component>
