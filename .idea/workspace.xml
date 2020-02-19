@@ -1,34 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="78098f88-2b19-4108-a517-33c192de8add" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/front-end/public/brainprocess.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/src/components/Home/CourseTile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/src/components/Home/Entry.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/src/components/Home/NonUser.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/src/components/Home/NormalTile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/src/components/Home/Tiles.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/src/components/Mutliple/RadioButton.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/src/components/auth/PrivateRoute.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/000-default.conf" beforeDir="false" afterPath="$PROJECT_DIR$/docker/000-default.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/SidePanel.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/SidePanel.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/actions/authActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/actions/authActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/AppNavbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/AppNavbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/Mutliple/MasterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Mutliple/MasterForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/Nav/Tab.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/SideNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/SideNav.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/LoginModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/LoginModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/Logout.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/Logout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/RegisterModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/RegisterModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/serviceWorker.js" beforeDir="false" />
-    </list>
+    <list default="true" id="78098f88-2b19-4108-a517-33c192de8add" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -273,7 +246,7 @@
       <workItem from="1581618432801" duration="133000" />
       <workItem from="1581853027326" duration="80000" />
       <workItem from="1581869384149" duration="31448000" />
-      <workItem from="1582056335020" duration="10608000" />
+      <workItem from="1582056335020" duration="10975000" />
     </task>
     <servers />
   </component>
