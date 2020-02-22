@@ -7,6 +7,8 @@
     "bootstrap": "^4.3.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-iframe": "^1.8.0",
+    "react-loader-spinner": "^3.1.5",
     "react-radio-buttons": "^1.2.2",
     "react-radio-group": "^3.0.3",
     "react-rangeslider": "^2.2.0",

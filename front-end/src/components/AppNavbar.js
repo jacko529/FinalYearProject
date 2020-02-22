@@ -14,7 +14,7 @@ import RegisterModal from './auth/RegisterModel';
 import LoginModal from './auth/LoginModel';
 import { Redirect, withRouter } from 'react-router-dom';
 import { createBrowserHistory } from "history";
-
+import Loader from 'react-loader-spinner';
 import '../Loader.css';
 import '../SidePanel.css';
 
@@ -64,23 +64,13 @@ class AppNavbar extends Component {
     );
 
     const loadingSign = (
-        <div className="de">
+        <Loader
+            type="MutatingDots"
+            color="#00BFFF"
+            height={80}
+            width={80}
 
-          <div className="lds-default">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        </div>
+        />
 
     );
 

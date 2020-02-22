@@ -66,7 +66,9 @@ export class Entry extends Component {
             axios.post('http://localhost:8080/api/user-time',body,config )
                 .then(res => {
                     console.log(res.data);
+
                 });
+
 
             console.log('account');
         }
@@ -93,36 +95,29 @@ export class Entry extends Component {
                     </Container>
                 </Fragment>
         );
-        if (!isAuthenticated && !this.state.requestCompleted){
+        const { value } = this.state
+
+        if (!isAuthenticated ){
             return (
 
                 <div>
                 <Container>
                     {welcome}
-                    <Row className="bottom-row">
 
-                        <NormalTile
-                            image={"/"}
-                            title={"Random Users"}
-                            subtitle={'Here are your results'}
-                            description={'It will help'}
-                            button={'TakeQuiz'}
-                        />
-
-                    </Row>
                 </Container>
 
             </div>
             )
-        }else {
-            const { value } = this.state
-
+        }
+        else if  (isAuthenticated && user.learning_styles.length < 1){
+            console.log('here');
             return (
+
                 <div>
                     <Container>
-
                         {welcome}
-                        {user.time ? <Slider
+                        <div style={{textAlign:"center"}}>
+                        {user.time === '' ? <Slider
                             min={0}
                             max={100}
                             value={value}
@@ -130,8 +125,31 @@ export class Entry extends Component {
                             onChange={this.handleSliderChange}
                             onChangeComplete={this.handleChangeComplete}
                         /> : null }
-                        {user.time ?  <div className='value'>{value}</div> : null}
-                        {user.time ? <Button onClick={save} >That's enough time</Button>: null}
+                        {user.time === '' ?  <div className='value'>{value}</div> : null}
+                        {user.time === '' ? <Button onClick={save} >That's enough time</Button>: null}
+                        </div>
+                        <Row className="bottom-row">
+
+                            <NormalTile
+                                image={"/brainprocess.jpg"}
+                                title={"Random Users"}
+                                subtitle={'Here are your results'}
+                                description={'It will help'}
+                                button={'TakeQuiz'}
+                            />
+
+                        </Row>
+                    </Container>
+
+                </div>
+            )
+        }else if  (isAuthenticated && user.learning_styles.length > 1) {
+
+            return (
+                <div>
+                    <Container>
+
+                        {welcome}
 
                         <Row  className="bottom-row">
 

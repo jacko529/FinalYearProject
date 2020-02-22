@@ -8,7 +8,7 @@ use GraphAware\Neo4j\OGM\Common\Collection;
 /**
  * @OGM\Node(label="Course")
  */
-class Course
+class Course implements \Serializable
 {
     /**
     /* @OGM\GraphId()
@@ -32,13 +32,20 @@ class Course
     /**
      * @var User[]|Collection
      *
-     * @OGM\Relationship(type="CREATED_BY", direction="INCOMING", collection=true, mappedBy="users", targetEntity="User")
+     * @OGM\Relationship(type="CREATED_BY", direction="INCOMING", collection=true, mappedBy="course", targetEntity="User")
      */
-    protected $users;
+    protected $user;
+    /**
+     * @var User[]|Collection
+     *
+     * @OGM\Relationship(type="CREATED_BY", direction="OUTGOING", collection=true, mappedBy="course", targetEntity="LearningResource")
+     */
+    protected $learningResource;
 
     public function __construct()
     {
-        $this->users = new Collection();
+        $this->user = new Collection();
+        $this->learningResource = new Collection();
     }
     public function getId(): ?int
     {
@@ -64,7 +71,21 @@ class Course
     {
         return $this->dateTime;
     }
+    /**
+     * @return User[]|Collection
+     */
+    public function getUsers()
+    {
+        return $this->user;
+    }
 
+    /**
+     * @return LearningResource[]|Collection
+     */
+    public function getLearningResource()
+    {
+        return $this->learningResource;
+    }
 
     public function setDateCreated( $dateTime): self
     {
@@ -74,7 +95,37 @@ class Course
 
     public function setUser($user)
     {
-        $this->users = $user;
+        $this->user = $user;
         return $this;
+    }
+
+    public function serialize()
+    {
+        return serialize(array(
+                             $this->id,
+                             $this->name,
+                             $this->dateTime,
+                         )
+        );
+    }
+
+    /**
+     * Constructs the object
+     * @link https://php.net/manual/en/serializable.unserialize.php
+     * @param string $serialized <p>
+     * The string representation of the object.
+     * </p>
+     * @return void
+     * @since 5.1.0
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->name,
+            $this->dateTime,
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized);
     }
 }

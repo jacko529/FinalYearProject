@@ -1,7 +1,7 @@
 version: "3"
 services:
   neo4j:
-    image: "neo4j:latest"
+    image: "neo4j:3.5.14"
     ports:
       - "7474:7474"
       - "7687:7687"
@@ -17,17 +17,21 @@ services:
       context: "."
       dockerfile: "docker/php.Dockerfile"
     ports:
-      - "8080:80"
+      - "8080:9501"
+    command: tail -f /dev/null
     networks:
       - "default"
     volumes:
       - "./learning_made_easy:/var/www/html"
-  composer:
-    image: "composer:1.8"
-    volumes:
-      - "./learning_made_easy:/app"
-      - "~/.composer:/tmp"
-    command: "composer about"
+  db:
+    image: mariadb:5.5
+    environment:
+      - MYSQL_DATABASE=test
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
+    ports:
+      - "3306:3306"
     networks:
       - "default"
   frontend:

@@ -228,7 +228,7 @@ class MasterForm extends React.Component {
         let arrays = this.state;
         delete arrays.currentStep;
         const token = {
-            // headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` }
+            headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` }
         };
         axios.post("http://localhost:8080/api/learning-style", this.state, token).then(response => {
         }).catch(error => {

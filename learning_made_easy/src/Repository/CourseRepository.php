@@ -5,18 +5,24 @@ namespace App\Repository;
 use App\Entity\Course;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use GraphAware\Neo4j\Client\ClientInterface;
 
-/**
- * @method Course|null find($id, $lockMode = null, $lockVersion = null)
- * @method Course|null findOneBy(array $criteria, array $orderBy = null)
- * @method Course[]    findAll()
- * @method Course[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
-class CourseRepository extends ServiceEntityRepository
+
+class CourseRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    protected ClientInterface $client;
+
+    public function __construct( ClientInterface $client)
     {
-        parent::__construct($registry, Course::class);
+        $this->client = $client;
+
+    }
+    public function grabAllPreviousResources($email){
+        return $this->client->run(
+            "MATCH (a:User)-[:CREATED_BY]-(b:Course)-[:TimeDifficulty]-(resource:LearningResource)
+                    where a.email = '$email'
+                    RETURN  b,resource"
+        );
     }
 
     // /**

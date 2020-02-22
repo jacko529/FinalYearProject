@@ -23,6 +23,7 @@ const Tiles = (props) => {
                 <CardBody>
                     <CardTitle>{props.title}</CardTitle>
                     <CardSubtitle>{props.subtitle}</CardSubtitle>
+                     <Button  onClick={save}><Link to="/quiz">{props.button}</Link></Button>
                 </CardBody>
             </Card>
         </Col>

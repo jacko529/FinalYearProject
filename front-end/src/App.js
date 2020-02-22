@@ -12,6 +12,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {loadUser} from './actions/authActions'
 import Entry from "./components/Home/Entry";
+import CourseContent from "./components/Home/CourseContent";
+import TeachHome from "./components/TeachUpload/TeachHome";
+import UploadContent from "./components/TeachUpload/UploadContent";
+import UploadCourse from "./components/TeachUpload/UploadCourse";
 import MasterForm from "./components/Mutliple/MasterForm";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import {NonUser} from "./components/Home/NonUser";
@@ -33,6 +37,11 @@ class App extends Component {
                         <AppNavBar/>
                         <Switch>
                             <PrivateRoute path='/me' component={Entry}/>
+                            <PrivateRoute path='/content' component={CourseContent}/>
+                            <PrivateRoute path='/admin' component={CourseContent}/>
+                            <PrivateRoute path='/home' component={TeachHome}/>
+                            <PrivateRoute path='/upload-course' component={UploadCourse}/>
+                            <PrivateRoute path='/upload-content' component={UploadContent}/>
                             <Route path="/quiz" component={MasterForm}/>
                             <Route path="/" component={NonUser}/>
                             <Route path="/norm"/>

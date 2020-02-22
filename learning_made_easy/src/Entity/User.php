@@ -55,19 +55,31 @@ class User implements UserInterface, \Serializable
      *
      * @OGM\Relationship(type="HAS", direction="OUTGOING", collection=true, mappedBy="user", targetEntity="LearningStyle")
      */
-    protected $learningSyles;
+    protected $learningStyles;
+
+    /**
+     * @var Course[]|Collection
+     *
+     * @OGM\Relationship(type="CREATED_BY", direction="OUTGOING", collection=true, mappedBy="user", targetEntity="Course")
+     */
+    protected $course;
+
 
     public function __construct()
     {
-        $this->learningSyles = new Collection();
+        $this->learningStyles = new Collection();
+        $this->course = new Collection();
     }
 
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection|LearningStyle[]
-     */
+
     public function getLearningStyles()
     {
-        return $this->learningSyles;
+        return $this->learningStyles;
+    }
+
+    public function getCourse()
+    {
+        return $this->course;
     }
 
     public function getId(): ?int

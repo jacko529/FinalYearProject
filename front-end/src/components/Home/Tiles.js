@@ -27,7 +27,7 @@ const Tiles = (props) => {
                         <CardText>Intuitive {props.learning_styles.intuitive}</CardText>
                         <CardText>Reflector {props.learning_styles.reflector}</CardText>
                         <CardText>Verbal {props.learning_styles.verbal}</CardText>
-                        {(props.button === null) ? null : (props.learning_styles !== null ) ? null : <Button  onClick={save}><Link to="/quiz">{props.button}</Link></Button>}
+                        {(props.button === null) ? null : (props.learning_styles.length ) ? null : <Button  onClick={save}><Link to="/quiz">{props.button}</Link></Button>}
                     </CardBody>
                 </Card>
                 </Col>

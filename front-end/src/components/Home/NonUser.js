@@ -19,9 +19,7 @@ import LoginModal from "../auth/LoginModel";
 import RegisterModal from "../auth/RegisterModel";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import AppNavBar from "../AppNavbar";
-import { Redirect } from 'react-router-dom';
-import {Entry} from "./Entry";
+
 
 export class NonUser extends Component {
 

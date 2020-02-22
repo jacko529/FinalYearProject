@@ -4,10 +4,8 @@
 namespace App\Repository;
 
 
-use Aws\S3\S3Client;
 use GraphAware\Neo4j\Client\ClientInterface;
-use GraphAware\Neo4j\OGM\EntityManagerInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+
 
 class LearningResourceRepository
 {
@@ -18,30 +16,43 @@ class LearningResourceRepository
     {
         $this->client = $client;
     }
-    public function createRelationship($nameOfCurrent, $nameOfPrevious, $timeBetween){
+    public function connectWithPreviousLearningResource($nameOfCurrent, $nameOfPrevious, $timeBetween){
 
         $this->client->run(
             "MATCH (a:LearningResource),(b:LearningResource)
                    WHERE a.name_of_resource = '".$nameOfPrevious."' AND b.name_of_resource = '".$nameOfCurrent."'
-                   CREATE (a)-[r:TimeDifficulty { time: '".$timeBetween."' }]->(b)"
+                   CREATE (a)-[a:TimeDifficulty { time: '".$timeBetween."' }]->(b)"
+        );
+    }
+    public function connectWithFirstLearningResource( $timeBetween, $course, $nameOfResource){
+
+        $this->client->run(
+            "MATCH (a:LearningResource),(b:Course)
+                   WHERE a.name_of_resource = '".$nameOfResource."' AND b.name = '".$course."'
+                   CREATE (b)-[cb:BELONGS_TO]->(a)
+                   CREATE (b)-[r:TimeDifficulty { time: '".$timeBetween."' }]->(a)"
         );
     }
 
+
+
     public function matchFirst($learningType){
 
-       $learning =   $this->client->run(
+        return   $this->client->run(
            "MATCH (first:LearningResource)
                     WHERE first.learning_type = 'third' and first.stage = '1'
                     RETURN first");
-       return $learning;
 
     }
 
     public function connectUserAndLo($nameOfResource, $email){
         return $this->client->run(
-            "MATCH (a:User),(b:LearningResource)
-                    WHERE a.email= '".$email."' and b.name_of_resource = '".$nameOfResource."'
-                    CREATE (a)-[r:Consumed]->(b)"
+            "MATCH (a:User { email: '$email' }),
+            MATCH (b:LearningResource { name_of_resource: '$nameOfResource' })
+            MERGE(a)-[r:Consumed]->(b)"
+
         );
     }
+
+
 }

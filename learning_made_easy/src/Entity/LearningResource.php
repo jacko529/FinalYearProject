@@ -36,6 +36,14 @@ class LearningResource
      */
     private $name_of_resource;
 
+
+    /**
+     * @var Course[]|Collection
+     *
+     * @OGM\Relationship(type="CREATED_BY", direction="INCOMING", collection=true, mappedBy="learningResource", targetEntity="Course")
+     */
+    protected $course;
+
     /**
      * @OGM\Property(type="string")
      */
@@ -44,7 +52,7 @@ class LearningResource
     public function __construct()
     {
         $this->users = new Collection();
-
+        $this->course = new Collection();
     }
 
     /**
@@ -111,6 +119,11 @@ class LearningResource
     public function setLearningType($learning_type): void
     {
         $this->learning_type = $learning_type;
+    }
+
+    public function setCourse($course):void
+    {
+        $this->course = $course;
     }
 
     /**
