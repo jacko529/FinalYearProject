@@ -4,10 +4,11 @@ framework:
     #http_method_override: true
 
     # Enables session support. Note that the session will ONLY be started if you read or write from it.
-    # Remove or comment this section to explicitly disable session support.
     session:
-        storage_id: session.storage.php_bridge
-
+        handler_id: ~
+        storage_id: swoole_bundle.session.table_storage
+        cookie_secure: auto
+        cookie_samesite: lax
 
     #esi: true
     #fragments: true

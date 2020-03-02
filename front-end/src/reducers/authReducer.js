@@ -13,7 +13,10 @@ import {
     access_token: localStorage.getItem('access_token'),
     isAuthenticated: null,
     isLoading: false,
-    user: null
+    isLoaded:false,
+    user: null,
+    isUser: false,
+    isTeacher: false
   };
   
   export default function(state = initialState, action) {
@@ -24,12 +27,28 @@ import {
           isLoading: true
         };
       case USER_LOADED:
-        return {
-          ...state,
-          isAuthenticated: true,
-          isLoading: false,
-          user: action.payload
-        };
+        const type =  action.payload.user_type;
+        if(!type.includes("ROLE_TEACHER")){
+          return {
+            ...state,
+            isAuthenticated: true,
+            isLoading: false,
+            isLoaded: true,
+            user: action.payload,
+            isUser: true,
+            isTeacher: false
+          };
+        }else{
+          return {
+            ...state,
+            isAuthenticated: true,
+            isLoading: false,
+            isLoaded: true,
+            user: action.payload,
+            isUser: true,
+            isTeacher: true
+          };
+        }
       case LOGIN_SUCCESS:
       case REGISTER_SUCCESS:
         localStorage.setItem('access_token', action.payload.access_token);
@@ -37,6 +56,7 @@ import {
           ...state,
           ...action.payload,
           isAuthenticated: true,
+          isLoaded: true,
           isLoading: false
         };
       case AUTH_ERROR:
@@ -49,7 +69,8 @@ import {
           access_token: null,
           user: null,
           isAuthenticated: false,
-          isLoading: false
+          isLoading: false,
+          isLoaded: true
         };
       default:
         return state;

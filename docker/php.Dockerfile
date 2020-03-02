@@ -26,10 +26,11 @@ RUN apt-get install vim -y && \
 RUN pecl install swoole
 RUN pecl install inotify
 RUN docker-php-ext-enable swoole
+RUN docker-php-ext-enable inotify
+
 
 RUN touch /usr/local/etc/php/conf.d/swoole.ini && \
     echo 'extension=swoole.so' > /usr/local/etc/php/conf.d/swoole.ini
-
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 

@@ -49,8 +49,13 @@ class LearningResource
      */
     private $stage;
 
-    public function __construct()
+    public function __construct($name_of_resource,  $name_of_file, $date_uploaded, $learning_type, $stage)
     {
+        $this->name_of_resource = $name_of_resource;
+        $this->name_of_file = $name_of_file;
+        $this->date_uploaded = $date_uploaded;
+        $this->learning_type = $learning_type;
+        $this->stage = $stage;
         $this->users = new Collection();
         $this->course = new Collection();
     }

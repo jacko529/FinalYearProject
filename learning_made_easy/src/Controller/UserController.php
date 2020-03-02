@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\LearningResourceRepository;
+use App\Repository\UserRepository;
 use GraphAware\Neo4j\OGM\EntityManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,18 +24,21 @@ class UserController extends AbstractController
     protected JWTEncoderInterface $jwtEncoder;
     protected array $learningStyles = [];
     protected array $courses = [];
-
+    protected UserRepository $userRepository;
+    protected array $arrayOfRelatedResources;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         UserPasswordEncoderInterface $userPasswordEncoder,
         TokenStorageInterface $tokenStorage,
-        JWTEncoderInterface $JWTEncoder
+        JWTEncoderInterface $JWTEncoder,
+        UserRepository $userRepository
     ) {
         $this->entityManager = $entityManager;
         $this->tokenStorage = $tokenStorage;
         $this->userPasswordEncoder = $userPasswordEncoder;
         $this->jwtEncoder = $JWTEncoder;
+        $this->userRepository = $userRepository;
     }
 
 
@@ -53,21 +58,25 @@ class UserController extends AbstractController
         if($this->learningStyles){
             arsort($this->learningStyles, SORT_REGULAR);
         }
-
-        foreach ($userEntity->getCourse() as $key => $course) {
-                    $this->courses[] =  ['name'=>$course->getName(),
-                                        'date' => $course->getDateCreated()];
-
+        $courses = $this->userRepository->findCourseByUser($user->getUsername());
+        $this->arrayOfRelatedResources = [];
+        foreach ($courses->records() as  $course) {
+                $courseGet =    $course->get('course');
+                       $courseValue =  $courseGet->values();
+                       $this->arrayOfRelatedResources =  $courseValue;
         }
-
+        if($this->arrayOfRelatedResources === null){
+            $this->arrayOfRelatedResources = [];
+        }
 
         return $this->json([
             'first_name' => $userEntity->getFirstName(),
             'surname' => $userEntity->getSurname(),
             'email' => $userEntity->getEmail(),
+            'user_type' => $userEntity->getRoles(),
             'time' => $userEntity->getTime() ?: '',
             'learning_styles' => $this->learningStyles,
-            'course_created' => $this->courses
+            'course_created' => $this->arrayOfRelatedResources
         ]);
 
 
@@ -85,17 +94,18 @@ class UserController extends AbstractController
             $user->setPassword($this->userPasswordEncoder->encodePassword($user, $request->get('password')));
             $user->setRoles(['ROLE_USER']);
             $user->getLearningStyles();
-            if($this->entityManager->persist($user)){
+            // @todo what if they are already a user
+            $this->entityManager->persist($user);
                 $this->entityManager->flush();
                 $token = $this->jwtEncoder->encode([
                   'username' => $user->getUsername(),
                     'exp' => time() + 3600 // 1 hour expiration
               ]);
                 $reply = 'success';
-            }else{
-                $reply = 'failure';
-                $token = 'A user already has this email address`';
-            }
+//            }else{
+//                $reply = 'failure';
+//                $token = 'A user already has this email address`';
+//            }
 
         } catch (Exception $exception) {
             return $this->json('A user already has this email address');

@@ -1,14 +1,11 @@
-import React, { Component, Fragment } from 'react';
-import {
-    Card, CardImg, CardText,Col, CardBody, Row,
-    CardTitle, CardSubtitle, Button
-} from 'reactstrap';
+import React from 'react';
+import { Button, Card, CardTitle,Icon, Row, Col } from 'react-materialize';
+
 import '../../SidePanel.css';
 
 import {
     Link
 } from "react-router-dom";
-import Logout from "../auth/Logout";
 
 const Tiles = (props) => {
     let save = (e) => {
@@ -17,20 +14,28 @@ const Tiles = (props) => {
     }
 
     return (
-                <Col sm={{ size: '12' }} md={{ size: '4' , offset: '1'}}>
-                <Card>
-                    <CardImg top width="20%" src={props.image} alt="" />
-                    <CardBody>
-                        <CardTitle>{props.title}</CardTitle>
-                        <CardSubtitle>{props.subtitle}</CardSubtitle>
-                        <CardText>Global {props.learning_styles.global}</CardText>
-                        <CardText>Intuitive {props.learning_styles.intuitive}</CardText>
-                        <CardText>Reflector {props.learning_styles.reflector}</CardText>
-                        <CardText>Verbal {props.learning_styles.verbal}</CardText>
-                        {(props.button === null) ? null : (props.learning_styles.length ) ? null : <Button  onClick={save}><Link to="/quiz">{props.button}</Link></Button>}
-                    </CardBody>
-                </Card>
-                </Col>
+
+        <Col   m={2}
+               s={6}>
+            <Card
+                actions={[
+                    <Button  onClick={save}><Link to="/quiz">{props.button}</Link></Button>
+
+                ]}
+                header={<CardTitle image={props.image}>{props.title}</CardTitle>}
+                revealicon={<Icon>more_vert</Icon>}
+
+            >
+
+                {props.subtitle}<br></br>
+                Global - {props.learning_styles.global}<br></br>
+                Intuitive - {props.learning_styles.intuitive}<br></br>
+                reflector - {props.learning_styles.reflector}<br></br>
+                Verbal - {props.learning_styles.verbal}<br></br>
+            </Card>
+        </Col>
+
+
     );
 };
 

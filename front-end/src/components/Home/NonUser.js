@@ -1,42 +1,31 @@
 import React, { Component, Fragment } from 'react';
 import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    ListGroup,
-    ListGroupItem,
-    ListGroupItemHeading,
-    Container, NavLink
-} from 'reactstrap';
+
+    Container,
+
+} from 'react-materialize';
 import '../../Loader.css';
 import '../../SidePanel.css';
 import './Tiles'
 import Tiles from "./Tiles";
-import LoginModal from "../auth/LoginModel";
-import RegisterModal from "../auth/RegisterModel";
+
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 
 export class NonUser extends Component {
 
-    static propTypes = {
-        auth: PropTypes.object.isRequired
-    };
+
     render() {
-        console.log(this.props.auth);
 
 
 
 
         const welcome = (
             <Fragment>
-                <Container>
-                    <h1 style={{textAlign: "center"}}>Welcome to easy learning</h1>
-                    <h2> Please log in</h2>
+                <Container style={{textAlign: "center"}}>
+                    <h1 style={{marginBottom: "7rem" , marginTop: '4rem', color: 'white'}}>Welcome to Easy Learn</h1>
+                    <h2 style={{color:'white'}}> It might just be easier to study </h2>
+                    <h3 style={{color:'white'}}> Please Login</h3>
                 </Container>
             </Fragment>
         );

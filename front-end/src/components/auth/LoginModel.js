@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
+// import {
+//   Button,
+//   Modal,
+//   ModalHeader,
+//   ModalBody,
+//   Form,
+//   FormGroup,
+//   Label,
+//   Input,
+//   NavLink,
+//   Alert
+// } from 'reactstrap';
 import {
+
+  Nav,
+  NavItem,
   Button,
+  TextInput,
   Modal,
-  ModalHeader,
-  ModalBody,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  NavLink,
-  Alert
-} from 'reactstrap';
+  Model
+} from 'react-materialize';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/authActions';
@@ -67,6 +76,7 @@ class LoginModal extends Component {
   };
 
   onSubmit = e => {
+    console.log('clock')
     e.preventDefault();
 
     const { username, password } = this.state;
@@ -83,46 +93,47 @@ class LoginModal extends Component {
   render() {
 
     return (
-      <div>
-        <NavLink onClick={this.toggle} href='#'>
-          Login
-        </NavLink>
 
-        <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Login</ModalHeader>
-          <ModalBody>
-            {this.state.msg ? (
-              <Alert color='danger'>{this.state.msg}</Alert>
-            ) : null}
-            <Form onSubmit={this.onSubmit}>
-              <FormGroup>
-                <Label for='username'>Email</Label>
-                <Input
-                  type='username'
-                  name='username'
-                  id='username'
-                  placeholder='username'
-                  className='mb-3'
-                  onChange={this.onChange}
-                />
+        <Modal
+            actions={[
+              <Button flat modal="close" node="button" waves="green">Close</Button>
+            ]}
+            bottomSheet={false}
+            fixedFooter={false}
+            header="Login"
+            id="modal-0"
+            style={{    width: '50%', height: 'auto'}}
+            options={{
+              dismissible: true,
+              endingTop: '10%',
+              inDuration: 250,
+              onCloseEnd: null,
+              onCloseStart: null,
+              onOpenEnd: null,
+              onOpenStart: null,
+              opacity: 0.6,
+              outDuration: 250,
+              preventScrolling: true,
+              startingTop: '4%'
+            }}
+            trigger={<Button node="button">Login</Button>}
+        >
+          <TextInput
+              label="First Name"
+              value={this.state.username}
+              onChange={this.onChange}
+              name={'username'}
+          />
 
-                <Label for='password'>Password</Label>
-                <Input
-                  type='password'
-                  name='password'
-                  id='password'
-                  placeholder='Password'
-                  className='mb-3'
-                  onChange={this.onChange}
-                />
-                <Button color='dark' style={{ marginTop: '2rem' }} block>
-                  Login
-                </Button>
-              </FormGroup>
-            </Form>
-          </ModalBody>
+          <TextInput
+              label="Password"
+              password
+              value={this.state.password}
+              onChange={this.onChange}
+              name={'password'}
+          />
+          <Button onClick={this.onSubmit} node="button">Login</Button>
         </Modal>
-      </div>
     );
   }
 }

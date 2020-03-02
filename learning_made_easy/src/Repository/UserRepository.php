@@ -24,11 +24,16 @@ class UserRepository implements UserLoaderInterface
 
 
     protected EntityManagerInterface $client;
+    protected ClientInterface $clients;
 
-    public function __construct(EntityManagerInterface $client)
+    public function __construct(EntityManagerInterface $client,
+                                 ClientInterface $clients)
     {
         $this->client = $client;
+        $this->clients = $clients;
+
     }
+
 
     public function loadUserByUsername($usernameOrEmail)
     {
@@ -39,8 +44,12 @@ class UserRepository implements UserLoaderInterface
 
 
 
-    public function findByOne(User $user, $username){
-
+    public function findCourseByUser( $email){
+        return $this->clients->run(
+            "MATCH (course:Course)-[:CREATED_BY]-(b:User)
+                    where b.email = '$email'
+                    RETURN  course"
+        );
     }
 
     // /**

@@ -21,10 +21,17 @@ class CourseRepository
         return $this->client->run(
             "MATCH (a:User)-[:CREATED_BY]-(b:Course)-[:TimeDifficulty]-(resource:LearningResource)
                     where a.email = '$email'
-                    RETURN  b,resource"
+                    RETURN resource.name_of_resource as resource, resource.stage as stage ,b.name as course_name, resource.learning_type as type
+                    order by b.name, resource.stage"
         );
     }
-
+    public function addCourseRelationship($email, $name){
+        return $this->client->run(
+            "MATCH (a:User { email: '$email' })
+                     MATCH (b:Course { name: '$name' })
+                 MERGE(a)-[r:STUDYING]->(b)"
+        );
+    }
     // /**
     //  * @return Course[] Returns an array of Course objects
     //  */

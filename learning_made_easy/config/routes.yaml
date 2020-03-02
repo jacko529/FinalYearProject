@@ -55,11 +55,22 @@ user_course:
 
 all_courses_resources:
     path: /api/courses
-    controller: App\Controller\CourseController::getAllCoursesWithRelatedLearningObjects
+    controller: App\Controller\CourseController::getAll
     methods: get
 
-test:
-    path: /api/test
-    controller: App\Controller\TokenController::Test
+which_course:
+    path: /api/courses
+    controller: App\Controller\CourseController::studyingNow
+    methods: post
+
+
+consume_course:
+    path: /api/consume
+    controller: App\Controller\LearningResourceController::consumeLearningResource
+    methods: post
+
+course_analytics:
+    path: /api/course-analytics
+    controller: App\Controller\LearningAnalyticsController::getAnalytics
     methods: GET
 

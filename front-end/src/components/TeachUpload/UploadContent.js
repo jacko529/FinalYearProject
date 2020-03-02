@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import {
     Container,
     Form,
@@ -7,9 +7,15 @@ import {
     Label,
     Input,
     FormText,
-    Row,
-    Button
+
+
 } from 'reactstrap';
+
+import {
+    TextInput,
+    Button,
+    Row,
+} from 'react-materialize';
 
 import '../../Loader.css';
 import '../../SidePanel.css';
@@ -26,15 +32,40 @@ export class TeachHome extends Component {
         resourceName: '',
         stage: '',
         time: '',
-        learningStyle: '',
+        learningStyle: 'verbal',
         resourceType: 'file/pdf',
         resource: '',
         link: '',
         selectedCourse: '',
-        previous: []
+        previousSelected: '',
+        previous: [],
+        course_created: [],
+        courseLoaded: false
     };
+    componentDidMount() {
+        const config = {
+            headers: { Authorization: `bearer ${localStorage.getItem('access_token')}` ,'Content-type': 'application/json'}
+
+        };
+        axios.get('http://localhost:8080/api/courses',config )
+            .then(res => {
+                this.setState({previous: res.data.data[0]});
+                this.setState({courseLoaded: true})
+            });
+
+    }
+
     handleCourse(event) {
         this.setState({selectedCourse: event.target.value})
+        console.log(this.state.selectedCourse)
+    }
+    handleOneCourse(event) {
+        this.setState({selectedCourse: event.target.value})
+        console.log(this.state.selectedCourse)
+    }
+    handlePreviousSelected(event) {
+        this.setState({previousSelected: event.target.value})
+
     }
     handleNameChange(event) {
         this.setState({resourceName: event.target.value})
@@ -59,7 +90,7 @@ export class TeachHome extends Component {
 
     }
     render() {
-        const { isLoading, isAuthenticated, user } = this.props.auth;
+        const {  isAuthenticated, user } = this.props.auth;
 
         let save = (e) => {
             const config = {
@@ -75,7 +106,7 @@ export class TeachHome extends Component {
                 stage: this.state.stage,
                 time: this.state.time,
                 learning_style: this.state.learningStyle,
-                previous: this.state.previous
+                previous: this.state.previousSelected
             };
             const json = JSON.stringify(obj);
 
@@ -88,58 +119,43 @@ export class TeachHome extends Component {
             console.log(this.state.value)
             axios.post('http://localhost:8080/api/coure-resources',data,config )
                 .then(res => {
-                    console.log(res.data);
+                    window.location.reload();
 
                 });
-            this.state = {resourceName: '',
-                stage: '',
-                time: '',
-                learningStyle: '',
-                resourceType: 'file/pdf',
-                resource: '',
-                link: '',
-                previous: [],
-                courses: [],
-                selectedCourse: ""
 
-            };
 
             console.log('account');
         }
 
+            if(isAuthenticated && !user.course_created.isArray){
+                this.state.selectedCourse = user.course_created.name;
+                console.log(user);
+
+            }
 
         return (
-            <Container>
+            <Container style={{textAlign: 'center', marginTop: '4rem'}}>
                 <Row>
                     <Form>
                         <Row form>
                             <Col md={12}>
-                                {isAuthenticated ?
-                                <FormGroup>
-                                    <Label for="course">Which course</Label>
-                                    <Input value={this.state.selectedCourse} onChange={this.handleCourse.bind(this)} type="select" name="select" id="learning_style">
-                                        {user.course_created.map((course) => <option key={course.name} value={course.name}>{course.name}</option>)}
-                                    </Input>
-                                </FormGroup>
+                                {isAuthenticated && user.course_created.isArray ?
+                                    <FormGroup>
+                                        <Label for="course">Which course</Label>
+                                        <Input value={this.state.selectedCourse} onChange={this.handleCourse.bind(this)} type="select" name="select" id="learning_style">
+                                            {user.course_created.map((course) => <option key={course.name} value={course.name}>{course.name}</option>)}
+                                        </Input>
+
+                                    </FormGroup>
                                     : null }
-                            </Col>
-                            <Col md={12}>
-                                <FormGroup>
-                                    <Label for="resource_name">Resource Name</Label>
-                                    <Input type="text" value={this.state.resourceName} onChange={this.handleNameChange.bind(this)}  placeholder="Resource name" />
-                                </FormGroup>
-                            </Col>
-                            <Col md={12}>
-                                <FormGroup>
-                                    <Label for="stage">Stage</Label>
-                                    <Input type="number" value={this.state.stage} onChange={this.handleStageChange.bind(this)}  placeholder="Stage in the course" />
-                                </FormGroup>
-                            </Col>
-                            <Col md={12}>
-                                <FormGroup>
-                                    <Label for="time">Time</Label>
-                                    <Input type="number" value={this.state.time} onChange={this.handleTimeChange.bind(this)}  placeholder="time" />
-                                </FormGroup>
+                                {isAuthenticated && !user.course_created.isArray ?
+                                    <FormGroup>
+                                        <Label for="course">Which course</Label>
+                                        <Input value={this.state.selectedCourse}  onChange={this.handleOneCourse.bind(this)} type="select" name="select" id="learning_style">
+                                             <option key={user.course_created.name} value={user.course_created.name}>{user.course_created.name}</option>)}
+                                        </Input>
+                                    </FormGroup>
+                                    : null }
                             </Col>
                             <Col md={12}>
                                 <FormGroup>
@@ -152,6 +168,29 @@ export class TeachHome extends Component {
                                     </Input>
                                 </FormGroup>
                             </Col>
+                            {/*<Col md={12}>*/}
+                            {/*    {this.state.courseLoaded && this.state.learningStyle !== '' ?*/}
+                            {/*        <FormGroup>*/}
+                            {/*            <Label for="course">Previous</Label>*/}
+                            {/*            <Input value={this.state.previousSelected} onChange={this.handlePreviousSelected.bind(this)} type="select" name="select" id="learning_style">*/}
+                            {/*                {this.state.previous.map((course) => <option key={course.course} value={course.course}>*/}
+                            {/*                                                                                Resource: {course.course} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/}
+                            {/*                                                                                Stage: {course.stage} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/}
+                            {/*                                                                                Course: {course.resource}</option>)}*/}
+                            {/*            </Input>*/}
+                            {/*        </FormGroup>*/}
+                            {/*        : null }*/}
+                            {/*</Col>*/}
+                            <Col md={12}>
+                                <TextInput label="Course Name"  value={this.state.resourceName} onChange={this.handleNameChange.bind(this)}/>
+                            </Col>
+                            <Col md={12}>
+                                <TextInput label="Stage" type={'number'} value={this.state.stage} onChange={this.handleStageChange.bind(this)}/>
+                            </Col>
+                            <Col md={12}>
+                                <TextInput label="Time" type={'number'} value={this.state.time} onChange={this.handleTimeChange.bind(this)}/>
+                            </Col>
+
                             <Col md={12}>
                                 <FormGroup>
                                     <Label for="resource_type">Resource</Label>
@@ -163,12 +202,14 @@ export class TeachHome extends Component {
                             </Col>
                             {this.state.resourceType === 'file/pdf' ?
                                 <FormGroup row>
-                                    <Label for="resource" sm={2}>Resource</Label>
                                     <Col sm={10}>
-                                        <Input type="file" onChange={this.handleResourceChange.bind(this)} name="resource" id="resource" />
-                                        <FormText color="muted">
-                                            This is the course content.
-                                        </FormText>
+                                        <TextInput
+                                            label=" Click to upload course content."
+                                            type="file"
+                                            name={'resource'}
+                                            id={'resource'}
+                                            onChange={this.handleResourceChange.bind(this)}
+                                        />
                                     </Col>
                                 </FormGroup> :
                                 <Col md={12}>

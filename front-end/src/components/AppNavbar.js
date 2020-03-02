@@ -1,20 +1,28 @@
 import React, { Component, Fragment } from 'react';
+// import {
+//   Collapse,
+//   Navbar,
+//   NavbarToggler,
+//   NavbarBrand,
+//   Nav,
+//   NavItem,
+//   Container
+// } from 'reactstrap';
+
 import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  Container
-} from 'reactstrap';
+
+    Nav,
+    NavItem,
+    Container,
+    Navbar,
+    Icon,
+    NavBrand
+} from 'react-materialize';
+
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import RegisterModal from './auth/RegisterModel';
 import LoginModal from './auth/LoginModel';
-import { Redirect, withRouter } from 'react-router-dom';
-import { createBrowserHistory } from "history";
-import Loader from 'react-loader-spinner';
 import '../Loader.css';
 import '../SidePanel.css';
 
@@ -36,43 +44,9 @@ class AppNavbar extends Component {
   };
 
   render() {
-      const { isLoading, isAuthenticated, user } = this.props.auth;
+      const {isLoaded, isLoading, isAuthenticated, user } = this.props.auth;
 
 
-    const authLinks = (
-        <Fragment>
-          <NavItem>
-          <span className='navbar-text mr-3'>
-            <strong style={{color: '#006494'}}>{user ? `Welcome ${user.first_name}` : ''}</strong>
-          </span>
-          </NavItem>
-          <NavItem>
-            <Logout />
-          </NavItem>
-        </Fragment>
-    );
-
-    const guestLinks = (
-        <Fragment>
-          <NavItem>
-              <LoginModal />
-          </NavItem>
-            <NavItem>
-                <RegisterModal />
-            </NavItem>
-        </Fragment>
-    );
-
-    const loadingSign = (
-        <Loader
-            type="MutatingDots"
-            color="#00BFFF"
-            height={80}
-            width={80}
-
-        />
-
-    );
 
     let navOutput = 0;
     if(!isLoading && isAuthenticated ){
@@ -85,19 +59,33 @@ class AppNavbar extends Component {
     return (
 
         <div>
-          <Navbar  expand='sm' className='mb-5 navBar'>
 
-            <Container>
-                {isAuthenticated ?  <NavbarBrand href='/me'>Easy Learning</NavbarBrand>: <NavbarBrand href='/'>Easy Learning</NavbarBrand>}
-              <NavbarToggler onClick={this.toggle} />
-              <Collapse isOpen={this.state.isOpen} navbar>
-                <Nav className='ml-auto' navbar>
-                  {(navOutput === 1) ? authLinks : (navOutput === 2 ) ? guestLinks : ""}
-                </Nav>
-              </Collapse>
-            </Container>
-          </Navbar>
-          {isLoading ? loadingSign: ''}
+            <Navbar
+                className={'navy'}
+                alignLinks="right"
+                brand={<a href='/me'>Easy Learn</a>}
+                menuIcon={<Icon>menu</Icon>}
+                options={{
+                    draggable: true,
+                    edge: 'left',
+                    inDuration: 250,
+                    onCloseEnd: null,
+                    onCloseStart: null,
+                    onOpenEnd: null,
+                    onOpenStart: null,
+                    outDuration: 200,
+                    preventScrolling: true
+                }}
+                sidenav={<li>Custom node!</li>}
+            >
+                <NavItem href="">
+                    {(navOutput === 1) ?  <strong style={{color: 'darkgray'}}>{user ? `Welcome ${user.first_name}` : ''}</strong>
+                        : (navOutput === 2 ) ?  <LoginModal /> : ""}
+                </NavItem>
+                <NavItem >
+                    {(navOutput === 1) ?  <Logout /> : (navOutput === 2 ) ?   <RegisterModal /> : ""}
+                </NavItem>
+            </Navbar>
         </div>
     );
   }

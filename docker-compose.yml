@@ -24,7 +24,7 @@ services:
     volumes:
       - "./learning_made_easy:/var/www/html"
   db:
-    image: mariadb:5.5
+    image: mariadb:latest
     environment:
       - MYSQL_DATABASE=test
       - MYSQL_ROOT_PASSWORD=test

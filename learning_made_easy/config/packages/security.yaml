@@ -5,11 +5,8 @@ security:
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        # used to reload user from session & other features (e.g. switch_user)
-
         app_user_provider:
             id: App\Security\Guard\UserProvider
-
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -47,3 +44,4 @@ security:
          - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/api/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+

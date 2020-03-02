@@ -10,7 +10,10 @@ import {
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+
 import {loadUser} from './actions/authActions'
+import {nextActiveLoading} from './actions/nextActiveActions'
+
 import Entry from "./components/Home/Entry";
 import CourseContent from "./components/Home/CourseContent";
 import TeachHome from "./components/TeachUpload/TeachHome";
@@ -18,34 +21,41 @@ import UploadContent from "./components/TeachUpload/UploadContent";
 import UploadCourse from "./components/TeachUpload/UploadCourse";
 import MasterForm from "./components/Mutliple/MasterForm";
 import PrivateRoute from "./components/auth/PrivateRoute";
+import TeacherRoute from "./components/auth/TeacherPrivateRoute";
+import ResolveRoutes from "./components/auth/ResolveRoutes"
 import {NonUser} from "./components/Home/NonUser";
-import { createBrowserHistory } from "history";
+import Loader from "react-loader-spinner";
+
 
 
 class App extends Component {
+
     componentDidMount() {
         store.dispatch(loadUser());
+        store.dispatch(nextActiveLoading());
+
+    }
+
+    state = {
+        time:false
     }
 
 
     render() {
+        let links = true;
+        //
+        // setTimeout(function() {  this.setState({time: true}); }.bind(this), 1600);
+
 
         return (
+
             <Router>
+
                 <Provider store={store}>
-                    <div className="App" style={{backgroundColor: '#0582CA'}}>
+
+                    <div className={'app'} >
                         <AppNavBar/>
-                        <Switch>
-                            <PrivateRoute path='/me' component={Entry}/>
-                            <PrivateRoute path='/content' component={CourseContent}/>
-                            <PrivateRoute path='/admin' component={CourseContent}/>
-                            <PrivateRoute path='/home' component={TeachHome}/>
-                            <PrivateRoute path='/upload-course' component={UploadCourse}/>
-                            <PrivateRoute path='/upload-content' component={UploadContent}/>
-                            <Route path="/quiz" component={MasterForm}/>
-                            <Route path="/" component={NonUser}/>
-                            <Route path="/norm"/>
-                        </Switch>
+                       <ResolveRoutes/>
                     </div>
                 </Provider>
             </Router>

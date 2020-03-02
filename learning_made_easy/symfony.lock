@@ -84,6 +84,9 @@
     "doctrine/reflection": {
         "version": "v1.1.0"
     },
+    "fzaninotto/faker": {
+        "version": "v1.9.1"
+    },
     "graphaware/neo4j-bolt": {
         "version": "1.11.0"
     },

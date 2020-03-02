@@ -8,6 +8,7 @@
         "aws/aws-sdk-php": "^3.133",
         "doctrine/doctrine-bundle": "^2.0",
         "doctrine/doctrine-migrations-bundle": "2.1.2",
+        "fzaninotto/faker": "^1.9",
         "graphaware/neo4j-php-ogm": "@rc",
         "k911/swoole-bundle": "0.7.*",
         "lexik/jwt-authentication-bundle": "^2.6",

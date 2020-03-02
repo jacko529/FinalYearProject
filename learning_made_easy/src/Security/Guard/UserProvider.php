@@ -4,35 +4,40 @@ namespace App\Security\Guard;
 
 
 use App\Entity\User;
-use App\Manager\EntityManager;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use Symfony\Component\Security\Core\User\UserInterface;
+use GraphAware\Neo4j\OGM\EntityManager;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 
 class UserProvider implements UserProviderInterface
 {
-    protected $userRepository;
+    private $em;
 
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManager $em)
     {
-        $this->userRepository = $entityManager->getEntityManager()->getRepository(User::class);
+        $this->em = $em;
     }
 
-    /**
-     * @param string $username
-     * @return null|User
-     */
     public function loadUserByUsername($username)
     {
-         $ko = $this->userRepository->findOneBy(['username' => $username]);
-         return
+
+        $user = $this->em->getRepository(User::class)->findOneBy(['username' => $username]);
+
+        if (null !== $user) {
+            return $user;
+        }
+
+        throw new UsernameNotFoundException(
+            sprintf('Username "%s" does not exist.', $username)
+        );
     }
 
     public function refreshUser(UserInterface $user)
     {
         if (!$user instanceof User) {
             throw new UnsupportedUserException(
-                sprintf('Instance of %s is not support', get_class($user))
+                sprintf('Instances of "%s" are not supported.', get_class($user))
             );
         }
 
@@ -41,7 +46,7 @@ class UserProvider implements UserProviderInterface
 
     public function supportsClass($class)
     {
-        return User::class === $class;
+        return (\neo4j_ogm_proxy_App_Entity_User::class === $class || User::class === $class);
     }
 
 }

@@ -1,17 +1,28 @@
 import React, { Component } from 'react';
 
+// import {
+//   Button,
+//   Modal,
+//   ModalHeader,
+//   ModalBody,
+//   Form,
+//   FormGroup,
+//   Label,
+//   Input,
+//   NavLink,
+//   Alert
+// } from 'reactstrap';
+
+
 import {
+  TextInput,
+  Nav,
+  NavItem,
   Button,
+  Navbar,
   Modal,
-  ModalHeader,
-  ModalBody,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  NavLink,
-  Alert
-} from 'reactstrap';
+  Model
+} from 'react-materialize';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { register } from '../../actions/authActions';
@@ -84,65 +95,64 @@ class RegisterModal extends Component {
 
   render() {
     return (
-        <div>
-          <NavLink onClick={this.toggle} href='#'>
-            Register
-          </NavLink>
-        <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Register</ModalHeader>
-          <ModalBody>
-            {this.state.msg ? (
-                <Alert color='danger'>{this.state.msg}</Alert>
-            ) : null}
-            <Form onSubmit={this.onSubmit}>
-              <FormGroup>
-                <Label for='first_name'>Name</Label>
-                <Input
-                    type='text'
-                    name='first_name'
-                    id='first_name'
-                    placeholder='First name'
-                    className='mb-3'
-                    onChange={this.onChange}
-                />
 
-                <Label for='surname'>Surname</Label>
-                <Input
-                    type='text'
-                    name='surname'
-                    id='surname'
-                    placeholder='Surname'
-                    className='mb-3'
-                    onChange={this.onChange}
-                />
+        <Modal
+    actions={[
+          <Button flat modal="close" node="button" waves="green">Close</Button>
+          ]}
+    bottomSheet={false}
+    fixedFooter={false}
+    header="Register"
+    id="modal-0"
+    style={{ maxHeight:'80%',   width: '50%', height: 'auto', overflowY: 'inherit'}}
+    options={{
+      dismissible: true,
+          endingTop: '10%',
+          inDuration: 250,
+          onCloseEnd: null,
+          onCloseStart: null,
+          onOpenEnd: null,
+          onOpenStart: null,
+          opacity: 0.5,
+          outDuration: 250,
+          preventScrolling: true,
+          startingTop: '4%'
+    }}
+    trigger={<Button node="button">Register</Button>}
+  >
 
-                <Label for='email'>Email</Label>
-                <Input
-                  type='email'
-                  name='email'
-                  id='email'
-                  placeholder='Email'
-                  className='mb-3'
-                  onChange={this.onChange}
-                />
+          <TextInput
+              label="First Name"
+              value={this.state.first_name}
+              onChange={this.onChange}
+              name={'first_name'}
+          />
+          <TextInput
+              label="Last Name"
+              value={this.state.surname}
+              onChange={this.onChange}
+              name={'surname'}
+          />
+          <TextInput
+              label="Email"
+              value={this.state.username}
+              onChange={this.onChange}
+              name={'email'}
+          />
+          <TextInput
+              label="Password"
+              password
+              value={this.state.password}
+              onChange={this.onChange}
+              name={'password'}
+          />
+              <Button onClick={this.onSubmit} color='dark' style={{ marginTop: '2rem' }} >
+                Register
+              </Button>
+  </Modal>
 
-                <Label for='password'>Password</Label>
-                <Input
-                  type='password'
-                  name='password'
-                  id='password'
-                  placeholder='Password'
-                  className='mb-3'
-                  onChange={this.onChange}
-                />
-                <Button color='dark' style={{ marginTop: '2rem' }} block>
-                  Register
-                </Button>
-              </FormGroup>
-            </Form>
-          </ModalBody>
-        </Modal>
-        </div>
+
+
     );
   }
 }

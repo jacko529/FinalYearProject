@@ -1,93 +1,140 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
+
 import {
-    ListGroup,
-    ListGroupItem,
+    Button,
+    TextInput,
     Container,
     Row,
-    Button,
     Col,
-    FormGroup,
-    Label,
     Form,
-    Input,
-    FormText
-} from 'reactstrap';
+    CardTitle,
+    Icon,
+    CardPanel,
+    Card
+} from 'react-materialize';
 import {
     Link
 } from "react-router-dom";
 import '../../Loader.css';
 import '../../SidePanel.css';
 
-import Slider from 'react-rangeslider'
-
 import 'react-rangeslider/lib/index.css'
 import axios from 'axios';
 
 import { connect } from 'react-redux';
+import InformCards from "../Home/InformCards";
 
 
 export class TeachHome extends Component {
 
     state = {
         requestCompleted:false,
-        learning_styles: [],
+        courseAnalytics: [],
         course: [],
         values: '',
 
     };
-    handleChange(event) {
-        this.setState({values: event.target.value})
+
+    componentWillMount() {
+
+
+        const config = {
+            headers: { Authorization: `bearer ${localStorage.getItem('access_token')}` ,'Content-type': 'application/json'}
+
+        };
+
+        axios.get('http://localhost:8080/api/course-analytics',config )
+            .then(res => {
+                this.setState({courseAnalytics: res.data});
+                this.setState({requestCompleted: true});
+            })
+
     }
+
+
     render() {
-        let save = (e) => {
-            const config = {
-                headers: { Authorization: `bearer ${localStorage.getItem('access_token')}` ,'Content-type': 'application/json'}
-            };
-            e.preventDefault();
-            const body = JSON.stringify({ name: this.state.values });
-            console.log(this.state.value)
-            axios.post('http://localhost:8080/api/course',body,config )
-                .then(res => {
-                    console.log(res.data);
+        const {isTeacher,isUser, isLoading, isAuthenticated, user } = this.props.auth;
 
-                });
+        let analytics= [];
 
+        if(this.state.requestCompleted){
+             analytics = [this.state.courseAnalytics];
 
-            console.log('account');
         }
 
-
-
         return (
-            <Container>
+            <Container style={{textAlign:'center' , marginTop: '5rem'}}>
                 <Row>
-                    <Form>
-                        <Row form>
-                            <Col md={12}>
-                                <FormGroup>
-                                    <Label for="course_name">Course Name</Label>
-                                    <Input type="text" value={this.state.values} onChange={this.handleChange.bind(this)}  placeholder="networking" />
-                                </FormGroup>
-                            </Col>
-                            <FormGroup row>
-                                <Label for="course_image" sm={2}>File</Label>
-                                <Col sm={10}>
-                                    <Input type="file" name="course_image" id="course_image" />
-                                    <FormText color="muted">
-                                        This is the course placeholder image.
-                                    </FormText>
-                                </Col>
-                            </FormGroup>
-                        </Row>
-                        <Button onClick={save}>Sign in</Button>
-                    </Form>
+                    <Col
+                        m={2}
+                        s={6}
+                    >
+                        <Card
+                            actions={[
+                                <Link to="/upload-course">Upload a course</Link>
+                            ]}
+                            closeIcon={<Icon>close</Icon>}
+                            header={<CardTitle image="/course.jpg">Upload A New Course</CardTitle>}
+                            revealIcon={<Icon>more_vert</Icon>}
+                        >
+                            Upload a new course for students to learn.
+                        </Card>
+                    </Col>
 
+                    <Col
+                        m={2}
+                        s={6}
+                    >
+                        <Card
+                            actions={[
+                                <Link to="/upload-content">Upload course content</Link>
+                            ]}
+                            closeIcon={<Icon>close</Icon>}
+                            header={<CardTitle image="/download.png">Course Content</CardTitle>}
+                            revealIcon={<Icon>more_vert</Icon>}
+                        >
+                            Upload some course content
+                        </Card>
+                    </Col>
                 </Row>
-                <Row>
-                    <Button>
-                        <Link to="/upload-content">Upload course content</Link>
-                    </Button>
-                </Row>
+                {this.state.requestCompleted && this.state.courseAnalytics ?
+                    <Row>
+                        <Col
+                            m={6}
+                            s={12}
+                        >
+
+      {analytics.map((person) => (
+          <CardPanel >
+              <div>
+                  {person.courses.map((pet) => (
+                    <h4>
+                         Course {pet.course}  has {pet.count} students, of which {"\n"}{pet.finished} have finished
+                        <p>People wanted an average course time of {pet.avg_time_wanted} minutes</p>
+                        {/*<p>The most common learning style was {pet.avg_time_wanted} minutes</p>*/}
+
+                    </h4>
+
+                  ))}
+                      </div>
+
+          </CardPanel>
+      ))}
+
+                  {/*{Object.keys(this.state.courseAnalytics).map((key) => {*/}
+                  {/*    return this.state.courseAnalytics[key].map((station) => {*/}
+                  {/*        console.log(station);*/}
+                  {/*        // you should return something here*/}
+                  {/*    })*/}
+                  {/*})}*/}
+
+
+
+                        </Col>
+                    </Row>: null
+
+                }
+
             </Container>
         );
     }

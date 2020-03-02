@@ -41,12 +41,24 @@ services:
     App\:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
-
+    App\Classes\:
+        # redundant thanks to _defaults, but value is overridable on each service
+        resource: '../src/Classes'
+        tags: ['classes.service_arguments']
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+    GraphAware\Neo4j\Client\ClientInterface: '@neo4j.client.default'
+    Graphaware\Neo4j\Client\Client: '@neo4j.client.default'
+    GraphAware\Neo4j\OGM\EntityManager: '@neo4j.entity_manager'
+    neo4j.entity_manager:
+        public: true
+        class: GraphAware\Neo4j\OGM\EntityManager
+        arguments:
+            - '@neo4j.client.default'
+            - '%kernel.cache_dir%/neo4j'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

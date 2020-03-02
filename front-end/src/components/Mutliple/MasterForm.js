@@ -1,27 +1,16 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
+// import {RadioGroup, Radio} from 'react-radio-group';
 import {RadioGroup, Radio} from 'react-radio-group';
+
 import '../../SidePanel.css';
 import axios from 'axios';
-
 import {
-    ButtonGroup,
     Button,
-    Modal,
-    ModalHeader,
-    ModalBody,
     Row,
     Col,
     Container,
-    Form,
-    InputGroup,
-    InputGroupAddon,
-    FormGroup,
-    Label,
-    Input,
-    NavLink,
-    Alert
-} from 'reactstrap';
+} from 'react-materialize';
 
 class MasterForm extends React.Component {
     constructor(props) {
@@ -290,9 +279,8 @@ class MasterForm extends React.Component {
 
         return (
             <React.Fragment>
-                <p>Step {this.state.currentStep} </p>
+                <p style={{textAlign:'center'}}>Step {this.state.currentStep} </p>
 
-                <form onSubmit={this.handleSubmit}>
                     {/*
         render the form steps and pass required props in
       */}
@@ -401,6 +389,8 @@ class MasterForm extends React.Component {
                         q42change={this.changeQ42}
                         q43change={this.changeQ43}
                         q44change={this.changeQ44}
+                        buttonSubmit={this.handleSubmit}
+
                     />
 
                     <div className="bg-info clearfix" style={{ padding: '.5rem' }}>
@@ -409,7 +399,6 @@ class MasterForm extends React.Component {
                     </div>
 
 
-                </form>
             </React.Fragment>
         );
     }
@@ -422,22 +411,21 @@ function Step1(props) {
     return(
         <div className="multi-step">
         <Container>
-            <Row>
+            <Row >
                 <Col sm={{ size: '12' }} md={{ size: '6' , offset: '3'}} >
                     <h2 className={'questionLegend'}>Learning Styles Quiz</h2>
                     <RadioGroup
                         name="q1"
                         selectedValue={props.one}
                         onChange={props.q1change}>
-                        <legend className={'questionLegend'}>I understand something better after I </legend>
+                        <legend className={'questionLegend'}>I understand something better after I  </legend>
                         <label className={'questionLabel'}>
                             <Radio value="a" />Try it out.
                         </label>
-                        <label>
+                        <label className={'questionLabel'}>
                             <Radio value="b" />Think it through.
                         </label>
                     </RadioGroup>
-
 
                     <RadioGroup
                         name="q2"
@@ -447,7 +435,7 @@ function Step1(props) {
                         <label className={'questionLabel'}>
                             <Radio value="a" />Realistic.
                         </label>
-                        <label>
+                        <label className={'questionLabel'}>
                             <Radio value="b" />Innovative.
                         </label>
                     </RadioGroup>
@@ -460,7 +448,7 @@ function Step1(props) {
                         <label className={'questionLabel'}>
                             <Radio value="a" />A picture.
                         </label>
-                        <label>
+                        <label className={'questionLabel'}>
                             <Radio value="b" />Words.
                         </label>
                     </RadioGroup>
@@ -473,7 +461,7 @@ function Step1(props) {
                         <label className={'questionLabel'}>
                             <Radio value="a" />Understand details of a subject but may be fuzzy about its overall structure.
                         </label>
-                        <label>
+                        <label className={'questionLabel'}>
                             <Radio value="b" />Understand the overall structure but may be fuzzy about details.
                         </label>
                     </RadioGroup>
@@ -486,7 +474,7 @@ function Step1(props) {
                         <label className={'questionLabel'}>
                             <Radio value="a" />Talk about it.
                         </label>
-                        <label>
+                        <label className={'questionLabel'}>
                             <Radio value="b" />Think about it.
                         </label>
                     </RadioGroup>
@@ -500,7 +488,7 @@ function Step1(props) {
                         <label className={'questionLabel'}>
                             <Radio value="a" /> That deals with facts and real life situations.
                         </label>
-                        <label>
+                        <label className={'questionLabel'}>
                             <Radio value="b" /> That deals with ideas and theories.
                         </label>
                     </RadioGroup>
@@ -514,7 +502,7 @@ function Step1(props) {
                         <label className={'questionLabel'}>
                             <Radio value="a" /> Pictures, diagrams, graphs, or maps.
                         </label>
-                        <label>
+                        <label className={'questionLabel'}>
                             <Radio value="b" /> Written directions or verbal information.
                         </label>
                     </RadioGroup>
@@ -527,7 +515,7 @@ function Step1(props) {
                         <label className={'questionLabel'}>
                             <Radio value="a" /> All the parts, I understand the whole thing.
                         </label>
-                        <label>
+                        <label className={'questionLabel'}>
                             <Radio value="b" />The whole thing, I see how the parts fit.
                         </label>
                     </RadioGroup>
@@ -540,7 +528,7 @@ function Step1(props) {
                         <label className={'questionLabel'}>
                             <Radio value="a" /> jump in and contribute ideas.
                         </label>
-                        <label>
+                        <label className={'questionLabel'}>
                             <Radio value="b" />sit back and listen.
                         </label>
                     </RadioGroup>
@@ -553,7 +541,7 @@ function Step1(props) {
                         <label className={'questionLabel'}>
                             <Radio value="a" />To learn facts.
                         </label>
-                        <label>
+                        <label className={'questionLabel'}>
                             <Radio value="b" />To learn concepts.
                         </label>
                     </RadioGroup>
@@ -566,7 +554,7 @@ function Step1(props) {
                         <label className={'questionLabel'}>
                             <Radio value="a" />Look over the pictures and charts carefully.
                         </label>
-                        <label>
+                        <label className={'questionLabel'}>
                             <Radio value="b" />Focus on the written text.
                         </label>
                     </RadioGroup>
@@ -594,7 +582,7 @@ function Step2(props) {
                         <label className={'questionLabel'}>
                             <Radio value="a" /> I usually work my way to the solutions one step at a time.
                         </label>
-                        <label>
+                        <label className={'questionLabel'}>
                             <Radio value="b" /> I often just see the solutions but then have to struggle to figure out the steps to
                             get to them.
                         </label>
@@ -609,7 +597,7 @@ function Step2(props) {
                         <label className={'questionLabel'}>
                             <Radio value="a" />I have usually got to know many of the students.
                         </label>
-                        <label>
+                        <label className={'questionLabel'}>
                             <Radio value="b" />I have rarely got to know many of the students.
                         </label>
                     </RadioGroup>
@@ -622,7 +610,7 @@ function Step2(props) {
                         <label className={'questionLabel'}>
                             <Radio value="a" />Something that teaches me new facts or tells me how to do something.
                         </label>
-                        <label>
+                        <label className={'questionLabel'}>
                             <Radio value="b" />Something that gives me new ideas to think about.
                         </label>
                     </RadioGroup>
@@ -635,7 +623,7 @@ function Step2(props) {
                         <label className={'questionLabel'}>
                             <Radio value="a" />Who put a lot of diagrams on the board.
                         </label>
-                        <label>
+                        <label className={'questionLabel'}>
                             <Radio value="b" />Who spend a lot of time explaining.
                         </label>
                     </RadioGroup>
@@ -648,7 +636,7 @@ function Step2(props) {
                         <label className={'questionLabel'}>
                             <Radio value="a" /> I think of the incidents and try to put them together to figure out the themes
                         </label>
-                        <label>
+                        <label className={'questionLabel'}>
                             <Radio value="b" /> I just know what the themes are when I finish reading and then I have to go back
                             and find the incidents that demonstrate them.
                         </label>
@@ -663,7 +651,7 @@ function Step2(props) {
                         <label className={'questionLabel'}>
                             <Radio value="a" />Start working on the solution immediately.
                         </label>
-                        <label>
+                        <label className={'questionLabel'}>
                             <Radio value="b" />Try to fully understand the problem first.
                         </label>
                     </RadioGroup>
@@ -677,7 +665,7 @@ function Step2(props) {
                         <label className={'questionLabel'}>
                             <Radio value="a" />Certainty.
                         </label>
-                        <label>
+                        <label className={'questionLabel'}>
                             <Radio value="b" />Theory
                         </label>
                     </RadioGroup>
@@ -690,7 +678,7 @@ function Step2(props) {
                         <label className={'questionLabel'}>
                             <Radio value="a" />What I see.
                         </label>
-                        <label>
+                        <label className={'questionLabel'}>
                             <Radio value="b" />What I hear.
                         </label>
                     </RadioGroup>
@@ -703,7 +691,7 @@ function Step2(props) {
                         <label className={'questionLabel'}>
                             <Radio value="a" />Lay out the material in clear sequential steps
                         </label>
-                        <label>
+                        <label className={'questionLabel'}>
                             <Radio value="b" />Give me an overall picture and relate the material to other subjects.
                         </label>
                     </RadioGroup>
@@ -716,7 +704,7 @@ function Step2(props) {
                         <label className={'questionLabel'}>
                             <Radio value="a" />In a group.
                         </label>
-                        <label>
+                        <label className={'questionLabel'}>
                             <Radio value="b" />Alone.
                         </label>
                     </RadioGroup>
@@ -729,7 +717,7 @@ function Step2(props) {
                         <label className={'questionLabel'}>
                             <Radio value="a" />Careful about the details of my work.
                         </label>
-                        <label>
+                        <label className={'questionLabel'}>
                             <Radio value="b" />Creative about how to do my work.
                         </label>
                     </RadioGroup>
@@ -758,9 +746,9 @@ function Step3(props) {
                             <label className={'questionLabel'}>
                                 <Radio value="a" />A map.
                             </label>
-                            <label>
+                            <label className={'questionLabel'}>
                                 <Radio value="b" />Written instructions.
-                            </label>
+                            </label >
                         </RadioGroup>
 
 
@@ -772,7 +760,7 @@ function Step3(props) {
                             <label className={'questionLabel'}>
                                 <Radio value="a" />At a fairly regular pace. If I study hard, I'll "get it."
                             </label>
-                            <label>
+                            <label className={'questionLabel'}>
                                 <Radio value="b" />In fits and starts. I'll be totally confused and then suddenly it all "clicks."
                             </label>
                         </RadioGroup>
@@ -785,7 +773,7 @@ function Step3(props) {
                             <label className={'questionLabel'}>
                                 <Radio value="a" /> Try things out.
                             </label>
-                            <label>
+                            <label className={'questionLabel'}>
                                 <Radio value="b" />Think about how I'm going to do it
                             </label>
                         </RadioGroup>
@@ -798,7 +786,7 @@ function Step3(props) {
                             <label className={'questionLabel'}>
                                 <Radio value="a" />Clearly say what they mean.
                             </label>
-                            <label>
+                            <label className={'questionLabel'}>
                                 <Radio value="b" />Say things in creative, interesting ways.
                             </label>
                         </RadioGroup>
@@ -811,7 +799,7 @@ function Step3(props) {
                             <label className={'questionLabel'}>
                                 <Radio value="a" /> The picture.
                             </label>
-                            <label>
+                            <label className={'questionLabel'}>
                                 <Radio value="b" /> What the instructor said about it.
                             </label>
                         </RadioGroup>
@@ -825,7 +813,7 @@ function Step3(props) {
                             <label className={'questionLabel'}>
                                 <Radio value="a" />Focus on details and miss the big picture.
                             </label>
-                            <label>
+                            <label className={'questionLabel'}>
                                 <Radio value="b" />Try to understand the big picture before getting into the details.
                             </label>
                         </RadioGroup>
@@ -839,7 +827,7 @@ function Step3(props) {
                             <label className={'questionLabel'}>
                                 <Radio value="a" />Something I have done.
                             </label>
-                            <label>
+                            <label className={'questionLabel'}>
                                 <Radio value="b" />Something I have thought a lot about.
                             </label>
                         </RadioGroup>
@@ -852,7 +840,7 @@ function Step3(props) {
                             <label className={'questionLabel'}>
                                 <Radio value="a" />master one way of doing it.
                             </label>
-                            <label>
+                            <label className={'questionLabel'}>
                                 <Radio value="b" />come up with new ways of doing it.
                             </label>
                         </RadioGroup>
@@ -865,7 +853,7 @@ function Step3(props) {
                             <label className={'questionLabel'}>
                                 <Radio value="a" />charts or graphs.
                             </label>
-                            <label>
+                            <label className={'questionLabel'}>
                                 <Radio value="b" /> text summarizing the results.
                             </label>
                         </RadioGroup>
@@ -878,7 +866,7 @@ function Step3(props) {
                             <label className={'questionLabel'}>
                                 <Radio value="a" />Work on (think about or write) the beginning of the paper and progress forward.
                             </label>
-                            <label>
+                            <label className={'questionLabel'}>
                                 <Radio value="b" />Work on (think about or write) different parts of the paper and then order them.
                             </label>
                         </RadioGroup>
@@ -891,7 +879,7 @@ function Step3(props) {
                             <label className={'questionLabel'}>
                                 <Radio value="a" />Have a "group brainstorming" where everyone contributes ideas.
                             </label>
-                            <label>
+                            <label className={'questionLabel'}>
                                 <Radio value="b" />Brainstorm individually and then come together as a group to compare ideas.
                             </label>
                         </RadioGroup>
@@ -922,7 +910,7 @@ function Step4(props) {
                             <label className={'questionLabel'}>
                                 <Radio value="a" /> Sensible.
                             </label>
-                            <label>
+                            <label className={'questionLabel'}>
                                 <Radio value="b" /> Imaginative.
                             </label>
                         </RadioGroup>
@@ -936,7 +924,7 @@ function Step4(props) {
                             <label className={'questionLabel'}>
                                 <Radio value="a" />What they looked like.
                             </label>
-                            <label>
+                            <label className={'questionLabel'}>
                                 <Radio value="b" />What they said about themselves.
                             </label>
                         </RadioGroup>
@@ -949,7 +937,7 @@ function Step4(props) {
                             <label className={'questionLabel'}>
                                 <Radio value="a" /> Stay focused on that subject, learning as much about it as I can.
                             </label>
-                            <label>
+                            <label className={'questionLabel'}>
                                 <Radio value="b" /> Try to make connections between that subject and related subjects.
                             </label>
                         </RadioGroup>
@@ -962,7 +950,7 @@ function Step4(props) {
                             <label className={'questionLabel'}>
                                 <Radio value="a" />Outgoing.
                             </label>
-                            <label>
+                            <label className={'questionLabel'}>
                                 <Radio value="b" />Reserved.
                             </label>
                         </RadioGroup>
@@ -975,7 +963,7 @@ function Step4(props) {
                             <label className={'questionLabel'}>
                                 <Radio value="a" /> Concrete material (facts, data).
                             </label>
-                            <label>
+                            <label className={'questionLabel'}>
                                 <Radio value="b" />Abstract material (concepts, theories).
                             </label>
                         </RadioGroup>
@@ -989,7 +977,7 @@ function Step4(props) {
                             <label className={'questionLabel'}>
                                 <Radio value="a" />Watch television.
                             </label>
-                            <label>
+                            <label className={'questionLabel'}>
                                 <Radio value="b" />Read a book.
                             </label>
                         </RadioGroup>
@@ -1004,7 +992,7 @@ function Step4(props) {
                             <label className={'questionLabel'}>
                                 <Radio value="a" /> Somewhat helpful to me.
                             </label>
-                            <label>
+                            <label className={'questionLabel'}>
                                 <Radio value="b" />Very helpful to me.
                             </label>
                         </RadioGroup>
@@ -1017,7 +1005,7 @@ function Step4(props) {
                             <label className={'questionLabel'}>
                                 <Radio value="a" />Appeals to me.
                             </label>
-                            <label>
+                            <label className={'questionLabel'}>
                                 <Radio value="b" />Does not appeal to me.
                             </label>
                         </RadioGroup>
@@ -1030,7 +1018,7 @@ function Step4(props) {
                             <label className={'questionLabel'}>
                                 <Radio value="a" /> I tend to repeat all my steps and check my work carefully.
                             </label>
-                            <label>
+                            <label className={'questionLabel'}>
                                 <Radio value="b" /> I find checking my work tiresome and have to force myself to do it.
                             </label>
                         </RadioGroup>
@@ -1043,7 +1031,7 @@ function Step4(props) {
                             <label className={'questionLabel'}>
                                 <Radio value="a" /> Easily and fairly accurately.
                             </label>
-                            <label>
+                            <label className={'questionLabel'}>
                                 <Radio value="b" /> With difficulty and without much detail.
                             </label>
                         </RadioGroup>
@@ -1056,16 +1044,17 @@ function Step4(props) {
                             <label className={'questionLabel'}>
                                 <Radio value="a" /> Think of the steps in the solution process.
                             </label>
-                            <label>
+                            <label className={'questionLabel'}>
                                 <Radio value="b" /> Think of possible consequences or applications of the solution in a wide range of
                                 areas.
                             </label>
                         </RadioGroup>
 
                     </Col>
-                </Row>
 
-                <button className="btn btn-success btn-block">Sign up</button>
+                </Row>
+                <Button style={{textAlign:'center'}} onClick={props.buttonSubmit}>Sign up</Button>
+
 
             </Container>
 

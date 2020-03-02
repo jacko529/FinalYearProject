@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Course;
+use App\Entity\User;
 use App\Repository\CourseRepository;
 use GraphAware\Neo4j\OGM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,6 +33,13 @@ class CourseController extends AbstractController
         return $this->json(['data'=>$course]);
     }
 
+    public function getAll(Request $request){
+        $course = $this->entityManager->getRepository(Course::class)->findAll();
+        foreach ($course as $courses) {
+            $courseArray[] = $courses->getName();
+        }
+        return $this->json(['data'=>$courseArray]);
+    }
 
 
     public function getAllCoursesWithRelatedLearningObjects(){
@@ -39,14 +47,26 @@ class CourseController extends AbstractController
         $response = $this->courseRepository->grabAllPreviousResources($currentUser->getEmail());
 
         foreach($response->records() as $record){
-            $courseRelated = $record->get('b');
-            $learningCourseResource =  $record->get('resource');
-                $resources = $learningCourseResource->values();
-                $courses = $courseRelated->values();
-                $arrayOfRelatedResources['related_courses'][] = [$courses, $resources ];
+            $courseRelated = $record->get('resource');
+            $stage =  $record->get('stage');
+            $learningCourseResource =  $record->get('course_name');
+            $learningType =  $record->get('type');
+
+            $arrayOfRelatedResources[] = ['course' => $courseRelated,
+                                                             'stage' => $stage,
+                                                             'resource'=> $learningCourseResource,
+                                                            'type'=> $learningType
+            ];
         }
         return $this->json($arrayOfRelatedResources);
-}
+    }
+
+    public function studyingNow(Request $request){
+        $currentUser = $this->getUser();
+        $course = $request->get('course');
+        $this->courseRepository->addCourseRelationship($currentUser->getEmail() ,$course);
+        return $this->json('success');
+    }
 
     public function create(Request $request)
     {
