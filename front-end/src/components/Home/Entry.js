@@ -100,41 +100,125 @@ export class Entry extends Component {
         };
 
         // graph event callbacks
-        const onClickGraph = function() {
+        const onClickGraphFirst = function() {
             window.alert(`Clicked the graph background`);
         };
 
-        const onClickNode = function(nodeId) {
+        const onClickNodeFirst = function(nodeId) {
         };
 
-        const onDoubleClickNode = function(nodeId) {
+        const onDoubleClickNodeFirst = function(nodeId) {
             window.alert(`Double clicked node ${nodeId}`);
         };
 
-        const onRightClickNode = function(event, nodeId) {
+        const onRightClickNodeFirst = function(event, nodeId) {
             window.alert(`Right clicked node ${nodeId}`);
         };
 
-        const onMouseOverNode = function(nodeId) {
+        const onMouseOverNodeFirst = function(nodeId) {
         };
 
-        const onMouseOutNode = function(nodeId) {
+        const onMouseOutNodeFirst = function(nodeId) {
         };
 
-        const onClickLink = function(source, target) {
+        const onClickLinkFirst = function(source, target) {
         };
 
-        const onRightClickLink = function(event, source, target) {
+        const onRightClickLinkFirst = function(event, source, target) {
         };
 
-        const onMouseOverLink = function(source, target) {
+        const onMouseOverLinkFirst = function(source, target) {
         };
 
-        const onMouseOutLink = function(source, target) {
+        const onMouseOutLinkFirst = function(source, target) {
         };
 
-        const onNodePositionChange = function(nodeId, x, y) {
+        const onNodePositionChangeFirst = function(nodeId, x, y) {
         };
+
+
+        // graph event callbacks
+        const onClickGraphSecond = function() {
+            window.alert(`Clicked the graph background`);
+        };
+
+        const onClickNodeSecond = function(nodeId) {
+        };
+
+        const onDoubleClickNodeSecond = function(nodeId) {
+            window.alert(`Double clicked node ${nodeId}`);
+        };
+
+        const onRightClickNodeSecond = function(event, nodeId) {
+            window.alert(`Right clicked node ${nodeId}`);
+        };
+
+        const onMouseOverNodeSecond = function(nodeId) {
+        };
+
+        const onMouseOutNodeSecond = function(nodeId) {
+        };
+
+        const onClickLinkSecond = function(source, target) {
+        };
+
+        const onRightClickLinkSecond = function(event, source, target) {
+        };
+
+        const onMouseOverLinkSecond = function(source, target) {
+        };
+
+        const onMouseOutLinkSecond = function(source, target) {
+        };
+
+        const onNodePositionChangeSecond = function(nodeId, x, y) {
+        };
+
+
+
+
+
+        // third
+        const onClickGraphThird = function() {
+            window.alert(`Clicked the graph background`);
+        };
+
+        const onClickNodeThird = function(nodeId) {
+        };
+
+        const onDoubleClickNodeThird = function(nodeId) {
+            window.alert(`Double clicked node ${nodeId}`);
+        };
+
+        const onRightClickNodeThird = function(event, nodeId) {
+            window.alert(`Right clicked node ${nodeId}`);
+        };
+
+        const onMouseOverNodeThird = function(nodeId) {
+        };
+
+        const onMouseOutNodeThird = function(nodeId) {
+        };
+
+        const onClickLinkThird = function(source, target) {
+        };
+
+        const onRightClickLinkThird = function(event, source, target) {
+        };
+
+        const onMouseOverLinkThird = function(source, target) {
+        };
+
+        const onMouseOutLinkThird = function(source, target) {
+        };
+
+        const onNodePositionChangeThird = function(nodeId, x, y) {
+        };
+
+
+
+
+
         const {isTeacher,isUser, isLoading, isAuthenticated, user } = this.props.auth;
         // const {isTeacher,isUser, isLoading, isAuthenticated, user } = this.props.auth;
 
@@ -272,56 +356,57 @@ export class Entry extends Component {
                                     email={user.email}
                                     button={'Your Friends took this'}
                                 />  :null}
+                        <Col>
                                 <h3>What is your learning path </h3>
                             <Graph
                                 id="graph-id" // id is mandatory, if no id is defined rd3g will throw an error
                                 data={this.state.explainShortPath.first}
                                 config={myConfig}
-                                onClickNode={onClickNode}
-                                onDoubleClickNode={onDoubleClickNode}
-                                onRightClickNode={onRightClickNode}
-                                onClickGraph={onClickGraph}
-                                onClickLink={onClickLink}
-                                onRightClickLink={onRightClickLink}
-                                onMouseOverNode={onMouseOverNode}
-                                onMouseOutNode={onMouseOutNode}
-                                onMouseOverLink={onMouseOverLink}
-                                onMouseOutLink={onMouseOutLink}
-                                onNodePositionChange={onNodePositionChange}
+                                onClickNode={onClickNodeFirst}
+                                onDoubleClickNode={onDoubleClickNodeFirst}
+                                onRightClickNode={onRightClickNodeFirst}
+                                onClickGraph={onClickGraphFirst}
+                                onClickLink={onClickLinkFirst}
+                                onRightClickLink={onRightClickLinkFirst}
+                                onMouseOverNode={onMouseOverNodeFirst}
+                                onMouseOutNode={onMouseOutNodeFirst}
+                                onMouseOverLink={onMouseOverLinkFirst}
+                                onMouseOutLink={onMouseOutLinkFirst}
+                                onNodePositionChange={onNodePositionChangeFirst}
                             />;
                             <Graph
                                 id="graph-id" // id is mandatory, if no id is defined rd3g will throw an error
                                 data={this.state.explainShortPath.second}
                                 config={myConfig}
-                                onClickNode={onClickNode}
-                                onDoubleClickNode={onDoubleClickNode}
-                                onRightClickNode={onRightClickNode}
-                                onClickGraph={onClickGraph}
-                                onClickLink={onClickLink}
-                                onRightClickLink={onRightClickLink}
-                                onMouseOverNode={onMouseOverNode}
-                                onMouseOutNode={onMouseOutNode}
-                                onMouseOverLink={onMouseOverLink}
-                                onMouseOutLink={onMouseOutLink}
-                                onNodePositionChange={onNodePositionChange}
+                                onClickNode={onClickNodeSecond}
+                                onDoubleClickNode={onDoubleClickNodeSecond}
+                                onRightClickNode={onRightClickNodeSecond}
+                                onClickGraph={onClickGraphSecond}
+                                onClickLink={onClickLinkSecond}
+                                onRightClickLink={onRightClickLinkSecond}
+                                onMouseOverNode={onMouseOverNodeSecond}
+                                onMouseOutNode={onMouseOutNodeSecond}
+                                onMouseOverLink={onMouseOverLinkSecond}
+                                onMouseOutLink={onMouseOutLinkSecond}
+                                onNodePositionChange={onNodePositionChangeSecond}
                             />;
                             <Graph
                                 id="graph-id" // id is mandatory, if no id is defined rd3g will throw an error
                                 data={this.state.explainShortPath.third}
                                 config={myConfig}
-                                onClickNode={onClickNode}
-                                onDoubleClickNode={onDoubleClickNode}
-                                onRightClickNode={onRightClickNode}
-                                onClickGraph={onClickGraph}
-                                onClickLink={onClickLink}
-                                onRightClickLink={onRightClickLink}
-                                onMouseOverNode={onMouseOverNode}
-                                onMouseOutNode={onMouseOutNode}
-                                onMouseOverLink={onMouseOverLink}
-                                onMouseOutLink={onMouseOutLink}
-                                onNodePositionChange={onNodePositionChange}
+                                onClickNode={onClickNodeThird}
+                                onDoubleClickNode={onDoubleClickNodeThird}
+                                onRightClickNode={onRightClickNodeThird}
+                                onClickGraph={onClickGraphThird}
+                                onClickLink={onClickLinkThird}
+                                onRightClickLink={onRightClickLinkThird}
+                                onMouseOverNode={onMouseOverNodeThird}
+                                onMouseOutNode={onMouseOutNodeThird}
+                                onMouseOverLink={onMouseOverLinkThird}
+                                onMouseOutLink={onMouseOutLinkThird}
+                                onNodePositionChange={onNodePositionChangeThird}
                             />;
-
+                        </Col>
                         </Row> : null
 
                     }

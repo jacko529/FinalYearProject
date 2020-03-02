@@ -2,56 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="78098f88-2b19-4108-a517-33c192de8add" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/QuickScript/Connect.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuickScript/CreateUsers.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuickScript/MatchUser.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuickScript/start.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/public/android-chrome-192x192.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/public/android-chrome-512x512.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/public/apple-touch-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/public/favicon-16x16.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/public/favicon-32x32.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/public/materialize.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/public/materialize.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/public/site.webmanifest" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/src/actions/nextActiveActions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/src/components/Home/InformCards.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/src/components/Home/NoCourseTile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/src/components/auth/ResolveRoutes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/src/components/auth/TeacherPrivateRoute.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/src/reducers/nextActiveReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/php.Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/php.Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/public/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/public/logo192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/public/logo512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/SidePanel.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/SidePanel.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/actions/authActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/actions/authActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/actions/types.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/AppNavbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/AppNavbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/Home/CourseContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Home/CourseContent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/Home/CourseTile.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Home/CourseTile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/src/components/Home/Entry.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Home/Entry.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/Home/NonUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Home/NonUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/Home/NormalTile.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Home/NormalTile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/Home/Tiles.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Home/Tiles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/Mutliple/MasterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Mutliple/MasterForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/TeachUpload/TeachHome.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/TeachUpload/TeachHome.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/TeachUpload/UploadContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/TeachUpload/UploadContent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/TeachUpload/UploadCourse.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/TeachUpload/UploadCourse.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/LoginModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/LoginModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/Logout.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/Logout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/PrivateRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/PrivateRoute.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/RegisterModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/RegisterModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/reducers/authReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/reducers/authReducer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -312,7 +263,7 @@
       <workItem from="1582647130788" duration="6004000" />
       <workItem from="1582667157067" duration="4264000" />
       <workItem from="1582749539365" duration="9221000" />
-      <workItem from="1582817751568" duration="64201000" />
+      <workItem from="1582817751568" duration="64555000" />
     </task>
     <servers />
   </component>
