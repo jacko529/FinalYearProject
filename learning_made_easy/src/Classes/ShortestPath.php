@@ -89,14 +89,16 @@ class ShortestPath
         foreach($array as $now => $content){
             $testArray['nodes'][] = ['id'=> $content];
             $testArray['links'][] = ['source'=> $content,
-                'target'=> $array[$now< 6 ? $now+1 :  $finalKey]];
-
+                                    'target'=> $array[$now < 6 ? $now + 1 :  $finalKey],
+                                    'label' => 'Weight'];
         }
         return $testArray;
     }
+
     public function emptyReturn(){
         $this->returnedArrays = [];
     }
+
     public function findTimeAndStyle($userTime, $totalCostTimes, $topStyle, $options)
     {
         // most

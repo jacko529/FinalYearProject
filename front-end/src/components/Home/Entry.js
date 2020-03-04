@@ -86,33 +86,58 @@ export class Entry extends Component {
 
 // the graph configuration, you only need to pass down properties
 // that you want to override, otherwise default ones will be used
-        const myConfig = {
+        const myConfigFirst = {
+            nodeHighlightBehavior: true,
+
+            node: {
+                color: "lightblue",
+                size: 420,
+                fontColor: '#051923',
+                highlightStrokeColor: "blue",
+            },
+            link: {
+                renderLabel: true,
+                highlightColor: "blue",
+            },
+        };
+        const myConfigSecond = {
             nodeHighlightBehavior: true,
             node: {
                 color: "lightblue",
                 size: 420,
-                fontColor: 'lightblue',
+                fontColor: '#051923',
                 highlightStrokeColor: "blue",
             },
             link: {
+                renderLabel: true,
+                highlightColor: "blue",
+            },
+        };
+        const myConfigThird = {
+            nodeHighlightBehavior: true,
+            node: {
+                color: "lightblue",
+                size: 420,
+                fontColor: '#051923',
+                highlightStrokeColor: "blue",
+            },
+            link: {
+                renderLabel: true,
                 highlightColor: "blue",
             },
         };
 
         // graph event callbacks
         const onClickGraphFirst = function() {
-            window.alert(`Clicked the graph background`);
         };
 
         const onClickNodeFirst = function(nodeId) {
         };
 
         const onDoubleClickNodeFirst = function(nodeId) {
-            window.alert(`Double clicked node ${nodeId}`);
-        };
+       };
 
         const onRightClickNodeFirst = function(event, nodeId) {
-            window.alert(`Right clicked node ${nodeId}`);
         };
 
         const onMouseOverNodeFirst = function(nodeId) {
@@ -357,11 +382,13 @@ export class Entry extends Component {
                                     button={'Your Friends took this'}
                                 />  :null}
                         <Col>
-                                <h3>What is your learning path </h3>
+                            <h3>Explain your path </h3>
+                            <h4 style={{color: 'white'}}>These are the top 3 learning paths which are based around the time your spefifed at the beginning of the course</h4>
+                           <h5 style={{color: 'white'}}>You can look into your top learning paths by selecting the graph, these graphs where selected by finding the shortest path based around how long it takes to get from one resource to the next</h5>
                             <Graph
-                                id="graph-id" // id is mandatory, if no id is defined rd3g will throw an error
+                                id="graph-id1" // id is mandatory, if no id is defined rd3g will throw an error
                                 data={this.state.explainShortPath.first}
-                                config={myConfig}
+                                config={myConfigFirst}
                                 onClickNode={onClickNodeFirst}
                                 onDoubleClickNode={onDoubleClickNodeFirst}
                                 onRightClickNode={onRightClickNodeFirst}
@@ -375,9 +402,9 @@ export class Entry extends Component {
                                 onNodePositionChange={onNodePositionChangeFirst}
                             />;
                             <Graph
-                                id="graph-id" // id is mandatory, if no id is defined rd3g will throw an error
+                                id="graph-id2" // id is mandatory, if no id is defined rd3g will throw an error
                                 data={this.state.explainShortPath.second}
-                                config={myConfig}
+                                config={myConfigSecond}
                                 onClickNode={onClickNodeSecond}
                                 onDoubleClickNode={onDoubleClickNodeSecond}
                                 onRightClickNode={onRightClickNodeSecond}
@@ -391,9 +418,9 @@ export class Entry extends Component {
                                 onNodePositionChange={onNodePositionChangeSecond}
                             />;
                             <Graph
-                                id="graph-id" // id is mandatory, if no id is defined rd3g will throw an error
+                                id="graph-id3" // id is mandatory, if no id is defined rd3g will throw an error
                                 data={this.state.explainShortPath.third}
-                                config={myConfig}
+                                config={myConfigThird}
                                 onClickNode={onClickNodeThird}
                                 onDoubleClickNode={onDoubleClickNodeThird}
                                 onRightClickNode={onRightClickNodeThird}

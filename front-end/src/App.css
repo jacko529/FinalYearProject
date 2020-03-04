@@ -66,6 +66,17 @@ body { min-height: 100%!important;
 input[type=radio] {
     margin-right: 2rem;
 }
+#graph-id1-graph-wrapper{
+    border: 2px solid #051923!important;
+}
+#graph-id2-graph-wrapper{
+    border: 2px solid #051923!important;
+
+}
+#graph-id3-graph-wrapper{
+    border: 2px solid #051923!important;
+
+}
 .card{
     border-radius: 0px!important;
 }

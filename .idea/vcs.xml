@@ -2,6 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/front-end" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/front-end/adaptive-learning" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/learning_made_easy" vcs="Git" />
   </component>
