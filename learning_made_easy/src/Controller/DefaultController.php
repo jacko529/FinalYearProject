@@ -10,7 +10,7 @@ class DefaultController extends AbstractController
     /**
      * @Route("/default", name="default")
      */
-    public function get()
+    public function index()
     {
         return $this->json([
             'message' => 'Welcome To Easy Learn',

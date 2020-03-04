@@ -269,7 +269,7 @@
       <workItem from="1582667157067" duration="4264000" />
       <workItem from="1582749539365" duration="9221000" />
       <workItem from="1582817751568" duration="65560000" />
-      <workItem from="1583159746521" duration="12995000" />
+      <workItem from="1583159746521" duration="13352000" />
     </task>
     <servers />
   </component>
@@ -383,12 +383,13 @@
       <screen x="0" y="23" width="1440" height="816" />
     </state>
     <state width="1398" height="261" key="GridCell.Tab.3.right/0.23.1440.816@0.23.1440.816" timestamp="1583133773636" />
-    <state x="378" y="255" key="NewPhpClassDialog" timestamp="1583071780589">
-      <screen x="0" y="23" width="1440" height="823" />
+    <state x="378" y="255" key="NewPhpClassDialog" timestamp="1583359136441">
+      <screen x="0" y="23" width="1440" height="822" />
     </state>
     <state x="378" y="252" key="NewPhpClassDialog/0.23.1440.812@0.23.1440.812" timestamp="1582387927661" />
     <state x="378" y="253" key="NewPhpClassDialog/0.23.1440.816@0.23.1440.816" timestamp="1582752926528" />
     <state x="378" y="254" key="NewPhpClassDialog/0.23.1440.821@0.23.1440.821" timestamp="1582836863870" />
+    <state x="378" y="255" key="NewPhpClassDialog/0.23.1440.822@0.23.1440.822" timestamp="1583359136441" />
     <state x="378" y="255" key="NewPhpClassDialog/0.23.1440.823@0.23.1440.823" timestamp="1583071780589" />
     <state x="538" y="361" key="NewPhpFileDialog" timestamp="1582752831081">
       <screen x="0" y="23" width="1440" height="816" />
