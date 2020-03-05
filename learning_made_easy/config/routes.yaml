@@ -74,7 +74,7 @@ course_analytics:
     controller: App\Controller\LearningAnalyticsController::getAnalytics
     methods: GET
 
-default:
-    path: /
-    controller: App\Controller\DefaultController::index
-    methods: GET
+#default:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+#    methods: GET
