@@ -42,11 +42,9 @@ class LearningResourceController extends AbstractController
             [
                 'region' => 'eu-west-2',
                 'version' => 'latest',
-                'endpoint' => 'http://minio:9000/',
-                'use_path_style_endpoint' => true,
                 'credentials' => [
-                    'key' => 'AKIABUVWH1HUD7YQZQAR',
-                    'secret' => 'PVMlDMep3/jLSz9GxPV3mTvH4JZynkf2BFeTu+i8',
+                    'key' => 'AKIAIUGAFHIOCSCQJZTQ',
+                    'secret' => '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',
                 ]
             ]
         );

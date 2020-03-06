@@ -43,7 +43,7 @@ export class UploadCourse extends Component {
             e.preventDefault();
             const body = JSON.stringify({ name: this.state.values });
             console.log(this.state.value)
-            axios.post('http://localhost:8080/api/course',body,config )
+            axios.post('/course',body,config )
                 .then(res => {
                     console.log(res.data);
 

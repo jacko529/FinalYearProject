@@ -38,7 +38,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/front-end" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
@@ -152,7 +152,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/front-end/public" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/front-end" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -163,18 +163,18 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/front-end/public" />
+      <recent name="$PROJECT_DIR$/learning_made_easy/src/Controller" />
+      <recent name="$PROJECT_DIR$/site/database/migrations" />
+      <recent name="$PROJECT_DIR$/docker" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/front-end/public" />
       <recent name="$PROJECT_DIR$/front-end/src" />
       <recent name="$PROJECT_DIR$/front-end" />
       <recent name="$PROJECT_DIR$/learning_made_easy/src/Security/Guard" />
       <recent name="$PROJECT_DIR$/site/app" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/front-end/public" />
-      <recent name="$PROJECT_DIR$/learning_made_easy/src/Controller" />
-      <recent name="$PROJECT_DIR$/site/database/migrations" />
-      <recent name="$PROJECT_DIR$/docker" />
     </key>
   </component>
   <component name="RunManager" selected="Node.js.NormalTile.js">
@@ -264,7 +264,8 @@
       <workItem from="1582667157067" duration="4264000" />
       <workItem from="1582749539365" duration="9221000" />
       <workItem from="1582817751568" duration="65560000" />
-      <workItem from="1583159746521" duration="16500000" />
+      <workItem from="1583159746521" duration="20747000" />
+      <workItem from="1583439545019" duration="6136000" />
     </task>
     <servers />
   </component>
@@ -303,6 +304,10 @@
       <screen x="0" y="23" width="1440" height="822" />
     </state>
     <state x="384" y="23" width="670" height="822" key="#PHP/0.23.1440.822@0.23.1440.822" timestamp="1582270926340" />
+    <state x="436" y="240" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1583446723307">
+      <screen x="0" y="23" width="1440" height="816" />
+    </state>
+    <state x="436" y="240" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.816@0.23.1440.816" timestamp="1583446723307" />
     <state x="458" y="193" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1582995803630">
       <screen x="0" y="23" width="1440" height="823" />
     </state>
@@ -314,6 +319,10 @@
       <screen x="0" y="23" width="1440" height="822" />
     </state>
     <state x="368" y="85" key="#phpunit.xml/0.23.1440.822@0.23.1440.822" timestamp="1582270929821" />
+    <state x="577" y="194" key="FileChooserDialogImpl" timestamp="1583439877398">
+      <screen x="0" y="23" width="1440" height="814" />
+    </state>
+    <state x="577" y="194" key="FileChooserDialogImpl/0.23.1440.814@0.23.1440.814" timestamp="1583439877398" />
     <state width="1398" height="261" key="GridCell.Tab.0.bottom" timestamp="1583133773632">
       <screen x="0" y="23" width="1440" height="816" />
     </state>
@@ -400,10 +409,11 @@
     </state>
     <state x="375" y="51" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1440.812@0.23.1440.812" timestamp="1582582482571" />
     <state x="375" y="51" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1440.823@0.23.1440.823" timestamp="1583094649548" />
-    <state x="378" y="196" width="823" height="476" key="find.popup" timestamp="1583359649511">
-      <screen x="0" y="23" width="1440" height="822" />
+    <state x="378" y="194" width="823" height="476" key="find.popup" timestamp="1583439946725">
+      <screen x="0" y="23" width="1440" height="814" />
     </state>
     <state x="378" y="194" width="837" height="540" key="find.popup/0.23.1440.812@0.23.1440.812" timestamp="1582557226572" />
+    <state x="378" y="194" width="823" height="476" key="find.popup/0.23.1440.814@0.23.1440.814" timestamp="1583439946725" />
     <state x="378" y="195" width="837" height="543" key="find.popup/0.23.1440.816@0.23.1440.816" timestamp="1583139135954" />
     <state x="378" y="196" width="823" height="476" key="find.popup/0.23.1440.822@0.23.1440.822" timestamp="1583359649511" />
     <state x="378" y="196" width="823" height="477" key="find.popup/0.23.1440.823@0.23.1440.823" timestamp="1583070377375" />

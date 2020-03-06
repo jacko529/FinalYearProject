@@ -40,7 +40,7 @@ export class Entry extends Component {
 
         };
 
-        axios.get('http://localhost:8080/api/next-active',config )
+        axios.get('/next-active',config )
             .then(res => {
                 if(!res.data['shortest_path'] || !res.data['jarrard']){
                     this.setState({noCourse: res.data['none'][0]});
@@ -56,7 +56,7 @@ export class Entry extends Component {
 
                 this.setState({requestCompleted: true});
             }).then(
-            axios.get('http://localhost:8080/api/courses',config )
+            axios.get('/courses',config )
                 .then(ress => {
                     this.setState({coursesCanChoose: ress.data.data});
 
@@ -257,7 +257,7 @@ export class Entry extends Component {
 
             const body = JSON.stringify({ course: this.state.coursesCanChoose[0] });
 
-            axios.post('http://localhost:8080/api/courses',body,config )
+            axios.post('/courses',body,config )
                 .then(res => {
                     // console.log(res.data);
 
@@ -270,7 +270,7 @@ export class Entry extends Component {
             e.preventDefault();
             const body = JSON.stringify({ time: this.state.rangeValue });
 
-            axios.post('http://localhost:8080/api/user-time',body,config )
+            axios.post('/user-time',body,config )
                 .then(res => {
 
                 });

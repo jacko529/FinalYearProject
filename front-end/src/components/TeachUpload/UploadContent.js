@@ -47,7 +47,7 @@ export class TeachHome extends Component {
             headers: { Authorization: `bearer ${localStorage.getItem('access_token')}` ,'Content-type': 'application/json'}
 
         };
-        axios.get('http://localhost:8080/api/courses',config )
+        axios.get('/courses',config )
             .then(res => {
                 this.setState({previous: res.data.data[0]});
                 this.setState({courseLoaded: true})
@@ -117,7 +117,7 @@ export class TeachHome extends Component {
             e.preventDefault();
 
             console.log(this.state.value)
-            axios.post('http://localhost:8080/api/coure-resources',data,config )
+            axios.post('/coure-resources',data,config )
                 .then(res => {
                     window.location.reload();
 

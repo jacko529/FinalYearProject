@@ -43,7 +43,7 @@ export class TeachHome extends Component {
 
         };
 
-        axios.get('http://localhost:8080/api/course-analytics',config )
+        axios.get('/course-analytics',config )
             .then(res => {
                 this.setState({courseAnalytics: res.data});
                 this.setState({requestCompleted: true});

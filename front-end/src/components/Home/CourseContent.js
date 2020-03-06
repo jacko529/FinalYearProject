@@ -31,7 +31,7 @@ const CourseContent = (props) => {
                                              email: props.location.state.email}
                                              );
 
-        axios.post('http://localhost:8080/api/consume',body,config )
+        axios.post('/consume',body,config )
             .then(res => {
                 console.log(res.data);
             });

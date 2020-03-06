@@ -13,7 +13,7 @@ export const nextActiveLoading = () => (dispatch, getState) => {
     dispatch({ type: NEXT_ACTIVE_LOADING });
 
     axios
-        .get('http://localhost:8080/api/next-active',  tokenConfig(getState))
+        .get('/next-active',  tokenConfig(getState))
         .then(res =>
             dispatch({
                 type: NEXT_ACTIVE_LOADED,
