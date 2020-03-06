@@ -34,19 +34,20 @@ class TokenController extends AbstractController
         if (!$user) {
             $this->response = 'Your are not a user currently';
             $this->statusCode = 500;
+        }else{
+            $isValid = $this->passwordEncoder->isPasswordValid($user,$request->get('password'));
+            if (!$isValid) {
+                $this->response = 'Incorrect Credentials';
+                $this->statusCode = 500;
+            }else{
+                $this->response = $this->jwtEncoder->encode([
+                                                                'username' => $request->get('username'),
+                                                                'exp' => time() + 3600 // 1 hour expiration
+                                                            ]);
+                $this->statusCode = 200;
+            }
         }
 
-        $isValid = $this->passwordEncoder->isPasswordValid($user,$request->get('password'));
-        if (!$isValid) {
-            $this->response = 'Incorrect Credentials';
-            $this->statusCode = 500;
-        }else{
-            $this->response = $this->jwtEncoder->encode([
-                'username' => $request->get('username'),
-                'exp' => time() + 3600 // 1 hour expiration
-            ]);
-            $this->statusCode = 200;
-        }
         return $this->json(['access_token' => $this->response], $this->statusCode);
     }
 
