@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="78098f88-2b19-4108-a517-33c192de8add" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/docker/baboonka.conf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -267,7 +265,7 @@
       <workItem from="1582749539365" duration="9221000" />
       <workItem from="1582817751568" duration="65560000" />
       <workItem from="1583159746521" duration="20747000" />
-      <workItem from="1583439545019" duration="7595000" />
+      <workItem from="1583439545019" duration="8357000" />
     </task>
     <servers />
   </component>
