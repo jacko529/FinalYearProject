@@ -9,14 +9,14 @@ services:
       - "default"
     environment:
      NEO4J_AUTH: neo4j/jack
-  server:
-    image: nginx:latest
-    ports:
-      - "80:80"
-    volumes:
-      - ./babaoonka.conf:/etc/nginx/conf.d/site.conf
-    networks:
-      - "default"
+#  server:
+#    image: nginx:latest
+#    ports:
+#      - "80:80"
+#    volumes:
+#      - ./babaoonka.conf:/etc/nginx/conf.d/site.conf
+#    networks:
+#      - "default"
 #  php:
 #    depends_on:
 #      - "neo4j"
