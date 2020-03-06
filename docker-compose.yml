@@ -17,19 +17,19 @@ services:
 #      - ./babaoonka.conf:/etc/nginx/conf.d/site.conf
 #    networks:
 #      - "default"
-#  php:
-#    depends_on:
-#      - "neo4j"
-#    build:
-#      context: "."
-#      dockerfile: "docker/php.Dockerfile"
-#    ports:
-#      - "9501:9501"
-#    command: tail -f /dev/null && php bin/console swoole:server:run
-#    networks:
-#      - "default"
-#    volumes:
-#      - "./learning_made_easy:/var/www/html"
+  php:
+    depends_on:
+      - "neo4j"
+    build:
+      context: "."
+      dockerfile: "docker/php.Dockerfile"
+    ports:
+      - "9501:9501"
+    command: tail -f /dev/null && php bin/console swoole:server:run
+    networks:
+      - "default"
+    volumes:
+      - "./learning_made_easy:/var/www/html"
   db:
     image: mariadb:latest
     environment:
