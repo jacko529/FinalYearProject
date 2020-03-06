@@ -9,16 +9,23 @@ services:
       - "default"
     environment:
      NEO4J_AUTH: neo4j/jack
+  server:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./babaoonka.conf:/etc/nginx/conf.d/site.conf
+    networks:
+      - "default"
   php:
     depends_on:
-      - "frontend"
       - "neo4j"
     build:
       context: "."
       dockerfile: "docker/php.Dockerfile"
     ports:
-      - "8080:9501"
-    command: tail -f /dev/null
+      - "9501:9501"
+    command: tail -f /dev/null && php bin/console swoole:server:run
     networks:
       - "default"
     volumes:
@@ -32,19 +39,6 @@ services:
       - MYSQL_PASSWORD=test
     ports:
       - "3306:3306"
-    networks:
-      - "default"
-  frontend:
-    build:
-      context: "."
-      dockerfile: "docker/frontend.Dockerfile"
-    expose:
-      - "4000"
-    ports:
-      - "4000:3000"
-    volumes:
-      - "./front-end/src:/usr/src/app/src"
-      - "./front-end/public:/usr/src/app/public"
     networks:
       - "default"
   minio:

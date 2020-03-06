@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="78098f88-2b19-4108-a517-33c192de8add" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/docker/baboonka.conf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,11 +172,11 @@
       <recent name="$PROJECT_DIR$/docker" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/learning_made_easy" />
       <recent name="$PROJECT_DIR$/front-end/public" />
       <recent name="$PROJECT_DIR$/front-end/src" />
       <recent name="$PROJECT_DIR$/front-end" />
       <recent name="$PROJECT_DIR$/learning_made_easy/src/Security/Guard" />
-      <recent name="$PROJECT_DIR$/site/app" />
     </key>
   </component>
   <component name="RunManager" selected="Node.js.NormalTile.js">
@@ -265,7 +267,7 @@
       <workItem from="1582749539365" duration="9221000" />
       <workItem from="1582817751568" duration="65560000" />
       <workItem from="1583159746521" duration="20747000" />
-      <workItem from="1583439545019" duration="6136000" />
+      <workItem from="1583439545019" duration="7595000" />
     </task>
     <servers />
   </component>
@@ -304,10 +306,10 @@
       <screen x="0" y="23" width="1440" height="822" />
     </state>
     <state x="384" y="23" width="670" height="822" key="#PHP/0.23.1440.822@0.23.1440.822" timestamp="1582270926340" />
-    <state x="436" y="240" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1583446723307">
+    <state x="436" y="240" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1583491739824">
       <screen x="0" y="23" width="1440" height="816" />
     </state>
-    <state x="436" y="240" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.816@0.23.1440.816" timestamp="1583446723307" />
+    <state x="436" y="240" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.816@0.23.1440.816" timestamp="1583491739824" />
     <state x="458" y="193" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1582995803630">
       <screen x="0" y="23" width="1440" height="823" />
     </state>
