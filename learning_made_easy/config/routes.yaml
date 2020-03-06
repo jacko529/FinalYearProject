@@ -10,8 +10,8 @@ me:
 
 api_login_check:
     path: /api/login
-    defaults: { _controller: App\Controller\TokenController::Token }
-    methods: ['POST']
+    controller: App\Controller\TokenController::Token
+    methods: POST
 
 create_course:
     path: /api/course

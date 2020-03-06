@@ -16,6 +16,8 @@ class TokenController extends AbstractController
     protected EntityManagerInterface $entityManager;
     protected UserPasswordEncoderInterface $passwordEncoder;
     protected JWTEncoderInterface $jwtEncoder;
+    protected String $response;
+    protected Int $statusCode;
 
     public function __construct(EntityManagerInterface $entityManager,
                                 UserPasswordEncoderInterface $passwordEncoder,
@@ -30,19 +32,22 @@ class TokenController extends AbstractController
     {
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email'=>$request->get('username')]);
         if (!$user) {
-            throw $this->createNotFoundException();
+            $this->response = 'Your are not a user currently';
+            $this->statusCode = 500;
         }
 
         $isValid = $this->passwordEncoder->isPasswordValid($user,$request->get('password'));
         if (!$isValid) {
-            $response = 'Incorrect Credentials';
+            $this->response = 'Incorrect Credentials';
+            $this->statusCode = 500;
         }else{
-            $response = $this->jwtEncoder->encode([
+            $this->response = $this->jwtEncoder->encode([
                 'username' => $request->get('username'),
                 'exp' => time() + 3600 // 1 hour expiration
             ]);
+            $this->statusCode = 200;
         }
-        return $this->json(['access_token' => $response]);
+        return $this->json(['access_token' => $this->response], $this->statusCode);
     }
 
 
