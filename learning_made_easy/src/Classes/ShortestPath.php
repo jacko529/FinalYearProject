@@ -101,7 +101,7 @@ class ShortestPath
     public function createFunction($array)
     {
         foreach ($array as $now => $content) {
-            $testArray['nodes'][] = ['id' => $content];
+            $testArray['nodes'][] = ['id' => $content, 'svg' => 'http://localhost:9000/networking/icon-memory-retention.png'];
             $testArray['links'][] = [
                 'source' => $content,
                 'target' => $this->has_next($array) ? next($array) : $content,
@@ -129,7 +129,7 @@ class ShortestPath
 
     private function addDummyKey($arrayNeedingToBeAddedTo)
     {
-        return array_merge(array('temp' => 0), $arrayNeedingToBeAddedTo);
+        return array_merge(array('temp' => 'Current'), $arrayNeedingToBeAddedTo);
     }
 
     /**

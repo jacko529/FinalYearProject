@@ -30,7 +30,9 @@ export class Entry extends Component {
         coursesCanChoose: [],
         selectedCourse: '',
         recommendation: [],
-        noCourse: []
+        noCourse: [],
+        timeDisappear: false,
+        courseDisappear: false,
     };
     componentWillMount() {
 
@@ -77,10 +79,7 @@ export class Entry extends Component {
 
 
     render() {
-        const data = {
-            nodes: [{ id: "Harry" }, { id: "Sally" }, { id: "Alice" }],
-            links: [{ source: "Harry", target: "Sally" }, { source: "Harry", target: "Alice" }],
-        };
+
 
 
 
@@ -241,6 +240,7 @@ export class Entry extends Component {
             axios.post('/courses',body,config )
                 .then(res => {
                     // console.log(res.data);
+                    this.setState({courseDisappear: true});
 
                 });
         }
@@ -253,7 +253,7 @@ export class Entry extends Component {
 
             axios.post('/user-time',body,config )
                 .then(res => {
-
+                    this.setState({timeDisappear: true});
                 });
 
 
@@ -294,6 +294,9 @@ export class Entry extends Component {
                 />
             </div>
         );
+        let timeClass = this.state.timeDisappear ? "timeDiv" : "";
+        let courseClass = this.state.courseDisappear ? "courseDiv" : "";
+
         return (
 
             <div>
@@ -367,7 +370,7 @@ export class Entry extends Component {
                             <h4 style={{color: 'white'}}>These are the top 3 learning paths which are based around the time your spefifed at the beginning of the course</h4>
                            <h5 style={{color: 'white'}}>You can look into your top learning paths by selecting the graph, these graphs where selected by finding the shortest path based around how long it takes to get from one resource to the next</h5>
                             <Graph
-                                id="graph-id1" // id is mandatory, if no id is defined rd3g will throw an error
+                                id="graph-id" // id is mandatory, if no id is defined rd3g will throw an error
                                 data={this.state.explainShortPath.first}
                                 config={myConfig}
                                 onClickNode={onClickNodeFirst}
@@ -428,7 +431,7 @@ export class Entry extends Component {
                             <Row
                             >
                             <Col m={6}
-                                  s={6}>
+                                  s={6} className={timeClass}>
                                     <h1>Student Information</h1>
                                     <h4>First enter your time you want to spend on the course</h4>
                                     <Range
@@ -443,8 +446,10 @@ export class Entry extends Component {
                                 </Row>
                                 <Row >
                                     <Col m={6}
-                                         s={6}>
-                                    <Select
+                                         s={6} className={courseClass}>
+                                        <h4>Now select the course you wish to take</h4>
+
+                                        <Select
                                         label="Choose your option"
                                         options={{
                                             classes: '',

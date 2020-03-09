@@ -49,6 +49,7 @@ class UserController extends AbstractController
         $userEntitys = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $user->getUsername()]);
 
         $userEntity = $this->userRepository->getLearningStyles($user->getUsername());
+        $this->learningStyles = [];
         foreach($userEntity->records() as $style){
             $records = $style->get('learningStyle');
             $this->learningStyles = $records->values();

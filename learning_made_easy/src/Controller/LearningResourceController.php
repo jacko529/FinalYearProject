@@ -42,9 +42,11 @@ class LearningResourceController extends AbstractController
             [
                 'region' => 'eu-west-2',
                 'version' => 'latest',
+                'endpoint' => 'http://minio:9000/',
+                'use_path_style_endpoint' => true,
                 'credentials' => [
-                    'key' => 'AKIAIUGAFHIOCSCQJZTQ',
-                    'secret' => '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',
+                    'key' => 'AKIABUVWH1HUD7YQZQAR',
+                    'secret' => 'PVMlDMep3/jLSz9GxPV3mTvH4JZynkf2BFeTu+i8',
                 ]
             ]
         );
@@ -181,7 +183,7 @@ class LearningResourceController extends AbstractController
             $stage = $this->filterNeo4jResponse($latestStage, 'stage');
 
         // if this is nothing then do the first
-        // @todo get the course name and case statement to sort this shit out
+        // @todo get the course name and case statement to sort this shit out - it is not set up for multiple courses currently
         if ($lastConsumableItem === 0) {
             $firstCourse[] = $this->learningResourceRepo->matchFirst(
                 $topCategory[0],

@@ -22,7 +22,7 @@ class CreateUsers
     protected $course;
 
 
-    public function __construct()
+    public function __construct($firstName, $lastname, $email, $password, $time, $roles)
     {
 
         $this->client = ClientBuilder::create()
@@ -31,16 +31,17 @@ class CreateUsers
             ->build();
         $faker = \Faker\Factory::create();
 
-        $this->firstName = $faker->firstName;
-        $this->lastname = $faker->lastName;
-        $this->email = $faker->email;
-        $this->password = $faker->password;
-        $this->time = $faker->numberBetween(23, 45);
-        $this->verbal = $faker->numberBetween(1, 7);
-        $this->reflector = $faker->numberBetween(1, 8);
-        $this->global = $faker->numberBetween(0, 8);
-        $this->intuitive = $faker->numberBetween(0, 8);
-        $this->course = 'networking';
+        $this->firstName = $firstName;
+        $this->lastname = $lastname;
+        $this->email = $email;
+        $this->password = $password;
+        $this->time = $time;
+        $this->roles = $roles;
+//        $this->verbal = $faker->numberBetween(1, 7);
+//        $this->reflector = $faker->numberBetween(1, 8);
+//        $this->global = $faker->numberBetween(0, 8);
+//        $this->intuitive = $faker->numberBetween(0, 8);
+//        $this->course = 'networking';
 
     }
 
@@ -49,7 +50,7 @@ class CreateUsers
     }
 
     public function createUser(){
-        $this->run("CREATE (n:User {firstName: '$this->firstName', surname: '$this->lastname', email: '$this->email',  password: 'collegeproject', roles: [\"ROLE_USER\"], time: '$this->time'})");
+        $this->run("CREATE (n:User {firstName: '$this->firstName', surname: '$this->lastname', email: '$this->email',  password: 'collegeproject', roles: '$this->roles', time: '$this->time'})");
     }
 
     public function learningStyle(){
@@ -57,6 +58,12 @@ class CreateUsers
                            WITH learn
                            MATCH (a:User { email: '$this->email' })
                            CREATE (a)-[:HAS]->(learn)");
+    }
+
+    public function addConstraint(){
+        $this->run("CREATE CONSTRAINT learning_resource
+                        ON (n:LearningResource)
+                        ASSERT n.email IS UNIQUE");
     }
 
     public function connectCourse(){

@@ -20,12 +20,10 @@ services:
   php:
     depends_on:
       - "neo4j"
-    build:
-      context: "."
-      dockerfile: "docker/php.Dockerfile"
+    image: jack529/easylearn_php:easylearn
     ports:
       - "9501:9501"
-    command: tail -f /dev/null && php bin/console swoole:server:run
+    command: tail -f /dev/null
     networks:
       - "default"
     volumes:

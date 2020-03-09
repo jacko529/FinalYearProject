@@ -6,6 +6,7 @@ import store from "./stores/store";
 import {loadUser} from "./actions/authActions";
 import axios from 'axios';
 
+// axios.defaults.baseURL = 'https://baboonka.com/api';
 axios.defaults.baseURL = 'http://localhost:9501/api';
 
 store.dispatch(loadUser());
