@@ -50,7 +50,7 @@ class CreateUsers
     }
 
     public function createUser(){
-        $this->run("CREATE (n:User {firstName: '$this->firstName', surname: '$this->lastname', email: '$this->email',  password: 'collegeproject', roles: '$this->roles', time: '$this->time'})");
+        $this->run("CREATE (n:User {firstName: '$this->firstName', surname: '$this->lastname', email: '$this->email',  password: '$this->password', roles: '$this->roles', time: '$this->time'})");
     }
 
     public function learningStyle(){

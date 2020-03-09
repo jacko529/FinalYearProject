@@ -12,7 +12,7 @@ $connect = new CreateUsers('jack',
 
 
 $connect->createUser();
-$connect->addConstraint();
+//$connect->addConstraint();
 //for ($i = 0; $i < 1; $i++) {
 //    $connect->createUser();
 //    $connect->learningStyle();
