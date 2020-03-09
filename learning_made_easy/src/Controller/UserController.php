@@ -46,15 +46,14 @@ class UserController extends AbstractController
     {
 
         $user = $this->getUser();
-        $userEntity = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $user->getUsername()]);
+        $userEntitys = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $user->getUsername()]);
 
-        foreach ($userEntity->getLearningStyles() as $styles) {
-            $this->learningStyles['verbal'] = $styles->getVerbal();
-            $this->learningStyles['intuitive'] = $styles->getIntuitive();
-            $this->learningStyles['reflector'] = $styles->getReflector();
-            $this->learningStyles['global'] = $styles->getGlobal();
-            break;
+        $userEntity = $this->userRepository->getLearningStyles($user->getUsername());
+        foreach($userEntity->records() as $style){
+            $records = $style->get('learningStyle');
+            $this->learningStyles = $records->values();
         }
+
         if($this->learningStyles){
             arsort($this->learningStyles, SORT_REGULAR);
         }
@@ -70,11 +69,11 @@ class UserController extends AbstractController
         }
 
         return $this->json([
-            'first_name' => $userEntity->getFirstName(),
-            'surname' => $userEntity->getSurname(),
-            'email' => $userEntity->getEmail(),
-            'user_type' => $userEntity->getRoles(),
-            'time' => $userEntity->getTime() ?: '',
+            'first_name' => $userEntitys->getFirstName(),
+            'surname' => $userEntitys->getSurname(),
+            'email' => $userEntitys->getEmail(),
+            'user_type' => $userEntitys->getRoles(),
+            'time' => $userEntitys->getTime() ?: '',
             'learning_styles' => $this->learningStyles,
             'course_created' => $this->arrayOfRelatedResources
         ]);

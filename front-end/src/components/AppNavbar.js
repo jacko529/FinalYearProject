@@ -1,22 +1,8 @@
-import React, { Component, Fragment } from 'react';
-// import {
-//   Collapse,
-//   Navbar,
-//   NavbarToggler,
-//   NavbarBrand,
-//   Nav,
-//   NavItem,
-//   Container
-// } from 'reactstrap';
-
+import React, { Component } from 'react';
 import {
-
-    Nav,
     NavItem,
-    Container,
     Navbar,
-    Icon,
-    NavBrand
+    Icon
 } from 'react-materialize';
 
 import { connect } from 'react-redux';
@@ -44,7 +30,7 @@ class AppNavbar extends Component {
   };
 
   render() {
-      const {isLoaded, isLoading, isAuthenticated, user } = this.props.auth;
+      const { isLoading, isAuthenticated, user } = this.props.auth;
 
 
 

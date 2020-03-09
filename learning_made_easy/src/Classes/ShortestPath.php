@@ -3,8 +3,6 @@
 namespace App\Classes;
 
 use App\Repository\LearningResourceRepository;
-use GraphAware\Neo4j\Client\Client;
-use GraphAware\Neo4j\Client\ClientInterface;
 
 class ShortestPath
 {
@@ -16,28 +14,26 @@ class ShortestPath
     protected $learningResourceRepository;
     protected $usersCourse;
     protected $lastConsumedItem;
-    protected $client;
-    protected $returnedArrays = [];
+    protected array $returnedArrays = [];
+    protected array $journeyCosts;
 
-
-    public function __construct(LearningResourceRepository $learningResourceRepository )
+    public function __construct(LearningResourceRepository $learningResourceRepository)
     {
         $this->learningResourceRepository = $learningResourceRepository;
-
     }
 
-    public function setAll($stage, $usersTime, $usersTopCategory, $usersEmails, $usersCourse, $lastConsumedItem){
+    public function setAll($stage, $usersTime, $usersTopCategory, $usersEmails, $usersCourse, $lastConsumedItem)
+    {
         $this->stage = $stage;
         $this->usersTime = $usersTime;
         $this->usersTopCategory = $usersTopCategory;
         $this->usersEmails = $usersEmails;
         $this->usersCourse = $usersCourse;
         $this->lastConsumedItem = $lastConsumedItem;
-
     }
 
-    public function findShortestPath(){
-
+    public function findShortestPath()
+    {
         // get the total cost of path
         // should always be the first item
         $shortestPath = $this->learningResourceRepository->KshortestPath(
@@ -46,18 +42,21 @@ class ShortestPath
 //            array_key_first($absoluteArr)
             $this->usersTopCategory
         );
-
         foreach ($shortestPath->records() as $newItem) {
             $this->returnedArrays[] = $newItem->get('names');
             $learning[] = $newItem->get('learning');
-            $costs = $newItem->get('costs');
+            $this->journeyCosts[] = $newItem->get('costs');
             $totalCost[] = $newItem->get('totalCost');
         }
 
 
         $final = $this->findTimeAndStyle($this->usersTime, $totalCost, $this->usersTopCategory, $this->returnedArrays);
 
-        $matchNextRecords = $this->learningResourceRepository->matchNext($final, $this->usersEmails, $this->usersCourse);
+        $matchNextRecords = $this->learningResourceRepository->matchNext(
+            $final,
+            $this->usersEmails,
+            $this->usersCourse
+        );
 
         $finalValues = $this->filterNeo4jResponse($matchNextRecords, 'next');
 
@@ -68,35 +67,101 @@ class ShortestPath
 
     public function explainShortPath()
     {
-        $first = $this->returnedArrays[0];
-        $second = $this->returnedArrays[1];
-        $third = $this->returnedArrays[2];
-        $firstEndKey = array_key_last($first);
-        $secondEndKey = array_key_last($second);
-        $thirdEndKey = array_key_last($third);
+        $firstJourney = $this->returnedArrays[0];
+        $secondJourney = $this->returnedArrays[1];
+        $thirdJourney = $this->returnedArrays[2];
 
-        $test['first'] = $this->createFunction($first, $firstEndKey);
-        $test['second'] = $this->createFunction($second, $secondEndKey);
-        $test['third'] = $this->createFunction($third, $thirdEndKey);
+        $firstCosts = $this->addMins($this->journeyCosts[0]);
+        $secondCosts = $this->addMins($this->journeyCosts[1]);
+        $thirdThird = $this->addMins($this->journeyCosts[2]);
 
+        $a = $this->addDummyKey($firstCosts);
+        $b = $this->addDummyKey($secondCosts);
+        $c = $this->addDummyKey($thirdThird);
+
+        $firstCombined = $this->combineNewArrays($a, $firstJourney);
+        $secondCombined = $this->combineNewArrays($b, $secondJourney);
+        $thirdCombined = $this->combineNewArrays($c, $thirdJourney);
+
+        $test['first'] = $this->createFunction($firstCombined);
+        $test['second'] = $this->createFunction($secondCombined);
+        $test['third'] = $this->createFunction($thirdCombined);
 
         return $test;
     }
 
-
-    public function createFunction($array, $finalKey){
-
-        foreach($array as $now => $content){
-            $testArray['nodes'][] = ['id'=> $content];
-            $testArray['links'][] = ['source'=> $content,
-                                    'target'=> $array[$now < 6 ? $now + 1 :  $finalKey],
-                                    'label' => 'Weight'];
+    /**
+     *
+     * allocate node link information for explainibility
+     *
+     * @param $array
+     *
+     * @return mixed
+     */
+    public function createFunction($array)
+    {
+        foreach ($array as $now => $content) {
+            $testArray['nodes'][] = ['id' => $content];
+            $testArray['links'][] = [
+                'source' => $content,
+                'target' => $this->has_next($array) ? next($array) : $content,
+                'label' => $now
+            ];
         }
         return $testArray;
     }
 
-    public function emptyReturn(){
+
+    public function addMins($array){
+        foreach($array as $mins){
+           $new[] =  str_replace($mins,$mins . ' minutes',$mins);
+        }
+        return $new;
+    }
+
+    private function combineNewArrays($arrayKeys, $arrayNeedingToBeCombined)
+    {
+        return array_combine(
+            $arrayKeys,
+            array_values($arrayNeedingToBeCombined)
+        );
+    }
+
+    private function addDummyKey($arrayNeedingToBeAddedTo)
+    {
+        return array_merge(array('temp' => 0), $arrayNeedingToBeAddedTo);
+    }
+
+    /**
+     *
+     * check if array has a next value (pointer)
+     *
+     * @param $array
+     *
+     * @return bool
+     */
+    private function has_next(array $array)
+    {
+        if (is_array($array)) {
+            if (next($array) === false) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     *
+     * ensure all global arrays are clear
+     *
+     */
+    public function emptyReturn(): void
+    {
         $this->returnedArrays = [];
+        $this->journeyCosts = [];
     }
 
     public function findTimeAndStyle($userTime, $totalCostTimes, $topStyle, $options)

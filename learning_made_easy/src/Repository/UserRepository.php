@@ -52,6 +52,13 @@ class UserRepository implements UserLoaderInterface
         );
     }
 
+
+    public function getLearningStyles($userEmail){
+        return $this->clients->run(
+            "MATCH (n:User{email: '$userEmail'})-[r:HAS]-(learningStyle:LearningStyle) RETURN learningStyle LIMIT 1"
+        );
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

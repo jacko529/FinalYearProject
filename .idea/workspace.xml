@@ -3,6 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="78098f88-2b19-4108-a517-33c192de8add" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easylearn.pub" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/AppNavbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/AppNavbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/Home/CourseTile.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Home/CourseTile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/Home/Entry.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Home/Entry.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/Home/NoCourseTile.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Home/NoCourseTile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/Home/Tiles.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Home/Tiles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/TeachUpload/TeachHome.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/TeachUpload/TeachHome.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/LoginModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/LoginModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/Logout.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/Logout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/PrivateRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/PrivateRoute.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/RegisterModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/RegisterModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/ResolveRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/ResolveRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/TeacherPrivateRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/TeacherPrivateRoute.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +53,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/front-end" />
   </component>
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
@@ -265,7 +280,7 @@
       <workItem from="1582749539365" duration="9221000" />
       <workItem from="1582817751568" duration="65560000" />
       <workItem from="1583159746521" duration="20747000" />
-      <workItem from="1583439545019" duration="10269000" />
+      <workItem from="1583439545019" duration="27703000" />
     </task>
     <servers />
   </component>
@@ -409,18 +424,18 @@
     </state>
     <state x="375" y="51" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1440.812@0.23.1440.812" timestamp="1582582482571" />
     <state x="375" y="51" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1440.823@0.23.1440.823" timestamp="1583094649548" />
-    <state x="378" y="194" width="823" height="476" key="find.popup" timestamp="1583439946725">
-      <screen x="0" y="23" width="1440" height="814" />
+    <state x="378" y="194" width="837" height="540" key="find.popup" timestamp="1583699220766">
+      <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state x="378" y="194" width="837" height="540" key="find.popup/0.23.1440.812@0.23.1440.812" timestamp="1582557226572" />
+    <state x="378" y="194" width="837" height="540" key="find.popup/0.23.1440.812@0.23.1440.812" timestamp="1583699220766" />
     <state x="378" y="194" width="823" height="476" key="find.popup/0.23.1440.814@0.23.1440.814" timestamp="1583439946725" />
     <state x="378" y="195" width="837" height="543" key="find.popup/0.23.1440.816@0.23.1440.816" timestamp="1583139135954" />
     <state x="378" y="196" width="823" height="476" key="find.popup/0.23.1440.822@0.23.1440.822" timestamp="1583359649511" />
     <state x="378" y="196" width="823" height="477" key="find.popup/0.23.1440.823@0.23.1440.823" timestamp="1583070377375" />
-    <state x="385" y="169" width="670" height="671" key="search.everywhere.popup" timestamp="1583139142978">
-      <screen x="0" y="23" width="1440" height="816" />
+    <state x="385" y="168" width="670" height="667" key="search.everywhere.popup" timestamp="1583699072954">
+      <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state x="385" y="168" width="670" height="667" key="search.everywhere.popup/0.23.1440.812@0.23.1440.812" timestamp="1582497275254" />
+    <state x="385" y="168" width="670" height="667" key="search.everywhere.popup/0.23.1440.812@0.23.1440.812" timestamp="1583699072954" />
     <state x="385" y="169" width="670" height="671" key="search.everywhere.popup/0.23.1440.816@0.23.1440.816" timestamp="1583139142978" />
     <state x="385" y="170" width="670" height="676" key="search.everywhere.popup/0.23.1440.821@0.23.1440.821" timestamp="1582838165817" />
     <state x="385" y="170" width="670" height="677" key="search.everywhere.popup/0.23.1440.822@0.23.1440.822" timestamp="1582973482708" />

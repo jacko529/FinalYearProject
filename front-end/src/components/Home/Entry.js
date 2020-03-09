@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Button, Container,TextInput,Select, Collection,Range, CollectionItem,Card, CardTitle,Icon, Row, Col } from 'react-materialize';
+import { Button, Container,Select, Collection,Range, CollectionItem, Row, Col } from 'react-materialize';
 import 'materialize-css'
 import '../../Loader.css';
 import '../../SidePanel.css';
@@ -86,44 +86,25 @@ export class Entry extends Component {
 
 // the graph configuration, you only need to pass down properties
 // that you want to override, otherwise default ones will be used
-        const myConfigFirst = {
-            nodeHighlightBehavior: true,
 
-            node: {
-                color: "lightblue",
-                size: 420,
-                fontColor: '#051923',
-                highlightStrokeColor: "blue",
-            },
-            link: {
-                renderLabel: true,
-                highlightColor: "blue",
-            },
-        };
-        const myConfigSecond = {
+        const myConfig = {
+            directed: true,
+
             nodeHighlightBehavior: true,
             node: {
                 color: "lightblue",
                 size: 420,
-                fontColor: '#051923',
+                symbolType: 'wye',
+                fontColor: 'white',
                 highlightStrokeColor: "blue",
             },
             link: {
                 renderLabel: true,
                 highlightColor: "blue",
-            },
-        };
-        const myConfigThird = {
-            nodeHighlightBehavior: true,
-            node: {
-                color: "lightblue",
-                size: 420,
-                fontColor: '#051923',
-                highlightStrokeColor: "blue",
-            },
-            link: {
-                renderLabel: true,
-                highlightColor: "blue",
+                fontSize: 15,
+                fontColor: 'white',
+                semanticStrokeWidth: true,
+                labelProperty: 'label'
             },
         };
 
@@ -388,7 +369,7 @@ export class Entry extends Component {
                             <Graph
                                 id="graph-id1" // id is mandatory, if no id is defined rd3g will throw an error
                                 data={this.state.explainShortPath.first}
-                                config={myConfigFirst}
+                                config={myConfig}
                                 onClickNode={onClickNodeFirst}
                                 onDoubleClickNode={onDoubleClickNodeFirst}
                                 onRightClickNode={onRightClickNodeFirst}
@@ -401,38 +382,38 @@ export class Entry extends Component {
                                 onMouseOutLink={onMouseOutLinkFirst}
                                 onNodePositionChange={onNodePositionChangeFirst}
                             />;
-                            <Graph
-                                id="graph-id2" // id is mandatory, if no id is defined rd3g will throw an error
-                                data={this.state.explainShortPath.second}
-                                config={myConfigSecond}
-                                onClickNode={onClickNodeSecond}
-                                onDoubleClickNode={onDoubleClickNodeSecond}
-                                onRightClickNode={onRightClickNodeSecond}
-                                onClickGraph={onClickGraphSecond}
-                                onClickLink={onClickLinkSecond}
-                                onRightClickLink={onRightClickLinkSecond}
-                                onMouseOverNode={onMouseOverNodeSecond}
-                                onMouseOutNode={onMouseOutNodeSecond}
-                                onMouseOverLink={onMouseOverLinkSecond}
-                                onMouseOutLink={onMouseOutLinkSecond}
-                                onNodePositionChange={onNodePositionChangeSecond}
-                            />;
-                            <Graph
-                                id="graph-id3" // id is mandatory, if no id is defined rd3g will throw an error
-                                data={this.state.explainShortPath.third}
-                                config={myConfigThird}
-                                onClickNode={onClickNodeThird}
-                                onDoubleClickNode={onDoubleClickNodeThird}
-                                onRightClickNode={onRightClickNodeThird}
-                                onClickGraph={onClickGraphThird}
-                                onClickLink={onClickLinkThird}
-                                onRightClickLink={onRightClickLinkThird}
-                                onMouseOverNode={onMouseOverNodeThird}
-                                onMouseOutNode={onMouseOutNodeThird}
-                                onMouseOverLink={onMouseOverLinkThird}
-                                onMouseOutLink={onMouseOutLinkThird}
-                                onNodePositionChange={onNodePositionChangeThird}
-                            />;
+                            {/*<Graph*/}
+                            {/*    id="graph-id2" // id is mandatory, if no id is defined rd3g will throw an error*/}
+                            {/*    data={this.state.explainShortPath.second}*/}
+                            {/*    config={myConfig}*/}
+                            {/*    onClickNode={onClickNodeSecond}*/}
+                            {/*    onDoubleClickNode={onDoubleClickNodeSecond}*/}
+                            {/*    onRightClickNode={onRightClickNodeSecond}*/}
+                            {/*    onClickGraph={onClickGraphSecond}*/}
+                            {/*    onClickLink={onClickLinkSecond}*/}
+                            {/*    onRightClickLink={onRightClickLinkSecond}*/}
+                            {/*    onMouseOverNode={onMouseOverNodeSecond}*/}
+                            {/*    onMouseOutNode={onMouseOutNodeSecond}*/}
+                            {/*    onMouseOverLink={onMouseOverLinkSecond}*/}
+                            {/*    onMouseOutLink={onMouseOutLinkSecond}*/}
+                            {/*    onNodePositionChange={onNodePositionChangeSecond}*/}
+                            {/*/>;*/}
+                            {/*<Graph*/}
+                            {/*    id="graph-id3" // id is mandatory, if no id is defined rd3g will throw an error*/}
+                            {/*    data={this.state.explainShortPath.third}*/}
+                            {/*    config={myConfig}*/}
+                            {/*    onClickNode={onClickNodeThird}*/}
+                            {/*    onDoubleClickNode={onDoubleClickNodeThird}*/}
+                            {/*    onRightClickNode={onRightClickNodeThird}*/}
+                            {/*    onClickGraph={onClickGraphThird}*/}
+                            {/*    onClickLink={onClickLinkThird}*/}
+                            {/*    onRightClickLink={onRightClickLinkThird}*/}
+                            {/*    onMouseOverNode={onMouseOverNodeThird}*/}
+                            {/*    onMouseOutNode={onMouseOutNodeThird}*/}
+                            {/*    onMouseOverLink={onMouseOverLinkThird}*/}
+                            {/*    onMouseOutLink={onMouseOutLinkThird}*/}
+                            {/*    onNodePositionChange={onNodePositionChangeThird}*/}
+                            {/*/>;*/}
                         </Col>
                         </Row> : null
 
@@ -449,6 +430,7 @@ export class Entry extends Component {
                             <Col m={6}
                                   s={6}>
                                     <h1>Student Information</h1>
+                                    <h4>First enter your time you want to spend on the course</h4>
                                     <Range
                                         value={this.state.rangeValue}
                                         onChange={this.handleRangeSlider.bind(this)}

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 
 

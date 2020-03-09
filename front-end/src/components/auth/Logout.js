@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { NavItem }  from 'react-materialize';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/authActions';

@@ -1,30 +1,15 @@
 import React, { Component } from 'react';
-// import {
-//   Button,
-//   Modal,
-//   ModalHeader,
-//   ModalBody,
-//   Form,
-//   FormGroup,
-//   Label,
-//   Input,
-//   NavLink,
-//   Alert
-// } from 'reactstrap';
-import {
 
-  Nav,
-  NavItem,
+import {
   Button,
   TextInput,
   Modal,
-  Model
+
 } from 'react-materialize';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/authActions';
 import { clearErrors } from '../../actions/errorActions';
-import { Redirect } from 'react-router-dom';
 
 class LoginModal extends Component {
   state = {
@@ -119,7 +104,7 @@ class LoginModal extends Component {
             trigger={<Button node="button">Login</Button>}
         >
           <TextInput
-              label="First Name"
+              label="Email"
               value={this.state.username}
               onChange={this.onChange}
               name={'username'}

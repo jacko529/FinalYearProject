@@ -1,12 +1,10 @@
 import React from 'react';
 
-import { Button, Card, CardTitle,Icon, Row, Col } from 'react-materialize';
+import {  Card, CardTitle,Icon, Col } from 'react-materialize';
 import 'materialize-css'
 import '../../SidePanel.css';
 
-import {
-    Link
-} from "react-router-dom";
+
 
 const NoCourseTile = (props) => {
     let save = (e) => {

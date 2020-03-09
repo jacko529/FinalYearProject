@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 
 import {
-    Button,
-    TextInput,
+
     Container,
     Row,
     Col,
-    Form,
     CardTitle,
     Icon,
     CardPanel,
@@ -22,7 +20,6 @@ import 'react-rangeslider/lib/index.css'
 import axios from 'axios';
 
 import { connect } from 'react-redux';
-import InformCards from "../Home/InformCards";
 
 
 export class TeachHome extends Component {
@@ -53,7 +50,7 @@ export class TeachHome extends Component {
 
 
     render() {
-        const {isTeacher,isUser, isLoading, isAuthenticated, user } = this.props.auth;
+        // const {isTeacher,isUser, isLoading, isAuthenticated, user } = this.props.auth;
 
         let analytics= [];
 

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PrivateRoute from "./PrivateRoute";
 import Entry from "../Home/Entry";
@@ -11,14 +11,12 @@ import MasterForm from "../Mutliple/MasterForm";
 import {NonUser} from "../Home/NonUser";
 
 import {
-    BrowserRouter as Router,
     Switch,
-    Route,
-    Link
+    Route
+
 } from "react-router-dom";
 import Loader from "react-loader-spinner";
-import store from "../../stores/store";
-import {nextActiveLoading} from "../../actions/nextActiveActions";
+
 
 export class ResolveRoutes extends Component {
 
@@ -27,7 +25,7 @@ export class ResolveRoutes extends Component {
 
     render() {
 
-        const {isTeacher,isUser, isLoaded, isLoading, isAuthenticated, user } = this.props.auth;
+        const {isLoading} = this.props.auth;
         // const {nextActiveLoaded } = this.props.next;
 
         const loadingSign = (

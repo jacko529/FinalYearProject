@@ -230,7 +230,6 @@ class LearningResourceController extends AbstractController
             $firstCourse['shortest_path'][] = $this->shortestPath->findShortestPath();
             $firstCourse['explain_short_path'][]= $this->shortestPath->explainShortPath();
             $this->shortestPath->emptyReturn();
-//            dd($firstCourse);
             $this->jaccardIndex->setAll($usersEmail, 'networking');
             $firstCourse['jarrard'][] = $this->jaccardIndex->findIndex();
         } else {

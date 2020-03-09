@@ -1,8 +1,7 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {Entry} from "../Home/Entry";
-import {login} from "../../actions/authActions";
+
 
 const TeacherPrivateRoute = ({ component: Component, auth, ...rest }) =>
     (

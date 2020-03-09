@@ -1,8 +1,5 @@
 import React from 'react';
-// import {
-//     Card, CardImg, CardText,Col, CardBody,
-//     CardTitle, CardSubtitle, Button
-// } from 'reactstrap';
+
 
 import { Button, Card, CardTitle,Icon, Row, Col } from 'react-materialize';
 import 'materialize-css'
