@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Repository\LearningAnalyticsRepoistory;
+use App\Repository\UserRepository;
 use GraphAware\Neo4j\OGM\EntityManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,16 +34,23 @@ class LearningAnalyticsController extends AbstractController
     public function getAnalytics(Request $request)
     {
         $courseInformation = [];
+        // get the most popular route
+        // get most common learning style
 
         $user = $this->getUser();
         $userEmail = $user->getUsername();
         $coursesCreated = $this->learningAnalyticsRepo->coursesCreate($userEmail);
+
+
         foreach ($coursesCreated as $courses) {
+
             $courseInformation['courses'][] = [
                 'course' => $courses,
                 'count' => $this->learningAnalyticsRepo->howManyPerCourse($courses),
-                'finished' => $this->learningAnalyticsRepo->howManyPeopleFinishedCourse($courses, '8'),
-                'avg_time_wanted' => round($this->learningAnalyticsRepo->averageTimePeopleWantOnCourse($courses), 2)
+                'finished' => $this->learningAnalyticsRepo->howManyPeopleFinishedCourse($courses, '2'),
+//                'avg_time_wanted' => round($this->learningAnalyticsRepo->averageTimePeopleWantOnCourse($courses), 2),
+                'most_popular_route' => '',
+                'most_popular_learning_style' => $this->learningAnalyticsRepo->topStyleOfEachCourse($courses)
             ];
         }
 
@@ -54,4 +61,6 @@ class LearningAnalyticsController extends AbstractController
     }
 
 
+
+    // get user
 }

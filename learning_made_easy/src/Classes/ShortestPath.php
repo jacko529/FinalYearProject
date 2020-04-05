@@ -16,10 +16,14 @@ class ShortestPath
     protected $lastConsumedItem;
     protected array $returnedArrays = [];
     protected array $journeyCosts;
+    protected FilterHelper $filterHelper;
 
-    public function __construct(LearningResourceRepository $learningResourceRepository)
+    public function __construct(LearningResourceRepository $learningResourceRepository,
+                                FilterHelper $filterHelper)
     {
         $this->learningResourceRepository = $learningResourceRepository;
+        $this->filterHelper = $filterHelper;
+
     }
 
     public function setAll($stage, $usersTime, $usersTopCategory, $usersEmails, $usersCourse, $lastConsumedItem)
@@ -32,16 +36,25 @@ class ShortestPath
         $this->lastConsumedItem = $lastConsumedItem;
     }
 
-    public function findShortestPath()
+    public function findShortestPath($flag = false)
     {
         // get the total cost of path
         // should always be the first item
-        $shortestPath = $this->learningResourceRepository->KshortestPath(
-            $this->lastConsumedItem,
-            $this->stage,
-//            array_key_first($absoluteArr)
-            $this->usersTopCategory
-        );
+        if($flag){
+            $shortestPath = $this->learningResourceRepository->KshortestPathLast(
+                $this->lastConsumedItem,
+                $this->stage,
+                $this->usersTopCategory
+            );
+        }else{
+            $shortestPath = $this->learningResourceRepository->KshortestPath(
+                $this->lastConsumedItem,
+                $this->stage,
+                $this->usersTopCategory
+            );
+        }
+
+
         foreach ($shortestPath->records() as $newItem) {
             $this->returnedArrays[] = $newItem->get('names');
             $learning[] = $newItem->get('learning');
@@ -49,43 +62,50 @@ class ShortestPath
             $totalCost[] = $newItem->get('totalCost');
         }
 
+        if($flag){
+            $test = $this->learningResourceRepository->matchNext(
+                end($this->returnedArrays[0]),
+                $this->usersEmails,
+                $this->usersCourse,
+                $this->lastConsumedItem
+            );
 
-        $final = $this->findTimeAndStyle($this->usersTime, $totalCost, $this->usersTopCategory, $this->returnedArrays);
+        }else{
+            $final = $this->findTimeAndStyle($this->usersTime, $totalCost, $this->usersTopCategory, $this->returnedArrays);
+            $test = $this->learningResourceRepository->matchNext(
+                $final,
+                $this->usersEmails,
+                $this->usersCourse,
+                $this->lastConsumedItem
+            );
+        }
 
-        $matchNextRecords = $this->learningResourceRepository->matchNext(
-            $final,
-            $this->usersEmails,
-            $this->usersCourse
-        );
 
-        $finalValues = $this->filterNeo4jResponse($matchNextRecords, 'next');
-
-
-        return $finalValues->values();
+        return $this->filterHelper->repositionedSecondaryArray($test);
     }
 
 
     public function explainShortPath()
     {
         $firstJourney = $this->returnedArrays[0];
-        $secondJourney = $this->returnedArrays[1];
-        $thirdJourney = $this->returnedArrays[2];
+//        $secondJourney = $this->returnedArrays[1] ? $this->returnedArrays[1] : null;
+//        $thirdJourney = $this->returnedArrays[2] ? $this->returnedArrays[1] : null;
 
         $firstCosts = $this->addMins($this->journeyCosts[0]);
-        $secondCosts = $this->addMins($this->journeyCosts[1]);
-        $thirdThird = $this->addMins($this->journeyCosts[2]);
+//        $secondCosts = $this->addMins($this->journeyCosts[1]);
+//        $thirdThird = $this->addMins($this->journeyCosts[2]);
 
         $a = $this->addDummyKey($firstCosts);
-        $b = $this->addDummyKey($secondCosts);
-        $c = $this->addDummyKey($thirdThird);
+//        $b = $this->addDummyKey($secondCosts);
+//        $c = $this->addDummyKey($thirdThird);
 
         $firstCombined = $this->combineNewArrays($a, $firstJourney);
-        $secondCombined = $this->combineNewArrays($b, $secondJourney);
-        $thirdCombined = $this->combineNewArrays($c, $thirdJourney);
+//        $secondCombined = $this->combineNewArrays($b, $secondJourney);
+//        $thirdCombined = $this->combineNewArrays($c, $thirdJourney);
 
         $test['first'] = $this->createFunction($firstCombined);
-        $test['second'] = $this->createFunction($secondCombined);
-        $test['third'] = $this->createFunction($thirdCombined);
+//        $test['second'] = $this->createFunction($secondCombined);
+//        $test['third'] = $this->createFunction($thirdCombined);
 
         return $test;
     }
@@ -98,8 +118,9 @@ class ShortestPath
      *
      * @return mixed
      */
-    public function createFunction($array)
+    public function createFunction(array $array) : array
     {
+        $testArray = [];
         foreach ($array as $now => $content) {
             $testArray['nodes'][] = ['id' => $content, 'svg' => 'http://localhost:9000/networking/icon-memory-retention.png'];
             $testArray['links'][] = [
@@ -166,10 +187,12 @@ class ShortestPath
 
     public function findTimeAndStyle($userTime, $totalCostTimes, $topStyle, $options)
     {
+
         // most
         foreach ($options as $learn) {
             $words[] = substr_count(implode($learn), $topStyle);
         }
+
 
         $closestNumber = $this->getClosest($userTime, $totalCostTimes);
 
@@ -183,6 +206,7 @@ class ShortestPath
         } else {
             $finalOption = $options[$key][1];
         }
+
 
         return $finalOption;
     }

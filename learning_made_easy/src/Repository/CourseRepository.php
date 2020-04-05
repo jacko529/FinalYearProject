@@ -25,6 +25,21 @@ class CourseRepository
                     order by b.name, resource.stage"
         );
     }
+
+    public function getAllPreviousCoursesNotStudied($email){
+        $courses = [];
+        $query = $this->client->run(
+            "MATCH (p:Course)
+            WHERE NOT (p)<-[:STUDYING]-(:User {email: '$email'})
+            RETURN p.name as course"
+        );
+        foreach ($query->records() as $course){
+            $courses[] = $course->get('course');
+        }
+        $courseTrue = empty($courses) ? ['No courses left'] : $courses;
+        return $courseTrue;
+    }
+
     public function addCourseRelationship($email, $name){
         return $this->client->run(
             "MATCH (a:User { email: '$email' })

@@ -15,8 +15,7 @@ const Tiles = (props) => {
     }
 
     return (
-        <Col   m={2}
-               s={6}>
+
             <Card
                 actions={[
                     <Button  onClick={save}><Link to="/quiz">{props.button}</Link></Button>
@@ -28,7 +27,6 @@ const Tiles = (props) => {
                {props.subtitle}
 
             </Card>
-        </Col>
     );
 };
 

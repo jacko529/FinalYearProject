@@ -10,6 +10,7 @@
     "neo4j-graph-renderer": "^0.1.6",
     "neo4jd3": "0.0.5",
     "react": "^16.9.0",
+    "react-compound-timer": "^1.2.0",
     "react-d3-graph": "^2.4.0",
     "react-dom": "^16.9.0",
     "react-iframe": "^1.8.0",

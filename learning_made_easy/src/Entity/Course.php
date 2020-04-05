@@ -22,6 +22,12 @@ class Course implements \Serializable
     private $name;
 
     /**
+     * @OGM\Property(type="string")
+     *
+     */
+    private $image;
+
+    /**
      * @var \DateTime
      *
      * @OGM\Property()
@@ -55,6 +61,10 @@ class Course implements \Serializable
     public function getName()
     {
         return $this->name;
+    }
+    public function getImage()
+    {
+        return $this->image;
     }
 
     public function setName(string $name): self
@@ -99,12 +109,19 @@ class Course implements \Serializable
         return $this;
     }
 
+    public function setImage($image)
+    {
+        $this->image = $image;
+        return $this;
+    }
+
     public function serialize()
     {
         return serialize(array(
                              $this->id,
                              $this->name,
                              $this->dateTime,
+                             $this->image
                          )
         );
     }
@@ -124,6 +141,7 @@ class Course implements \Serializable
             $this->id,
             $this->name,
             $this->dateTime,
+            $this->image
             // see section on salt below
             // $this->salt
             ) = unserialize($serialized);

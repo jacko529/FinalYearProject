@@ -3,6 +3,7 @@
 namespace App\Classes;
 
 use App\Repository\LearningResourceRepository;
+use App\Classes\FilterHelper;
 
 class JaccardIndex
 {
@@ -10,31 +11,43 @@ class JaccardIndex
     protected LearningResourceRepository $learningResourceRepository;
     protected $usersEmail;
     protected $usersCourse;
+    protected $lastConsumedItem;
+    protected FilterHelper $filterHelper;
 
-    public function __construct(LearningResourceRepository $learningResourceRepository)
+    public function __construct(LearningResourceRepository $learningResourceRepository, FilterHelper $filterHelper)
     {
+        $this->filterHelper = $filterHelper;
         $this->learningResourceRepository = $learningResourceRepository;
     }
 
-    public function setAll($usersEmail, $course){
+    public function setAll($usersEmail, $course, $lastConsumedItem)
+    {
         $this->usersEmail = $usersEmail;
         $this->usersCourse = $course;
+        $this->lastConsumedItem = $lastConsumedItem;
     }
 
-    public function findIndex(){
-
+    public function findIndex()
+    {
         $JaccardIndexArray = $this->getJarrardIndex($this->usersEmail);
-        $jaccardNext = $this->learningResourceRepository->matchNext($JaccardIndexArray[0], $this->usersEmail, $this->usersCourse);
-        $next = $this->filterNeo4jResponse($jaccardNext, 'next');
-//        $firstCourse['jarrard'][] = ;
+        if ($JaccardIndexArray) {
+            $jaccardNext = $this->learningResourceRepository->matchNext(
+                $JaccardIndexArray[0],
+                $this->usersEmail,
+                $this->usersCourse,
+                $this->lastConsumedItem
+            );
 
-        return $next->values();
+            return $this->filterHelper->repositionedSecondaryArray($jaccardNext);
+        }
+
+        return null;
     }
-
 
 
     public function getJarrardIndex($email)
     {
+        $returnedArrays = [];
         $this->learningResourceRepository->deleteSimlarReltionships();
         $this->learningResourceRepository->reRunMatchingProcess();
         $topIndex = $this->learningResourceRepository->jaradCollabortiveFiltering($email);
@@ -53,11 +66,14 @@ class JaccardIndex
      *
      * @return array
      */
-    public function filterNeo4jResponse($records, $get)
+    public function filterNeo4jResponse($records, $get): array
     {
+        $returnedArray = [];
+
         foreach ($records->records() as $newItem) {
             $returnedArray = $newItem->get($get);
         }
+
         return $returnedArray;
     }
 }

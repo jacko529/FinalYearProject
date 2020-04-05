@@ -10,7 +10,7 @@ class DefaultController extends AbstractController
     public function index()
     {
         return $this->json([
-            'message' => 'Welcome to easy learn!',
+            'data' => 'Welcome to easy learn!',
         ]);
     }
 }

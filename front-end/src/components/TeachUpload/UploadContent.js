@@ -106,8 +106,12 @@ export class TeachHome extends Component {
                 stage: this.state.stage,
                 time: this.state.time,
                 learning_style: this.state.learningStyle,
-                previous: this.state.previousSelected
+                previous: this.state.previousSelected,
+                link: this.state.link
             };
+
+
+
             const json = JSON.stringify(obj);
 
             const data = new FormData();
@@ -126,10 +130,24 @@ export class TeachHome extends Component {
 
             console.log('account');
         }
+        const reflective = [
+            'Reflective learners learn by thinking about information. They prefer to think things through and understand things before acting.'
+        ];
 
+        const verbal = [
+            'Verbal learners prefer explanations with words – both written and spoken.'
+        ];
+
+        const global = [
+            'Global learners prefer to organize information more holistically and in a seemingly random manner without seeing connections. They often appear scattered and disorganised in their thinking yet often arrive at a creative or correct end product.'
+        ];
+
+        const intuitive = [
+            'Intuitive learners prefer to take in information that is abstract, original, and oriented towards theory. They look at the big picture and try to grasp overall patterns. They like discovering possibilities and relationships and working with ideas.'
+        ];
             if(isAuthenticated && !user.course_created.isArray){
-                this.state.selectedCourse = user.course_created.name;
-                console.log(user);
+                // this.state.selectedCourse = user.course_created[0].name;
+                console.log(user.course_created);
 
             }
 
@@ -139,7 +157,7 @@ export class TeachHome extends Component {
                     <Form>
                         <Row form>
                             <Col md={12}>
-                                {isAuthenticated && user.course_created.isArray ?
+                                {isAuthenticated && !user.course_created.isArray ?
                                     <FormGroup>
                                         <Label for="course">Which course</Label>
                                         <Input value={this.state.selectedCourse} onChange={this.handleCourse.bind(this)} type="select" name="select" id="learning_style">
@@ -148,14 +166,7 @@ export class TeachHome extends Component {
 
                                     </FormGroup>
                                     : null }
-                                {isAuthenticated && !user.course_created.isArray ?
-                                    <FormGroup>
-                                        <Label for="course">Which course</Label>
-                                        <Input value={this.state.selectedCourse}  onChange={this.handleOneCourse.bind(this)} type="select" name="select" id="learning_style">
-                                             <option key={user.course_created.name} value={user.course_created.name}>{user.course_created.name}</option>)}
-                                        </Input>
-                                    </FormGroup>
-                                    : null }
+
                             </Col>
                             <Col md={12}>
                                 <FormGroup>
@@ -168,6 +179,20 @@ export class TeachHome extends Component {
                                     </Input>
                                 </FormGroup>
                             </Col>
+                            {this.state.learningStyle === 'verbal'?
+                                <p style={{marginLeft:'1rem'}}>{verbal}</p> :null
+                            }
+                            {this.state.learningStyle === 'intuitive'?
+                                <p style={{marginLeft:'1rem'}}>{intuitive}</p> :null
+                            }
+                            {this.state.learningStyle === 'reflective'?
+                                <p style={{marginLeft:'1rem'}}>{reflective}</p> :null
+                            }
+                            {this.state.learningStyle === 'global'?
+                                <p style={{marginLeft:'1rem'}}>{global}</p> :null
+                            }
+
+
                             {/*<Col md={12}>*/}
                             {/*    {this.state.courseLoaded && this.state.learningStyle !== '' ?*/}
                             {/*        <FormGroup>*/}
@@ -182,7 +207,7 @@ export class TeachHome extends Component {
                             {/*        : null }*/}
                             {/*</Col>*/}
                             <Col md={12}>
-                                <TextInput label="Course Name"  value={this.state.resourceName} onChange={this.handleNameChange.bind(this)}/>
+                                <TextInput label="Resource Name"  value={this.state.resourceName} onChange={this.handleNameChange.bind(this)}/>
                             </Col>
                             <Col md={12}>
                                 <TextInput label="Stage" type={'number'} value={this.state.stage} onChange={this.handleStageChange.bind(this)}/>
@@ -215,7 +240,7 @@ export class TeachHome extends Component {
                                 <Col md={12}>
                                     <FormGroup>
                                         <Label for="course_name">Video link</Label>
-                                        <Input type="number" value={this.state.link} onChange={this.handleLinkChange.bind(this)}  placeholder="Video link" />
+                                        <Input type="text" value={this.state.link} onChange={this.handleLinkChange.bind(this)}  placeholder="Video link" />
                                     </FormGroup>
                                 </Col>
 

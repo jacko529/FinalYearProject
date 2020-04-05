@@ -28,22 +28,38 @@ export class UploadCourse extends Component {
         learning_styles: [],
         course: [],
         values: '',
-
+        course_image: '',
     };
     handleChange(event) {
         this.setState({values: event.target.value})
+    }
+    handleResourceChange(event) {
+        this.setState({course_image: event.target.files[0]})
+
     }
     render() {
         const {isTeacher,isUser, isLoading, isAuthenticated, user } = this.props.auth;
 
         let save = (e) => {
             const config = {
-                headers: { Authorization: `bearer ${localStorage.getItem('access_token')}` ,'Content-type': 'application/json'}
+                headers: { Authorization: `bearer ${localStorage.getItem('access_token')}` ,
+                    'Accept': 'application/json',
+                    'Content-Type': 'multipart/form-data',
+                }
             };
             e.preventDefault();
             const body = JSON.stringify({ name: this.state.values });
+
+
+            // const json = JSON.stringify(body);
+
+            const data = new FormData();
+            data.append("json", body);
+            data.append('file', this.state.course_image);
+
+
             console.log(this.state.value)
-            axios.post('/course',body,config )
+            axios.post('/course',data,config )
                 .then(res => {
                     console.log(res.data);
 
@@ -63,6 +79,7 @@ export class UploadCourse extends Component {
                             type="file"
                             name={'course_image'}
                             id={'course_image'}
+                            onChange={this.handleResourceChange.bind(this)}
                         />
                     </Row>
 

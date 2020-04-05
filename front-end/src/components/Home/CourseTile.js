@@ -13,7 +13,8 @@ const CourseTile = (props) => {
     let save = (e) => {
         e.preventDefault();
     }
-    console.log('tile', props.url);
+    console.log('tile', props);
+
     return (
 
         <Col   m={2}
@@ -25,7 +26,8 @@ const CourseTile = (props) => {
                         state: {
                             url: props.url,
                             title: props.title,
-                            email: props.email
+                            email: props.email,
+                            time: props.time
                         }}}> {props.button}</Link></Button>
                 ]}
                 header={<CardTitle image={props.image}>{props.title}</CardTitle>}
@@ -33,8 +35,9 @@ const CourseTile = (props) => {
 
             >
                 Title - {props.title}<br></br>
-                    Course - {props.course}<br></br>
-                  Stage - {props.stage}<br></br>
+                Course - {props.course}<br></br>
+                Stage - {props.stage}<br></br>
+                Should take - {props.time} minutes<br></br>
 
             </Card>
         </Col>

@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 
+use App\Classes\FilterHelper;
+use App\Classes\FilterToAddS3Information;
 use App\Classes\JaccardIndex;
+use App\Classes\S3Helper;
 use App\Classes\ShortestPath;
-use App\Entity\Course;
 use App\Entity\LearningResource;
-use App\Entity\User;
 use App\Repository\LearningResourceRepository;
-use Aws\S3\Exception\S3Exception;
-use Aws\S3\S3Client;
+use App\Repository\UserRepository;
 use GraphAware\Neo4j\OGM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,67 +19,39 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class LearningResourceController extends AbstractController
 {
-    protected S3Client $s3;
     protected EntityManagerInterface $entityManager;
     protected TokenStorageInterface $tokenStorage;
     protected LearningResourceRepository $learningResourceRepo;
-    protected $learningRecords;
     protected $itemsC;
     protected ShortestPath $shortestPath;
     protected JaccardIndex $jaccardIndex;
-
+    protected UserRepository $userRepository;
+    protected FilterToAddS3Information $filterToAddS3Info;
+    protected FilterHelper $filterHelper;
+    protected $s3;
     public function __construct(
         EntityManagerInterface $entityManager,
         TokenStorageInterface $tokenStorage,
         LearningResourceRepository $learningResourceRepo,
         ShortestPath $shortestPath,
-        JaccardIndex $jaccardIndex
+        JaccardIndex $jaccardIndex,
+        UserRepository $userRepository,
+        FilterToAddS3Information $filterToAddS3Info,
+        FilterHelper $filterHelper
     ) {
         $this->shortestPath = $shortestPath;
         $this->jaccardIndex = $jaccardIndex;
         $this->entityManager = $entityManager;
-        $this->s3 = new S3Client(
-            [
-                'region' => 'eu-west-2',
-                'version' => 'latest',
-                'endpoint' => 'http://minio:9000/',
-                'use_path_style_endpoint' => true,
-                'credentials' => [
-                    'key' => 'AKIABUVWH1HUD7YQZQAR',
-                    'secret' => 'PVMlDMep3/jLSz9GxPV3mTvH4JZynkf2BFeTu+i8',
-                ]
-            ]
-        );
+        $this->userRepository = $userRepository;
+        $this->filterToAddS3Info = $filterToAddS3Info;
+        $this->filterHelper = $filterHelper;
+        $this->s3 = new S3Helper();
         $this->tokenStorage = $tokenStorage;
         $this->learningResourceRepo = $learningResourceRepo;
     }
 
-    /**
-     * @param $file
-     *
-     * @return string
-     */
-    public function upload($file)
-    {
-        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $originalExtension = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
-        $filePath = pathinfo($file, PATHINFO_EXTENSION);
-        $originalName = $originalFilename . '.' . $originalExtension;
-        $mimeType = mime_content_type('/tmp/swoole.upfile.' . $filePath);
-        try {
-            $this->s3->putObject(
-                [
-                    'Bucket' => 'networking',
-                    'Key' => $originalName,
-                    'ContentType' => $mimeType,
-                    'SourceFile' => '/tmp/swoole.upfile.' . $filePath,
-                ]
-            );
-        } catch (S3Exception $s3Exception) {
-            $s3Exception->getMessage();
-        }
-        return $originalName;
-    }
+
+
 
     /**
      *
@@ -99,13 +71,15 @@ class LearningResourceController extends AbstractController
     {
         $requests = $request->request->all();
 
+
+        $json = json_decode($requests['json'], true);
+        $this->s3->checkBucketsAgainstCourse($json['selectedCourse']);
         $file = $request->files->get('file');
         if ($file) {
-            $fileName = $this->upload($file);
+            $fileName = $this->s3->upload($file, strtolower($json['selectedCourse']));
         } else {
-            $fileName = $request->files->get('link');
+            $fileName = $json['link'];
         }
-        $json = json_decode($requests['json'], true);
         $timestamp = date("Y-m-d H:i:s");
         $learningResource = new LearningResource(
             $json['resourceName'],
@@ -136,18 +110,6 @@ class LearningResourceController extends AbstractController
     }
 
 
-    /**
-     * @param $bucket
-     * @param $key
-     *
-     * @return string|string[]
-     */
-    public function getS3($bucket, $key)
-    {
-        $plainUrl = $this->s3->getObjectUrl($bucket, $key);
-        $url = str_replace('minio', 'localhost', $plainUrl);
-        return $url;
-    }
 
     /**
      * @param Request $request
@@ -156,104 +118,135 @@ class LearningResourceController extends AbstractController
      */
     public function userFindFirst(Request $request)
     {
+        // make a loop through all courses
         $user = $this->getUser();
+        $this->itemsC = [];
         // get the first user
         $usersEmail = $user->getEmail();
-        $userEntity = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $usersEmail]);
-        $learningStyles = [];
-        foreach ($userEntity->getLearningStyles() as $styles) {
-            $learningStyles['verbal'] = $styles->getVerbal();
-            $learningStyles['intuitive'] = $styles->getIntuitive();
-            $learningStyles['reflective'] = $styles->getReflector();
-            $learningStyles['global'] = $styles->getGlobal();
-            break;
-        }
+        $courses = $this->learningResourceRepo->findCourseStudiedByUser($usersEmail);
+        $learningStyles = $this->userRepository->getLearningStyles($usersEmail);
+        unset($learningStyles['active']);
         $lastConsumableItem = 0;
-        if (!empty($learningStyles)) {
-            $absoluteArr = array_map('abs', array_unique($learningStyles));
-            arsort($absoluteArr);
-            $topCategory = array_keys($absoluteArr);
-            // match with first if it is the first
-            $latestConsumedItem = $this->learningResourceRepo->findLatestConsumedItem($usersEmail);
-            $latestStage = $this->learningResourceRepo->findLatestStage(array_key_first($absoluteArr));
-            if ($latestConsumedItem->records()) {
-                $lastConsumableItem = $this->filterNeo4jResponse($latestConsumedItem, 'max');
-            }
+        $comparingCourse = (empty($courses) ? ['No course information'] : $courses);
+        foreach ($comparingCourse as $index => $courseName) {
+            $lastStageOfCourse = $this->learningResourceRepo->findLastStageOfCourse($courseName['name']);
+            if (!empty($learningStyles) && $lastStageOfCourse > 0) {
 
-            $stage = $this->filterNeo4jResponse($latestStage, 'stage');
-
-        // if this is nothing then do the first
-        // @todo get the course name and case statement to sort this shit out - it is not set up for multiple courses currently
-        if ($lastConsumableItem === 0) {
-            $firstCourse[] = $this->learningResourceRepo->matchFirst(
-                $topCategory[0],
-                $usersEmail,
-                'networking'
-            );
-
-            if (empty($firstCourse)) {
-                $this->learningRecords = $this->learningResourceRepo->matchFirst(
-                    $topCategory[1],
+                arsort($learningStyles);
+                $topCategory = array_keys($learningStyles);
+                // match with first if it is the first
+                // todo change comsumable item for stage
+                // todo change if the second and it is not preferred
+                $latestConsumedItem = $this->learningResourceRepo->findLatestConsumedItem($courseName['name'], $usersEmail);
+                $lastItemStageOfPreferredLearningStageStage = $this->learningResourceRepo->findPreferredLatestStage(
                     $usersEmail,
-                    'networking'
+                    $courseName['name'],
+                    array_key_first($learningStyles)
                 );
 
-                if (empty($firstCourse)) {
-                    $this->learningRecords = $this->learningResourceRepo->matchFirst(
-                        $topCategory[2],
-                        $usersEmail,
-                        'networking'
-                    );
-
-                    if (empty($firstCourse)) {
-                        $this->learningRecords = $this->learningResourceRepo->matchFirst(
-                            $topCategory[3],
-                            $usersEmail,
-                            'networking'
-                        );
-                    }
+                if ($latestConsumedItem->records() && $lastItemStageOfPreferredLearningStageStage->records()) {
+                    $lastConsumableItem = intval($this->filterNeo4jResponse($latestConsumedItem, 'max'));
+                    $stage = $this->filterNeo4jResponse($lastItemStageOfPreferredLearningStageStage, 'stage');
                 }
-            }
+                // if this is nothing then do the first
+                if ($lastConsumableItem === 0) {
+                    $firstMatchingCourses = $this->learningResourceRepo->matchFirstUnion(
+                        $usersEmail,
+                        $courseName['name']
+                    );
+                    $repositionFirstCourseArray = $this->filterHelper->repositionedArray($firstMatchingCourses);
 
-        } elseif ($lastConsumableItem < $stage) {
-            foreach ($latestConsumedItem->records() as $itemsConsumed) {
-                $this->itemsC[] = ($itemsConsumed->get('name'));
-                $this->itemsC[] = ($itemsConsumed->get('max'));
-            }
+                    if($courseName['image']){
+                        $courseUrl = $this->s3->getS3($courseName['name'], $courseName['image']);
+                    }
 
-            $this->shortestPath->setAll(
-                $stage,
-                $user->getTime(),
-                $topCategory[0],
-                $usersEmail,
-                'networking',
-                $this->itemsC[0]
-            );
-            $firstCourse['shortest_path'][] = $this->shortestPath->findShortestPath();
-            $firstCourse['explain_short_path'][]= $this->shortestPath->explainShortPath();
-            $this->shortestPath->emptyReturn();
-            $this->jaccardIndex->setAll($usersEmail, 'networking');
-            $firstCourse['jarrard'][] = $this->jaccardIndex->findIndex();
-        } else {
-            $firstCourse = ['none' => ['No more course items left']];
+                    $firstCourse[] = [
+                        'course' => $courseName['name'],
+                        'course_image' => $courseUrl ?? null,
+                        'shortest_path' => $this->analyzeWhichIsFirst($repositionFirstCourseArray, $topCategory),
+                    ];
+
+                    $firstCourse = $this->filterToAddS3Info->filter($index, $courseName['name'], $firstCourse);
+                } elseif ($lastConsumableItem < $lastStageOfCourse) {
+                    if ($lastConsumableItem < $stage) {
+
+                        foreach ($latestConsumedItem->records() as $itemsConsumed) {
+                            $this->itemsC[] = ($itemsConsumed->get('name'));
+                            $this->itemsC[] = ($itemsConsumed->get('max'));
+                        }
+
+                        $this->shortestPath->setAll(
+                            $stage,
+                            $user->getTime(),
+                            $topCategory[0],
+                            $usersEmail,
+                            $courseName['name'],
+                            $this->itemsC[0]
+                        );
+                        $this->jaccardIndex->setAll($usersEmail, $courseName['name'], $this->itemsC[0]);
+
+                        if($courseName['image']){
+                            $courseUrl = $this->s3->getS3($courseName['name'], $courseName['image']);
+                        }
+
+                        $firstCourse[] = [
+                            'course' => $courseName['name'],
+                            'course_image' => $courseUrl ?? null,
+                            'shortest_path' => $this->shortestPath->findShortestPath(),
+                            'explain_short_path' => $this->shortestPath->explainShortPath(),
+                            'jarrard' => $this->jaccardIndex->findIndex()
+                        ];
+                        $this->shortestPath->emptyReturn();
+
+                        $firstCourse = $this->filterToAddS3Info->filter($index, $courseName['name'], $firstCourse);
+                    } else {
+                        foreach ($latestConsumedItem->records() as $itemsConsumed) {
+                            $this->itemsC[] = ($itemsConsumed->get('name'));
+                            $this->itemsC[] = ($itemsConsumed->get('max'));
+                        }
+                        $this->shortestPath->setAll(
+                            $lastStageOfCourse,
+                            $user->getTime(),
+                            $topCategory[0],
+                            $usersEmail,
+                            $courseName['name'],
+                            $this->itemsC[0]
+                        );
+                        $this->jaccardIndex->setAll($usersEmail, $courseName['name'], $this->itemsC[0]);
+                        $courseUrl = $this->s3->getS3($courseName['name'], $courseName['image']);
+
+                        $firstCourse[] = [
+                            'course' => $courseName['name'],
+                            'course_image' => $courseUrl ?? null,
+                            'shortest_path' => $this->shortestPath->findShortestPath(true),
+                            'explain_short_path' => $this->shortestPath->explainShortPath(),
+                            'jarrad' => $this->jaccardIndex->findIndex()
+                        ];
+
+                        $this->shortestPath->emptyReturn();
+                        // if there are no other users in the system then this cannot work
+
+                        $firstCourse = $this->filterToAddS3Info->filter($index, $courseName['name'], $firstCourse);
+                    }
+                } else {
+                    $firstCourse[] = ['none' => ['No more course items left']];
+                }
+            } else {
+                // when it is a new user with no information on them
+                $firstCourse[] = $this->courseWrap(['none' => ['Needs more information']], $courseName['name']);
+            }
         }
-        // get the learning resource item array
-        if (!array_key_exists('jarrard', $firstCourse) && array_key_exists('shortest_path', $firstCourse)) {
-            $url = $this->getS3('networking', $firstCourse['shortest_path'][0]['name_of_file']);
-            $firstCourse['shortest_path'][0]['url'] = $url;
-        } elseif (array_key_exists('jarrard', $firstCourse) && array_key_exists('shortest_path', $firstCourse)) {
-            $shortestPathUrl = $this->getS3('networking', $firstCourse['shortest_path'][0]['name_of_file']);
-            $jarrardPathUrl = $this->getS3('networking', $firstCourse['jarrard'][0]['name_of_file']);
-            $firstCourse['shortest_path'][0]['url'] = $shortestPathUrl;
-            $firstCourse['jarrard'][0]['url'] = $jarrardPathUrl;
-        } elseif (!array_key_exists('shortest_path', $firstCourse) && array_key_exists('jarrard', $firstCourse)) {
-            $url = $this->getS3('networking', $firstCourse['jarrard'][0]['name_of_file']);
-            $firstCourse['jarrard'][0]['url'] = $url;
-        }
-        }else {
-            $firstCourse = ['none' => ['Needs more information ']];
-        }
+
         return JsonResponse::create($firstCourse)->setEncodingOptions(JSON_UNESCAPED_SLASHES);
+    }
+
+
+    public function courseWrap($resources, $courses)
+    {
+        foreach ($resources as $i => $resource) {
+            $wrappedArray = ['course' => $courses, 'resource' => $resources];
+        }
+        return $wrappedArray;
     }
 
 
@@ -271,12 +264,41 @@ class LearningResourceController extends AbstractController
     }
 
 
-
     public function consumeLearningResource(Request $request)
     {
         $this->learningResourceRepo->consumeItem($request->get('email'), $request->get('name_of_resource'));
         return $this->json('success');
     }
+
+    /**
+     * matches the first course when the top category
+     *
+     * @param $firstCourse
+     * @param $topCategory
+     *
+     * @return mixed
+     */
+    private function analyzeWhichIsFirst($firstCourse, $topCategory)
+    {
+        foreach ($firstCourse as $key => $value) {
+            foreach ($value as $keys => $values) {
+                foreach ($values as $keyss) {
+                    if ($keyss === $topCategory[0]) {
+                        $matchingCourse[] = $value;
+                    } elseif ($keyss === $topCategory[1]) {
+                        $matchingCourse[] = $value;
+                    } elseif ($keyss === $topCategory[2]) {
+                        $matchingCourse[] = $value;
+                    } elseif ($keyss === $topCategory[3]) {
+                        $matchingCourse[] = $value;
+                    }
+                }
+            }
+        }
+
+        return $matchingCourse[0];
+    }
+
 
     /**
      * @param $records

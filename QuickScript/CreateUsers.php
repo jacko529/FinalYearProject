@@ -37,11 +37,11 @@ class CreateUsers
         $this->password = $password;
         $this->time = $time;
         $this->roles = $roles;
-//        $this->verbal = $faker->numberBetween(1, 7);
-//        $this->reflector = $faker->numberBetween(1, 8);
-//        $this->global = $faker->numberBetween(0, 8);
-//        $this->intuitive = $faker->numberBetween(0, 8);
-//        $this->course = 'networking';
+        $this->verbal = $faker->numberBetween(1, 7);
+        $this->reflector = $faker->numberBetween(1, 8);
+        $this->global = $faker->numberBetween(0, 8);
+        $this->intuitive = $faker->numberBetween(0, 8);
+        $this->course = 'programming';
 
     }
 
@@ -50,7 +50,7 @@ class CreateUsers
     }
 
     public function createUser(){
-        $this->run("CREATE (n:User {firstName: '$this->firstName', surname: '$this->lastname', email: '$this->email',  password: '$this->password', roles: '$this->roles', time: '$this->time'})");
+        $this->run("CREATE (n:User {firstName: '$this->firstName', surname: '$this->lastname', email: '$this->email',  password: '$this->password', roles: $this->roles, time: '$this->time'})");
     }
 
     public function learningStyle(){
@@ -64,6 +64,11 @@ class CreateUsers
         $this->run("CREATE CONSTRAINT learning_resource
                         ON (n:LearningResource)
                         ASSERT n.email IS UNIQUE");
+    }
+
+    public function deleteAll(){
+        $this->run("MATCH (n)
+                        DETACH DELETE n ");
     }
 
     public function connectCourse(){

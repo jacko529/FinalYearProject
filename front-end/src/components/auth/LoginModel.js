@@ -17,7 +17,8 @@ class LoginModal extends Component {
     username: '',
     password: '',
     msg: null,
-    redirect: false
+    redirect: false,
+    message: ''
   };
 
   static propTypes = {
@@ -76,6 +77,7 @@ class LoginModal extends Component {
   };
 
   render() {
+    const { error } = this.props;
 
     return (
 
@@ -103,6 +105,7 @@ class LoginModal extends Component {
             }}
             trigger={<Button node="button">Login</Button>}
         >
+          <p>{error.msg.access_token}</p>
           <TextInput
               label="Email"
               value={this.state.username}

@@ -80,7 +80,9 @@ class RegisterModal extends Component {
   };
 
   render() {
-    return (
+      const { error } = this.props;
+
+      return (
 
         <Modal
     actions={[
@@ -106,7 +108,7 @@ class RegisterModal extends Component {
     }}
     trigger={<Button node="button">Register</Button>}
   >
-
+            <p>{error.msg.access_token}</p>
           <TextInput
               label="First Name"
               value={this.state.first_name}

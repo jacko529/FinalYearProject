@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     NavItem,
     Navbar,
-    Icon
+    Icon,
+    Button
 } from 'react-materialize';
 
 import { connect } from 'react-redux';
@@ -13,7 +14,9 @@ import '../Loader.css';
 import '../SidePanel.css';
 
 import Logout from './auth/Logout';
-
+import {
+    Link
+} from "react-router-dom";
 class AppNavbar extends Component {
   state = {
     isOpen: false
@@ -30,17 +33,28 @@ class AppNavbar extends Component {
   };
 
   render() {
-      const { isLoading, isAuthenticated, user } = this.props.auth;
+      const { isLoading, isLoaded, isAuthenticated, user } = this.props.auth;
+
 
 
 
     let navOutput = 0;
-    if(!isLoading && isAuthenticated ){
-      navOutput = 1;
-    }else if(!isLoading && !isAuthenticated){
-      navOutput = 2;
+    let navOutputs = 0;
+    if(!isLoading && isAuthenticated)
+    {
+        navOutput = 1;
+    }  else if(!isLoading && !isAuthenticated)
+    {
+         navOutput = 2;
     }
 
+    if(isLoaded && isAuthenticated){
+    if (!user.user_type.includes('ROLE_TEACHER')){
+        navOutputs = 5;
+    }else if(user.user_type.includes('ROLE_TEACHER')){
+            navOutputs = 4;
+        }
+    }
 
     return (
 
@@ -62,11 +76,15 @@ class AppNavbar extends Component {
                     outDuration: 200,
                     preventScrolling: true
                 }}
-                sidenav={<li>Custom node!</li>}
+                sidenav={<li>Login, go full sreen!</li>}
             >
                 <NavItem href="">
                     {(navOutput === 1) ?  <strong style={{color: 'darkgray'}}>{user ? `Welcome ${user.first_name}` : ''}</strong>
-                        : (navOutput === 2 ) ?  <LoginModal /> : ""}
+                            : (navOutput === 2 ) ?  <LoginModal /> : ""}
+                </NavItem>
+                <NavItem >
+                    {(navOutputs === 4) ? <Link to="/home"> <Button>Teaching Console</Button> </Link>  : ""
+                    ? (navOutputs === 5) : ''}
                 </NavItem>
                 <NavItem >
                     {(navOutput === 1) ?  <Logout /> : (navOutput === 2 ) ?   <RegisterModal /> : ""}

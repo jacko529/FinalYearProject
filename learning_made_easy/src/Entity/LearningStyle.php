@@ -20,7 +20,7 @@ class LearningStyle implements \Serializable
     /**
      * @OGM\Property(type="string")
      */
-    private $reflector;
+    private $reflective;
 
     /**
      * @OGM\Property(type="string")
@@ -121,15 +121,15 @@ class LearningStyle implements \Serializable
      */
     public function getReflector(): string
     {
-        return (string) $this->reflector;
+        return (string) $this->reflective;
     }
 
     /**
-     * @param mixed $reflector
+     * @param mixed $reflective
      */
-    public function setReflector(string $reflector): self
+    public function setReflector(string $reflective): self
     {
-        $this->reflector = $reflector;
+        $this->reflective = $reflective;
         return $this;
     }
 
@@ -143,7 +143,7 @@ class LearningStyle implements \Serializable
     {
         return serialize(array(
                 $this->id,
-                $this->reflector,
+                $this->reflective,
                 $this->intuitive,
                 $this->verbal,
                 $this->global
@@ -167,7 +167,7 @@ class LearningStyle implements \Serializable
     {
         list (
             $this->id,
-            $this->reflector,
+            $this->reflective,
             $this->intuitive,
             $this->verbal,
             $this->global

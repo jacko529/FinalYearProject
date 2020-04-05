@@ -15,8 +15,7 @@ const Tiles = (props) => {
 
     return (
 
-        <Col   m={2}
-               s={6}>
+
             <Card
                 actions={[
                     <Button  onClick={save}><Link to="/quiz">{props.button}</Link></Button>
@@ -30,10 +29,10 @@ const Tiles = (props) => {
                 {props.subtitle}<br></br>
                 Global - {props.learning_styles.global}<br></br>
                 Intuitive - {props.learning_styles.intuitive}<br></br>
-                reflector - {props.learning_styles.reflector}<br></br>
+                Reflective - {props.learning_styles.reflective}<br></br>
                 Verbal - {props.learning_styles.verbal}<br></br>
             </Card>
-        </Col>
+
 
 
     );

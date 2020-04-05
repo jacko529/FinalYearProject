@@ -44,19 +44,44 @@ class UserRepository implements UserLoaderInterface
 
 
 
-    public function findCourseByUser( $email){
-        return $this->clients->run(
+    public function findCourseCreatedByUser( $email){
+        $courseValue = [];
+         $courses = $this->clients->run(
             "MATCH (course:Course)-[:CREATED_BY]-(b:User)
                     where b.email = '$email'
                     RETURN  course"
         );
+
+        foreach ($courses->records() as  $course) {
+            $courseGet =    $course->get('course');
+            $courseValue[] =  $courseGet->values();
+        }
+        return $courseValue;
     }
 
 
-    public function getLearningStyles($userEmail){
+    public function updateLearningStyles($email, $global, $reflective, $intuitive, $verbal){
         return $this->clients->run(
-            "MATCH (n:User{email: '$userEmail'})-[r:HAS]-(learningStyle:LearningStyle) RETURN learningStyle LIMIT 1"
+           "
+           MATCH (n:LearningStyle {active: true})<-[HAS]-(u:User {email: '$email'})
+           SET n += {active:false }
+           CREATE (LS:LearningStyle {active:true, global: '$global' , intuitive: '$intuitive', verbal: '$verbal', reflective: '$reflective' })
+           CREATE (LS)<-[:HAS]-(u) 
+           RETURN LS "
         );
+    }
+
+    public function getLearningStyles($userEmail){
+        $learningStyles = [];
+        $styles  = $this->clients->run(
+            "MATCH (n:User{email: '$userEmail'})-[r:HAS]-(learningStyle:LearningStyle {active: true}) RETURN learningStyle LIMIT 1"
+        );
+        foreach($styles->records() as $style){
+            $records = $style->get('learningStyle');
+            $learningStyles = $records->values();
+        }
+
+        return $learningStyles;
     }
 
     // /**

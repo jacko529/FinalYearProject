@@ -57,6 +57,14 @@ class LearningResourceRepository
     }
 
 
+    public function KshortestPathLast($beginningStage, $stage, $learningType){
+        return $this->client->run(
+            "match (start:LearningResource {name_of_resource: '$beginningStage'}), (end:LearningResource{stage: '$stage'})
+            CALL algo.kShortestPaths.stream(start, end, 3, 'time' ,{relationshipQuery:'TimeDifficulty'}) YIELD index, nodeIds, costs
+            RETURN [node in algo.getNodesById(nodeIds) | node.name_of_resource] AS names,[node in algo.getNodesById(nodeIds) | node.learning_type] AS learning,costs,reduce(acc = 0.0, cost in costs | acc + cost) AS totalCost"
+        );
+    }
+
     public function jaradCollabortiveFiltering($email){
         return $this->client->run(
             "MATCH (p:User {email: \"$email\"})-[:SIMILAR]->(other),
@@ -109,15 +117,77 @@ class LearningResourceRepository
 
     }
 
-    public function matchNext($nameOfResource, $email, $course){
 
-        return   $this->client->run(
+    public function matchFirstUnion( $email, $course)
+    {
+        $collectionOfFirstMatchingResources =  [];
+
+        $learningRecords =    $this->client->run(
             "MATCH (a:User { email: '$email' })
                   MATCH (a)-[:STUDYING]-(b:Course { name: '$course' })
-                  MATCH (next:LearningResource)
-                  where next.name_of_resource = '$nameOfResource' 
-                 return next");
+                  MATCH (b)-[td:TimeDifficulty]-(first:LearningResource {learning_type: 'global', stage: '1'})
+                  return first, td.time as time
+            UNION      
+            MATCH (a:User { email: '$email' })
+                  MATCH (a)-[:STUDYING]-(b:Course { name: '$course' })
+                  MATCH (b)-[td:TimeDifficulty]-(first:LearningResource {learning_type: 'reflective', stage: '1'})
+                  return first, td.time as time
+            UNION 
+            MATCH (a:User { email: '$email' })
+                  MATCH (a)-[:STUDYING]-(b:Course { name: '$course' })
+                  MATCH (b)-[td:TimeDifficulty]-(first:LearningResource {learning_type: 'verbal', stage: '1'})
+                  return first, td.time as time
+            UNION 
+            MATCH (a:User { email: '$email' })
+                  MATCH (a)-[:STUDYING]-(b:Course { name: '$course' })
+                  MATCH (b)-[td:TimeDifficulty]-(first:LearningResource {learning_type: 'intuitive', stage: '1'})
+                  return first, td.time as time");
+        foreach ($learningRecords->records() as $key => $record){
+            $firstMatchingRecord = $record->get('first');
+            $time = $record->get('time');
+            $collectionOfFirstMatchingResources[] = ['resource' => $firstMatchingRecord->values(), 'time'=> $time];
+        }
+        return $collectionOfFirstMatchingResources;
 
+    }
+
+
+    public function findCourseStudiedByUser( $email){
+        $courseValues = [];
+        $courses = $this->client->run(
+            "MATCH (course:Course)-[:STUDYING]-(b:User)
+                    where b.email = '$email'
+                    RETURN  course"
+        );
+        foreach ($courses->records() as  $course) {
+            $courseGet =    $course->get('course');
+            $courseValues[] = $courseGet->values();
+        }
+        return $courseValues;
+    }
+
+
+
+
+    public function matchNext($nameOfResource, $email, $course, $lastItem){
+        $correctReturn = [];
+        $query =    $this->client->run(
+            "  MATCH (a:User { email: '$email' })
+                MATCH (a)-[:STUDYING]-(b:Course { name: '$course' })
+                -[firstTime:TimeDifficulty*]->(next:LearningResource {name_of_resource: '$lastItem'})-[time:TimeDifficulty*]
+                ->(correctItem:LearningResource {name_of_resource: '$nameOfResource'})
+                return correctItem, time");
+        foreach($query->records() as $index => $record){
+            $resource = $record->get('correctItem');
+            $time = $record->get('time');
+            if (!empty($record->get('time'))) {
+                $size = sizeof($record->get('time'));
+            }
+            $correctReturn['resource'] = $resource->values();
+            $time = $time[$size - 1]->values();
+            $correctReturn['time'] = $time['time'];
+        }
+        return $correctReturn;
     }
 
 
@@ -139,19 +209,40 @@ class LearningResourceRepository
     }
 
 
-    public function findLatestConsumedItem($email){
+    public function findLatestConsumedItem($course, $email){
         return $this->client->run(
-            "MATCH (User {email: '$email'})-[:Consumed]->(LearningResource)  RETURN LearningResource.name_of_resource as name, max(LearningResource.stage) as max ORDER BY max DESC LIMIT 1"
+            "MATCH (User {email: '$email'})-[:STUDYING]->(s:Course {name: '$course'})
+             MATCH (User {email: '$email'})-[:Consumed]->(LearningResource) return LearningResource.name_of_resource as name, max(LearningResource.stage) as max ORDER BY max DESC LIMIT 1"
         );
     }
 
-    public function findLatestStage($learningType){
+    public function findAllCoursesUserBelongsTo($email){
         return $this->client->run(
-            "match (n:LearningResource{learning_type: \"$learningType\"})
-                    RETURN max(n.stage) as stage, n.name_of_resource
-                    ORDER BY stage DESC
-                    LIMIT 1"
+            "MATCH (User {email: '$email'})-[:Studying]->(c:Courses)  RETURN c.name  as course "
         );
+    }
+
+    public function findPreferredLatestStage($email, $course, $learningType){
+        return $this->client->run(
+            "MATCH (User {email: '$email'})-[:STUDYING]->(s:Course {name: '$course'})
+             match (n:LearningResource{learning_type: \"$learningType\"})
+             RETURN max(n.stage) as stage, n.name_of_resource
+             ORDER BY stage DESC
+             LIMIT 1"
+        );
+    }
+
+    public function findLastStageOfCourse($course){
+        $lastStage = 0;
+        $query =  $this->client->run(
+            "MATCH (course:Course {name: '$course'})-[:TimeDifficulty*]->(n:LearningResource)
+             RETURN max(n.stage) as stage"
+        );
+        foreach($query->records() as $record){
+            $lastStage = $record->values();
+        }
+
+        return intval($lastStage[0]);
     }
 
 

@@ -10,7 +10,7 @@ me:
 
 api_login_check:
     path: /api/login
-    controller: App\Controller\TokenController::Token
+    controller: App\Controller\TokenController::TokenAuthentication
     methods: POST
 
 create_course:

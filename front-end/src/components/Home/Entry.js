@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from 'react';
-import { Button, Container,Select, Collection,Range, CollectionItem, Row, Col } from 'react-materialize';
+import React, {Component, Fragment} from 'react';
+import {Button, Container, Select, Collection, Range, CollectionItem, Row, Col} from 'react-materialize';
 import 'materialize-css'
 import '../../Loader.css';
 import '../../SidePanel.css';
@@ -10,17 +10,16 @@ import CourseTile from "./CourseTile";
 
 import axios from 'axios';
 
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import NoCourseTile from "./NoCourseTile";
 import Loader from "react-loader-spinner";
-import { Graph } from "react-d3-graph";
-
+import {Graph} from "react-d3-graph";
 
 
 export class Entry extends Component {
 
     state = {
-        requestCompleted:false,
+        requestCompleted: false,
         learning_styles: [],
         course: [],
         value: 10,
@@ -32,24 +31,40 @@ export class Entry extends Component {
         recommendation: [],
         noCourse: [],
         timeDisappear: false,
+        completeDataSet: [],
         courseDisappear: false,
+
+
     };
+
     componentWillMount() {
 
 
         const config = {
-            headers: { Authorization: `bearer ${localStorage.getItem('access_token')}` ,'Content-type': 'application/json'}
+            headers: {
+                Authorization: `bearer ${localStorage.getItem('access_token')}`,
+                'Content-type': 'application/json'
+            }
 
         };
 
-        axios.get('/next-active',config )
+        axios.get('/next-active', config)
             .then(res => {
-                if(!res.data['shortest_path'] || !res.data['jarrard']){
-                    this.setState({noCourse: res.data['none'][0]});
+                // if it is the first course
+                 this.setState({completeDataSet: res.data});
+                 console.log(this.state.completeDataSet)
 
-                }else{
+                if (!res.data['shortest_path'] && !res.data['jarrard'] && !res.data['none']) {
+                    this.setState({course: res.data[0]});
+                   // if there is nothing done yet (new user)
+               }else if(res.data['none']){
+                   this.setState({noCourse: res.data['none']});
+               }else if (res.data['shortest_path'] && !res.data['jarrard']){
+                   this.setState({course: res.data['shortest_path'][0]});
+                   this.setState({explainShortPath: res.data['explain_short_path'][0]});
+
+               } else {
                     console.log('request', res.data['explain_short_path'][0])
-
                     this.setState({course: res.data['shortest_path'][0]});
                     this.setState({recommendation: res.data['jarrard'][0]});
                     this.setState({explainShortPath: res.data['explain_short_path'][0]});
@@ -58,9 +73,10 @@ export class Entry extends Component {
 
                 this.setState({requestCompleted: true});
             }).then(
-            axios.get('/courses',config )
+            axios.get('/courses', config)
                 .then(ress => {
                     this.setState({coursesCanChoose: ress.data.data});
+                    this.setState({selectedCourse: ress.data.data[0]});
 
                 })
         );
@@ -68,9 +84,9 @@ export class Entry extends Component {
     }
 
 
-
     handleCourse(event) {
-        this.setState({coursesCanChoose: event.target.value})
+        this.setState({selectedCourse: event.target.value})
+
     }
 
     handleRangeSlider(event) {
@@ -79,8 +95,6 @@ export class Entry extends Component {
 
 
     render() {
-
-
 
 
 // the graph configuration, you only need to pass down properties
@@ -108,136 +122,58 @@ export class Entry extends Component {
         };
 
         // graph event callbacks
-        const onClickGraphFirst = function() {
+        const onClickGraphFirst = function () {
         };
 
-        const onClickNodeFirst = function(nodeId) {
+        const onClickNodeFirst = function (nodeId) {
         };
 
-        const onDoubleClickNodeFirst = function(nodeId) {
-       };
-
-        const onRightClickNodeFirst = function(event, nodeId) {
+        const onDoubleClickNodeFirst = function (nodeId) {
         };
 
-        const onMouseOverNodeFirst = function(nodeId) {
+        const onRightClickNodeFirst = function (event, nodeId) {
         };
 
-        const onMouseOutNodeFirst = function(nodeId) {
+        const onMouseOverNodeFirst = function (nodeId) {
         };
 
-        const onClickLinkFirst = function(source, target) {
+        const onMouseOutNodeFirst = function (nodeId) {
         };
 
-        const onRightClickLinkFirst = function(event, source, target) {
+        const onClickLinkFirst = function (source, target) {
         };
 
-        const onMouseOverLinkFirst = function(source, target) {
+        const onRightClickLinkFirst = function (event, source, target) {
         };
 
-        const onMouseOutLinkFirst = function(source, target) {
+        const onMouseOverLinkFirst = function (source, target) {
         };
 
-        const onNodePositionChangeFirst = function(nodeId, x, y) {
+        const onMouseOutLinkFirst = function (source, target) {
         };
 
-
-        // graph event callbacks
-        const onClickGraphSecond = function() {
-            window.alert(`Clicked the graph background`);
-        };
-
-        const onClickNodeSecond = function(nodeId) {
-        };
-
-        const onDoubleClickNodeSecond = function(nodeId) {
-            window.alert(`Double clicked node ${nodeId}`);
-        };
-
-        const onRightClickNodeSecond = function(event, nodeId) {
-            window.alert(`Right clicked node ${nodeId}`);
-        };
-
-        const onMouseOverNodeSecond = function(nodeId) {
-        };
-
-        const onMouseOutNodeSecond = function(nodeId) {
-        };
-
-        const onClickLinkSecond = function(source, target) {
-        };
-
-        const onRightClickLinkSecond = function(event, source, target) {
-        };
-
-        const onMouseOverLinkSecond = function(source, target) {
-        };
-
-        const onMouseOutLinkSecond = function(source, target) {
-        };
-
-        const onNodePositionChangeSecond = function(nodeId, x, y) {
+        const onNodePositionChangeFirst = function (nodeId, x, y) {
         };
 
 
 
 
-
-        // third
-        const onClickGraphThird = function() {
-            window.alert(`Clicked the graph background`);
-        };
-
-        const onClickNodeThird = function(nodeId) {
-        };
-
-        const onDoubleClickNodeThird = function(nodeId) {
-            window.alert(`Double clicked node ${nodeId}`);
-        };
-
-        const onRightClickNodeThird = function(event, nodeId) {
-            window.alert(`Right clicked node ${nodeId}`);
-        };
-
-        const onMouseOverNodeThird = function(nodeId) {
-        };
-
-        const onMouseOutNodeThird = function(nodeId) {
-        };
-
-        const onClickLinkThird = function(source, target) {
-        };
-
-        const onRightClickLinkThird = function(event, source, target) {
-        };
-
-        const onMouseOverLinkThird = function(source, target) {
-        };
-
-        const onMouseOutLinkThird = function(source, target) {
-        };
-
-        const onNodePositionChangeThird = function(nodeId, x, y) {
-        };
-
-
-
-
-
-        const {isTeacher,isUser, isLoading, isAuthenticated, user } = this.props.auth;
+        const {isTeacher, isUser, isLoading, isAuthenticated, user} = this.props.auth;
         // const {isTeacher,isUser, isLoading, isAuthenticated, user } = this.props.auth;
 
 
-
-        let saveCourse = (e) =>{
+        let saveCourse = (e) => {
             const config = {
-                headers: { Authorization: `bearer ${localStorage.getItem('access_token')}` ,'Content-type': 'application/json'}
+                headers: {
+                    Authorization: `bearer ${localStorage.getItem('access_token')}`,
+                    'Content-type': 'application/json'
+                }
             };
             e.preventDefault();
 
-            const body = JSON.stringify({ course: this.state.coursesCanChoose[0] });
+            const body = JSON.stringify({course: this.state.selectedCourse});
 
-            axios.post('/courses',body,config )
+            axios.post('/courses', body, config)
                 .then(res => {
                     // console.log(res.data);
                     this.setState({courseDisappear: true});
@@ -246,12 +182,15 @@ export class Entry extends Component {
         }
         let save = (e) => {
             const config = {
-                headers: { Authorization: `bearer ${localStorage.getItem('access_token')}` ,'Content-type': 'application/json'}
+                headers: {
+                    Authorization: `bearer ${localStorage.getItem('access_token')}`,
+                    'Content-type': 'application/json'
+                }
             };
             e.preventDefault();
-            const body = JSON.stringify({ time: this.state.rangeValue });
+            const body = JSON.stringify({time: this.state.rangeValue});
 
-            axios.post('/user-time',body,config )
+            axios.post('/user-time', body, config)
                 .then(res => {
                     this.setState({timeDisappear: true});
                 });
@@ -260,31 +199,36 @@ export class Entry extends Component {
         }
 
         const welcome = (
-                <Fragment>
-                        <h1 style={{textAlign: "center",marginBottom: "2rem" , marginTop: '4rem', color: 'white'}}>Welcome to Easy Learn</h1>
+            <Fragment>
+                <h1 style={{textAlign: "center", marginBottom: "2rem", marginTop: '4rem', color: 'white'}}>Welcome to
+                    Easy Learn</h1>
 
-                        <Collection>
-                            <CollectionItem>
-                                First select the a course
-                            </CollectionItem>
-                            <CollectionItem>
-                                Find out your learning style
-                            </CollectionItem>
-                            <CollectionItem>
-                                Work through course
-                            </CollectionItem>
-                        </Collection>
-                </Fragment>
+                <Collection>
+                    <CollectionItem>
+                        First select a preference in course consumption time
+                    </CollectionItem>
+                    <CollectionItem>
+                        Then select the a course
+                    </CollectionItem>
+                    <CollectionItem>
+                        Find out your learning style
+                    </CollectionItem>
+                    <CollectionItem>
+                        Work through course
+                    </CollectionItem>
+                </Collection>
+            </Fragment>
         );
 
 
-        const { value } = this.state
-        if(this.state.requestCompleted){
+        const {value} = this.state
+        if (this.state.requestCompleted) {
             // {this.explainShortPath.map((course) => console.log(course) )}
-            console.log(this.state.explainShortPath.first)
+            console.log('recomm', this.state.selectedCourse)
+
         }
         const loadingSign = (
-            <div className={this.state.requestCompleted ? 'normal' : 'loader  '} style={{textAlign:'center'}}>
+            <div className={this.state.requestCompleted ? 'normal' : 'loader  '} style={{textAlign: 'center'}}>
                 <Loader
                     type="MutatingDots"
                     color="#00BFFF"
@@ -294,219 +238,262 @@ export class Entry extends Component {
                 />
             </div>
         );
+
         let timeClass = this.state.timeDisappear ? "timeDiv" : "";
         let courseClass = this.state.courseDisappear ? "courseDiv" : "";
 
         return (
 
             <div>
+
                 {!this.state.requestCompleted ? loadingSign :
-                <Container>
+                    <Container>
 
-                    {welcome}
+                        {welcome}
 
-                    { this.state.noCourse.length > 0  && Object.keys(user.learning_styles).length > 1 ?
+                        {Object.keys(user.learning_styles).length > 1 ?
+                        <div>
+                        <h2>Other courses you can take</h2>
+                        <Select
+                            label="Choose your option"
+                            options={{
+                                classes: '',
+                                dropdownOptions: {
+                                    alignment: 'left',
+                                    autoTrigger: true,
+                                    closeOnClick: true,
+                                    constrainWidth: true,
+                                    container: null,
+                                    coverTrigger: true,
+                                    hover: false,
+                                    inDuration: 150,
+                                    onCloseEnd: null,
+                                    onCloseStart: null,
+                                    onOpenEnd: null,
+                                    onOpenStart: null,
+                                    outDuration: 250
+                                }
+                            }}
+                            value={this.state.selectedCourse}
+                            onChange={this.handleCourse.bind(this)}
+                        >
 
-                        <Row  className="bottom-row">
-
-                            <Tiles
-                                image={"/audo.jpg"}
-                                title={user.first_name + ' ' + user.surname}
-                                learning_styles={user.learning_styles}
-                                subtitle={'Here are your results'}
-                                description={'It will help'}
-                                button={'TakeQuiz'}
-                            />
-
-                            <NoCourseTile
-                                image={"/study-notebooks.jpg"}
-                                title={this.state.noCourse}
-                            />
-
-
-
-                        </Row> : null
-
-                    }
-                    {/* this is to check that the user is authenticated, has learning styles and request has been made*/}
-                    {this.state.noCourse.length === 0  && Object.keys(user.learning_styles).length > 1  ?
-
-                        <Row  className="bottom-row">
-
-                            <Tiles
-                                image={"/audo.jpg"}
-                                title={user.first_name + ' ' + user.surname}
-                                learning_styles={user.learning_styles}
-                                subtitle={'Here are your results'}
-                                description={'It will help'}
-                                button={'TakeQuiz'}
-                            />
+                            { this.state.coursesCanChoose.map((item, key) =>
+                                <option value={item}>
+                                    {item}
+                                </option>
+                            )}
 
 
-                            {user.learning_styles ?
-                                <CourseTile
-                                    image={"/study.jpg"}
-                                    title={this.state.course.name_of_resource}
-                                    stage={this.state.course.stage}
-                                    course={this.state.coursesCanChoose}
-                                    url={this.state.course.url}
-                                    email={user.email}
-                                    button={'Start Course'}
-                                /> : null}
+                        </Select>
+                        <div style={{textAlign:"center"}}>
+                        <Button onClick={saveCourse}>Choose this course</Button>
+                        </div>
+                        </div>
+                        : null}
+                        <h2>Courses currently taking</h2>
 
-                                { this.state.recommendation ?
+                        { Object.values(this.state.completeDataSet).map((item, key) =>
 
-                                        <CourseTile
-                                    image={"/study-notebooks.jpg"}
-                                    title={this.state.recommendation.name_of_resource}
-                                    stage={this.state.recommendation.stage}
-                                    course={this.state.coursesCanChoose}
-                                    url={this.state.course.url}
-                                    email={user.email}
-                                    button={'Your Friends took this'}
-                                />  :null}
-                        <Col>
-                            <h3>Explain your path </h3>
-                            <h4 style={{color: 'white'}}>These are the top 3 learning paths which are based around the time your spefifed at the beginning of the course</h4>
-                           <h5 style={{color: 'white'}}>You can look into your top learning paths by selecting the graph, these graphs where selected by finding the shortest path based around how long it takes to get from one resource to the next</h5>
-                            <Graph
-                                id="graph-id" // id is mandatory, if no id is defined rd3g will throw an error
-                                data={this.state.explainShortPath.first}
-                                config={myConfig}
-                                onClickNode={onClickNodeFirst}
-                                onDoubleClickNode={onDoubleClickNodeFirst}
-                                onRightClickNode={onRightClickNodeFirst}
-                                onClickGraph={onClickGraphFirst}
-                                onClickLink={onClickLinkFirst}
-                                onRightClickLink={onRightClickLinkFirst}
-                                onMouseOverNode={onMouseOverNodeFirst}
-                                onMouseOutNode={onMouseOutNodeFirst}
-                                onMouseOverLink={onMouseOverLinkFirst}
-                                onMouseOutLink={onMouseOutLinkFirst}
-                                onNodePositionChange={onNodePositionChangeFirst}
-                            />;
-                            {/*<Graph*/}
-                            {/*    id="graph-id2" // id is mandatory, if no id is defined rd3g will throw an error*/}
-                            {/*    data={this.state.explainShortPath.second}*/}
-                            {/*    config={myConfig}*/}
-                            {/*    onClickNode={onClickNodeSecond}*/}
-                            {/*    onDoubleClickNode={onDoubleClickNodeSecond}*/}
-                            {/*    onRightClickNode={onRightClickNodeSecond}*/}
-                            {/*    onClickGraph={onClickGraphSecond}*/}
-                            {/*    onClickLink={onClickLinkSecond}*/}
-                            {/*    onRightClickLink={onRightClickLinkSecond}*/}
-                            {/*    onMouseOverNode={onMouseOverNodeSecond}*/}
-                            {/*    onMouseOutNode={onMouseOutNodeSecond}*/}
-                            {/*    onMouseOverLink={onMouseOverLinkSecond}*/}
-                            {/*    onMouseOutLink={onMouseOutLinkSecond}*/}
-                            {/*    onNodePositionChange={onNodePositionChangeSecond}*/}
-                            {/*/>;*/}
-                            {/*<Graph*/}
-                            {/*    id="graph-id3" // id is mandatory, if no id is defined rd3g will throw an error*/}
-                            {/*    data={this.state.explainShortPath.third}*/}
-                            {/*    config={myConfig}*/}
-                            {/*    onClickNode={onClickNodeThird}*/}
-                            {/*    onDoubleClickNode={onDoubleClickNodeThird}*/}
-                            {/*    onRightClickNode={onRightClickNodeThird}*/}
-                            {/*    onClickGraph={onClickGraphThird}*/}
-                            {/*    onClickLink={onClickLinkThird}*/}
-                            {/*    onRightClickLink={onRightClickLinkThird}*/}
-                            {/*    onMouseOverNode={onMouseOverNodeThird}*/}
-                            {/*    onMouseOutNode={onMouseOutNodeThird}*/}
-                            {/*    onMouseOverLink={onMouseOverLinkThird}*/}
-                            {/*    onMouseOutLink={onMouseOutLinkThird}*/}
-                            {/*    onNodePositionChange={onNodePositionChangeThird}*/}
-                            {/*/>;*/}
-                        </Col>
-                        </Row> : null
+                            <div>
+                                {/*{console.log(item.resource.none)}*/}
+                               <h3>{item.course}</h3>
+                               <Row className="bottom-row">
+                                   {/*<Bar  data={data} options={options} />*/}
 
-                    }
+                                   {item.resource ?
+                                       <NoCourseTile
+                                           image={"/study-notebooks.jpg"}
+                                           title={item.resource.none}
+                                       />
+                                       :null}
+                            {item.shortest_path ?
+                               <CourseTile
+                                   image={item.course_image}
+                                   title={item.shortest_path.resource.name_of_resource}
+                                   stage={item.shortest_path.resource.stage}
+                                   course={item.course}
+                                   time={item.shortest_path.resource.time}
+                                   url={item.shortest_path.resource.url}
+                                   email={user.email}
+                                   button={'Start Course'}
+                                   />
+                                : null}
+                                   {item.jarrard    ?
+
+                                       <CourseTile
+                                       image={"/study.jpg"}
+                                       title={item.jarrard.resource.name_of_resource}
+                                       stage={item.jarrard.resource.stage}
+                                       course={item.course}
+                                       time={item.jarrard.resource.time}
+                                       url={item.jarrard.resource.url}
+                                       email={user.email}
+                                       button={'Start Course'}
+                                       />
+
+                                       : null}
+
+                               </Row>
+                                {item.explain_short_path ?
+                               <Col>
+                                   <h3>Explain your path </h3>
+                                   <h4 style={{color: 'white'}}>This are the top  learning paths which are based
+                                       around the time your spefifed at the beginning of the course</h4>
+                                   <h5 style={{color: 'white'}}>You can look into your top learning paths by selecting
+                                       the graph, these graphs where selected by finding the shortest path based around
+                                       how long it takes to get from one resource to the next</h5>
+                                   <Graph
+                                       id="graph-id" // id is mandatory, if no id is defined rd3g will throw an error
+                                       data={item.explain_short_path.first}
+                                       config={myConfig}
+                                       onClickNode={onClickNodeFirst}
+                                       onDoubleClickNode={onDoubleClickNodeFirst}
+                                       onRightClickNode={onRightClickNodeFirst}
+                                       onClickGraph={onClickGraphFirst}
+                                       onClickLink={onClickLinkFirst}
+                                       onRightClickLink={onRightClickLinkFirst}
+                                       onMouseOverNode={onMouseOverNodeFirst}
+                                       onMouseOutNode={onMouseOutNodeFirst}
+                                       onMouseOverLink={onMouseOverLinkFirst}
+                                       onMouseOutLink={onMouseOutLinkFirst}
+                                       onNodePositionChange={onNodePositionChangeFirst}
+                                   />
+
+                               </Col>
+                                    :null}
+                           </div>
+                        )}
 
 
 
 
-                    { Object.keys(user.learning_styles).length < 1 ?
+                        {Object.keys(user.learning_styles).length < 1 ?
 
-                        <div  className="bottom-row" style={{textAlign: 'center'}} >
-                            <Row
-                            >
-                            <Col m={6}
-                                  s={6} className={timeClass}>
-                                    <h1>Student Information</h1>
-                                    <h4>First enter your time you want to spend on the course</h4>
-                                    <Range
-                                        value={this.state.rangeValue}
-                                        onChange={this.handleRangeSlider.bind(this)}
-                                        max="100"
-                                        min="0"
-                                        name="points"
-                                    />
-                                    {user.time === '' ? <Button onClick={save} >That's enough time</Button>: null}
-                            </Col>
-                                </Row>
-                                <Row >
-                                    <Col m={6}
-                                         s={6} className={courseClass}>
+                            <div className="bottom-row" style={{textAlign: 'center'}}>
+                                <Row
+                                style={{display:'block'}}>
+                                    <h2>Student Learning Course</h2>
+                                    <hr style={{background: 'white'}}></hr>
+
+                                    <Col l={6}
+                                         m={6}
+                                         s={12}>
+
+                                        <NormalTile
+                                            image={"/brainprocess.jpg"}
+                                            title={user.first_name + ' ' + user.surname}
+                                            subtitle={'Take this quiz to get your results'}
+                                            description={'It will help'}
+                                            button={'TakeQuiz'}
+                                        />
+                                    </Col>
+
+                                    <Col l={6}
+                                         m={6}
+                                         s={12} className={timeClass}  style={{marginBottom: '3rem'}}>
+
+                                        <h2>Student Information</h2>
+                                        <h4>First enter your time you want to spend on the course</h4>
+                                        <Range
+                                            value={this.state.rangeValue}
+                                            onChange={this.handleRangeSlider.bind(this)}
+                                            max="100"
+                                            min="0"
+                                            name="points"
+                                        />
+                                        {user.time === '' ? <Button onClick={save}>That's enough time</Button> : null}
+
+                                    </Col>
+
+                                    <Col l={6}
+                                         m={6}
+                                         s={12} className={courseClass}>
+
                                         <h4>Now select the course you wish to take</h4>
 
                                         <Select
-                                        label="Choose your option"
-                                        options={{
-                                            classes: '',
-                                            dropdownOptions: {
-                                                alignment: 'left',
-                                                autoTrigger: true,
-                                                closeOnClick: true,
-                                                constrainWidth: true,
-                                                container: null,
-                                                coverTrigger: true,
-                                                hover: false,
-                                                inDuration: 150,
-                                                onCloseEnd: null,
-                                                onCloseStart: null,
-                                                onOpenEnd: null,
-                                                onOpenStart: null,
-                                                outDuration: 250
-                                            }
-                                        }}
-                                        value={this.state.selectedCourse}
-                                        onChange={this.handleCourse.bind(this)}
-                                    >
-                                        <option value={this.state.coursesCanChoose}>
-                                            {this.state.coursesCanChoose}
-                                        </option>
-                                    </Select>
+                                            label="Choose your option"
+                                            options={{
+                                                classes: '',
+                                                dropdownOptions: {
+                                                    alignment: 'left',
+                                                    autoTrigger: true,
+                                                    closeOnClick: true,
+                                                    constrainWidth: true,
+                                                    container: null,
+                                                    coverTrigger: true,
+                                                    hover: false,
+                                                    inDuration: 150,
+                                                    onCloseEnd: null,
+                                                    onCloseStart: null,
+                                                    onOpenEnd: null,
+                                                    onOpenStart: null,
+                                                    outDuration: 250
+                                                }
+                                            }}
+                                            value={this.state.selectedCourse}
+                                            onChange={this.handleCourse.bind(this)}
+                                        >
+
+                                            { this.state.coursesCanChoose.map((item, key) =>
+                                                <option key={key} value={item}>
+                                                    {item}
+                                                </option>
+                                            )}
+
+                                        </Select>
+                                        <Button onClick={saveCourse}>Choose this course</Button>
+
                                     </Col>
+
                                 </Row>
+                            </div> : null
 
-                            <Button onClick={saveCourse} >Choose this course</Button>
-                                <hr style={{background: 'white'}}></hr>
-                            <h1>Student Learning Course</h1>
 
-                            <Row className="bottom-row">
 
-                                <NormalTile
-                                    image={"/brainprocess.jpg"}
+
+                        }
+                        {Object.keys(user.learning_styles).length > 0 ?
+                            <div>
+                                <Row>
+                            <Col sm={12} md={6} lg={6}>
+                                <h3>Take the quiz again</h3>
+                                <Tiles
+                                    image={"/audo.jpg"}
                                     title={user.first_name + ' ' + user.surname}
-                                    subtitle={'Take this quiz to get your results'}
+                                    learning_styles={user.learning_styles}
+                                    subtitle={'Here are your results'}
                                     description={'It will help'}
                                     button={'TakeQuiz'}
                                 />
+                            </Col>
+                            <Col l={6}
+                            m={6}
+                            s={12} className={timeClass}  style={{marginBottom: '3rem'}}>
+                            <h4>You can edit your overall time wanting to spend on a course</h4>
+                            <Range
+                            value={this.state.rangeValue}
+                            onChange={this.handleRangeSlider.bind(this)}
+                            max="100"
+                            min="0"
+                            name="points"
+                            />
+                          <Button onClick={save}>That's enough time</Button>
 
-                            </Row>
-                        </div> : null
+                            </Col>
+                                </Row>
+                            </div>
 
-                    }
+                            : null}
 
-                </Container>
+                    </Container>
                 }
             </div>
         )
 
     }
 }
-
-
 
 
 const mapStateToProps = state => ({

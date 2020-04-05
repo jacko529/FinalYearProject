@@ -19,31 +19,34 @@ class TokenController extends AbstractController
     protected String $response;
     protected Int $statusCode;
 
-    public function __construct(EntityManagerInterface $entityManager,
-                                UserPasswordEncoderInterface $passwordEncoder,
-                                JWTEncoderInterface $JWTEncoder)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        UserPasswordEncoderInterface $passwordEncoder,
+        JWTEncoderInterface $JWTEncoder
+    ) {
         $this->entityManager = $entityManager;
         $this->passwordEncoder = $passwordEncoder;
         $this->jwtEncoder = $JWTEncoder;
     }
 
-    public function Token(Request $request)
+    public function TokenAuthentication(Request $request)
     {
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email'=>$request->get('username')]);
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $request->get('username')]);
         if (!$user) {
-            $this->response = 'Your are not a user currently';
-            $this->statusCode = 500;
-        }else{
-            $isValid = $this->passwordEncoder->isPasswordValid($user,$request->get('password'));
+            $this->response = 'You are not a user currently';
+            $this->statusCode = 403;
+        } else {
+            $isValid = $this->passwordEncoder->isPasswordValid($user, $request->get('password'));
             if (!$isValid) {
                 $this->response = 'Incorrect Credentials';
-                $this->statusCode = 500;
-            }else{
-                $this->response = $this->jwtEncoder->encode([
-                                                                'username' => $request->get('username'),
-                                                                'exp' => time() + 3600 // 1 hour expiration
-                                                            ]);
+                $this->statusCode = 401;
+            } else {
+                $this->response = $this->jwtEncoder->encode(
+                    [
+                        'username' => $request->get('username'),
+                        'exp' => time() + 3600 // 1 hour expiration
+                    ]
+                );
                 $this->statusCode = 200;
             }
         }
