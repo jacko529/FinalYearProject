@@ -61,9 +61,11 @@ class CreateUsers
     }
 
     public function addConstraint(){
-        $this->run("CREATE CONSTRAINT learning_resource
-                        ON (n:LearningResource)
-                        ASSERT n.email IS UNIQUE");
+        $this->run("CREATE CONSTRAINT ON (n:LearningResource) ASSERT n.name_of_resource IS UNIQUE");
+    }
+
+    public function addConstraints(){
+        $this->run("CREATE CONSTRAINT ON (n:User) ASSERT n.email IS UNIQUE");
     }
     public function test(){
         $this->run("CALL apoc.import.graphml(\"movie.graphml\", {readLabels: true})");

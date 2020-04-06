@@ -14,14 +14,6 @@ import './App.css';
 import {loadUser} from './actions/authActions'
 import {nextActiveLoading} from './actions/nextActiveActions'
 
-import Entry from "./components/Home/Entry";
-import CourseContent from "./components/Home/CourseContent";
-import TeachHome from "./components/TeachUpload/TeachHome";
-import UploadContent from "./components/TeachUpload/UploadContent";
-import UploadCourse from "./components/TeachUpload/UploadCourse";
-import MasterForm from "./components/Mutliple/MasterForm";
-import PrivateRoute from "./components/auth/PrivateRoute";
-import TeacherRoute from "./components/auth/TeacherPrivateRoute";
 import ResolveRoutes from "./components/auth/ResolveRoutes"
 import {NonUser} from "./components/Home/NonUser";
 import Loader from "react-loader-spinner";

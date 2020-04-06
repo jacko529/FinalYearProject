@@ -19,8 +19,8 @@ require_once 'CreateUsers.php';
 
 //
 $match = new CreateUsers();
-$match->destroy();
-$match->test();
+$match->addConstraint();
+$match->addConstraints();
 //$mo = $match->checkStage("global stage 2");
 //$stage = $mo->getRecords();
 //foreach($stage as $mod){
