@@ -65,7 +65,12 @@ class CreateUsers
                         ON (n:LearningResource)
                         ASSERT n.email IS UNIQUE");
     }
-
+    public function test(){
+        $this->run("CALL apoc.import.graphml(\"movie.graphml\", {readLabels: true})");
+    }
+    public function destroy(){
+        $this->run("MATCH (n) DETACH DELETE n");
+    }
     public function deleteAll(){
         $this->run("MATCH (n)
                         DETACH DELETE n ");
