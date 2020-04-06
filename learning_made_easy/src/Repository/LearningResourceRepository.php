@@ -40,7 +40,7 @@ class LearningResourceRepository
     public function shortestPath($beginningStage, $stage, $learningType)
     {
         return $this->client->run(
-            "match (start:LearningResource {name_of_resource: \"$beginningStage\"}), (end:LearningResource{stage: \"$stage\", learning_type: \"$learningType\"})
+            "match (start:LearningResource {name_of_resource: \"$beginningStage\"}), (end:LearningResource{stage: $stage, learning_type: \"$learningType\"})
                     CALL algo.shortestPath.stream(start, end, \"time\") 
                     YIELD nodeId, cost
                     MATCH (LearningResource:LearningResource) WHERE id(LearningResource) = nodeId
@@ -50,7 +50,7 @@ class LearningResourceRepository
 
     public function KshortestPath($beginningStage, $stage, $learningType){
         return $this->client->run(
-            "match (start:LearningResource {name_of_resource: '$beginningStage'}), (end:LearningResource{stage: '$stage', learning_type: '$learningType'})
+            "match (start:LearningResource {name_of_resource: '$beginningStage'}), (end:LearningResource{stage: $stage, learning_type: '$learningType'})
             CALL algo.kShortestPaths.stream(start, end, 3, 'time' ,{relationshipQuery:'TimeDifficulty'}) YIELD index, nodeIds, costs
             RETURN [node in algo.getNodesById(nodeIds) | node.name_of_resource] AS names,[node in algo.getNodesById(nodeIds) | node.learning_type] AS learning,costs,reduce(acc = 0.0, cost in costs | acc + cost) AS totalCost"
         );
@@ -59,7 +59,7 @@ class LearningResourceRepository
 
     public function KshortestPathLast($beginningStage, $stage, $learningType){
         return $this->client->run(
-            "match (start:LearningResource {name_of_resource: '$beginningStage'}), (end:LearningResource{stage: '$stage'})
+            "match (start:LearningResource {name_of_resource: '$beginningStage'}), (end:LearningResource{stage: $stage})
             CALL algo.kShortestPaths.stream(start, end, 3, 'time' ,{relationshipQuery:'TimeDifficulty'}) YIELD index, nodeIds, costs
             RETURN [node in algo.getNodesById(nodeIds) | node.name_of_resource] AS names,[node in algo.getNodesById(nodeIds) | node.learning_type] AS learning,costs,reduce(acc = 0.0, cost in costs | acc + cost) AS totalCost"
         );

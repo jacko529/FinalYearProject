@@ -11,10 +11,13 @@ services:
     environment:
      NEO4J_AUTH: neo4j/jack
      NEO4J_dbms_active_database: neo4j.db
-     NEO4J_dbms_security_procedures_unrestricted: algo.*
-     NEO4J_dbms_security_procedures_whitelist: algo.*
+     NEO4J_apoc_export_file_enabled: 'true'
+     NEO4J_apoc_import_file_enabled: 'true'
+     NEO4J_dbms_security_procedures_unrestricted: algo.*, apoc.*
+     NEO4J_dbms_security_procedures_whitelist: algo.*, apoc.*
      NEO4J_dbms_directories_plugins: plugins
     volumes:
+      - "./back/apoc-3.5.0.8-all.jar:/var/lib/neo4j/plugins/apoc-3.5.0.8-all.jar"
       - "./back/neo4j-graph-algorithms-3.5.14.0-standalone.jar:/var/lib/neo4j/plugins/neo4j-graph-algorithms-3.5.14.0-standalone.jar"
   php:
     depends_on:

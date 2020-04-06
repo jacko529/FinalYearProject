@@ -54,7 +54,6 @@ class ShortestPath
             );
         }
 
-
         foreach ($shortestPath->records() as $newItem) {
             $this->returnedArrays[] = $newItem->get('names');
             $learning[] = $newItem->get('learning');
