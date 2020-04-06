@@ -26,7 +26,7 @@ class CreateUsers
     {
 
         $this->client = ClientBuilder::create()
-            ->addConnection('default', 'http://neo4j:jack@localhost:7474') // Example for HTTP connection configuration (port is optional)
+//            ->addConnection('default', 'http://neo4j:jack@localhost:7474') // Example for HTTP connection configuration (port is optional)
             ->addConnection('bolt', 'bolt://neo4j:jack@localhost:7687') // Example for BOLT connection configuration (port is optional)
             ->build();
         $faker = \Faker\Factory::create();
