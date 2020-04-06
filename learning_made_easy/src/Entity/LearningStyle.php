@@ -38,6 +38,11 @@ class LearningStyle implements \Serializable
     private $global;
 
     /**
+     * @OGM\Property(type="boolean")
+     */
+    private $active;
+
+    /**
      * @var User[]|Collection
      *
      * @OGM\Relationship(type="HAS", direction="INCOMING", collection=true, mappedBy="learningStyles", targetEntity="User")
@@ -98,7 +103,17 @@ class LearningStyle implements \Serializable
 
         return $this;
     }
+    public function setActive(bool  $active): self
+    {
+        $this->active = $active;
 
+        return $this;
+    }
+
+    public function getActive():string
+    {
+        return (bool) $this->active;
+    }
     /**
      * @return mixed
      */
@@ -146,7 +161,8 @@ class LearningStyle implements \Serializable
                 $this->reflective,
                 $this->intuitive,
                 $this->verbal,
-                $this->global
+                $this->global,
+                $this->active
             )
         );
     }
@@ -170,7 +186,8 @@ class LearningStyle implements \Serializable
             $this->reflective,
             $this->intuitive,
             $this->verbal,
-            $this->global
+            $this->global,
+            $this->active
             // see section on salt below
             // $this->salt
             ) = unserialize($serialized);

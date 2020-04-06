@@ -45,7 +45,7 @@ class LearningResource
     protected $course;
 
     /**
-     * @OGM\Property(type="string")
+     * @OGM\Property(type="int")
      */
     private $stage;
 

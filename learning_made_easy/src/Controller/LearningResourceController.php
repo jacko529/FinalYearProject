@@ -86,7 +86,7 @@ class LearningResourceController extends AbstractController
             $fileName,
             $timestamp,
             $json['learning_style'],
-            $json['stage']
+            intval($json['stage'])
         );
         $this->entityManager->persist($learningResource);
         $this->entityManager->flush();

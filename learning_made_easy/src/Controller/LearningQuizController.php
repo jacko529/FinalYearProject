@@ -56,6 +56,7 @@ class LearningQuizController extends AbstractController
             $this->learningStyle->setIntuitive($output['intuitive']);
             $this->learningStyle->setReflector($output['reflector']);
             $this->learningStyle->setVerbal($output['verbal']);
+            $this->learningStyle->setActive(true);
             $this->learningStyle->setUser($user);
             $this->entityManager->persist($this->learningStyle);
             $this->entityManager->flush();

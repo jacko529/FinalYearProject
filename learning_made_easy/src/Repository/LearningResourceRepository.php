@@ -125,22 +125,22 @@ class LearningResourceRepository
         $learningRecords =    $this->client->run(
             "MATCH (a:User { email: '$email' })
                   MATCH (a)-[:STUDYING]-(b:Course { name: '$course' })
-                  MATCH (b)-[td:TimeDifficulty]-(first:LearningResource {learning_type: 'global', stage: '1'})
+                  MATCH (b)-[td:TimeDifficulty]-(first:LearningResource {learning_type: 'global', stage: 1})
                   return first, td.time as time
             UNION      
             MATCH (a:User { email: '$email' })
                   MATCH (a)-[:STUDYING]-(b:Course { name: '$course' })
-                  MATCH (b)-[td:TimeDifficulty]-(first:LearningResource {learning_type: 'reflective', stage: '1'})
+                  MATCH (b)-[td:TimeDifficulty]-(first:LearningResource {learning_type: 'reflective', stage: 1})
                   return first, td.time as time
             UNION 
             MATCH (a:User { email: '$email' })
                   MATCH (a)-[:STUDYING]-(b:Course { name: '$course' })
-                  MATCH (b)-[td:TimeDifficulty]-(first:LearningResource {learning_type: 'verbal', stage: '1'})
+                  MATCH (b)-[td:TimeDifficulty]-(first:LearningResource {learning_type: 'verbal', stage: 1})
                   return first, td.time as time
             UNION 
             MATCH (a:User { email: '$email' })
                   MATCH (a)-[:STUDYING]-(b:Course { name: '$course' })
-                  MATCH (b)-[td:TimeDifficulty]-(first:LearningResource {learning_type: 'intuitive', stage: '1'})
+                  MATCH (b)-[td:TimeDifficulty]-(first:LearningResource {learning_type: 'intuitive', stage: 1})
                   return first, td.time as time");
         foreach ($learningRecords->records() as $key => $record){
             $firstMatchingRecord = $record->get('first');
