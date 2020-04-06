@@ -10,7 +10,12 @@ services:
       - "default"
     environment:
      NEO4J_AUTH: neo4j/jack
-     NEO4J_dbms_active__database=newgraph: neo4j.db
+     NEO4J_dbms_active_database: neo4j.db
+     NEO4J_dbms_security_procedures_unrestricted: algo.*
+     NEO4J_dbms_security_procedures_whitelist: algo.*
+     NEO4J_dbms_directories_plugins: plugins
+    volumes:
+      - "./back/neo4j-graph-algorithms-3.5.14.0-standalone.jar:/var/lib/neo4j/plugins/neo4j-graph-algorithms-3.5.14.0-standalone.jar"
   php:
     depends_on:
       - "neo4j"

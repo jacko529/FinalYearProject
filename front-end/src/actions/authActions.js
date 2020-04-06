@@ -26,10 +26,14 @@ export const loadUser = () => (dispatch, getState) => {
           })
       )
       .catch(err => {
-        dispatch(returnErrors(err.response.data, err.response.status));
-        dispatch({
-          type: AUTH_ERROR
-        });
+          if(err.response !== undefined) {
+
+              console.log(err.response)
+              dispatch(returnErrors(err.response.data, err.response.status));
+              dispatch({
+                  type: AUTH_ERROR
+              });
+          }
       });
 };
 
@@ -86,10 +90,12 @@ export const login = ({ username, password }) => dispatch => {
       localStorage.setItem('access_token', res.payload.access_token)
   )
       .catch(err => {
-        dispatch(returnErrors(err.response.data, err.response.status));
-        dispatch({
+          if(!err.response !== undefined){
+              dispatch(returnErrors(err.response.data, err.response.status));
+              dispatch({
           type: LOGIN_FAIL
         });
+          }
       });
 };
 

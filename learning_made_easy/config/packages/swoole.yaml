@@ -8,8 +8,6 @@ swoole:
     trusted_hosts: localhost,127.0.0.1,baboonka.com
     trusted_proxies:
       - '*'
-      - 127.0.0.1/8
-      - 192.168.2./16
 
     # enables static file serving
     static: advanced
