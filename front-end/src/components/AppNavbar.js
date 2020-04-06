@@ -79,7 +79,15 @@ class AppNavbar extends Component {
                     outDuration: 200,
                     preventScrolling: true
                 }}
-                sidenav={<li>Login, go full sreen!</li>}
+                sidenav={
+                    <div>
+
+                    <li>    {(navOutput === 1) ?  <Logout /> : (navOutput === 2 ) ?   <RegisterModal /> : ""}</li>
+                    <li>                    {(navOutput === 1) ?  <strong style={{color: 'darkgray'}}>{user !== null? `Welcome ${user.first_name}` : ''}</strong>
+                        : (navOutput === 2 ) ?  <LoginModal /> : ""}
+                    </li>
+                    </div>
+                }
             >
                 <NavItem href="">
                     {(navOutput === 1) ?  <strong style={{color: 'darkgray'}}>{user !== null? `Welcome ${user.first_name}` : ''}</strong>

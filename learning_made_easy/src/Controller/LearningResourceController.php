@@ -203,6 +203,7 @@ class LearningResourceController extends AbstractController
                             $this->itemsC[] = ($itemsConsumed->get('name'));
                             $this->itemsC[] = ($itemsConsumed->get('max'));
                         }
+                        dd('g');
                         $this->shortestPath->setAll(
                             $lastStageOfCourse,
                             $user->getTime(),

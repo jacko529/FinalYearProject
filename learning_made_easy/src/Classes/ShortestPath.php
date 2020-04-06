@@ -71,6 +71,7 @@ class ShortestPath
 
         }else{
             $final = $this->findTimeAndStyle($this->usersTime, $totalCost, $this->usersTopCategory, $this->returnedArrays);
+
             $test = $this->learningResourceRepository->matchNext(
                 $final,
                 $this->usersEmails,
@@ -187,11 +188,12 @@ class ShortestPath
     public function findTimeAndStyle($userTime, $totalCostTimes, $topStyle, $options)
     {
 
+
         // most
         foreach ($options as $learn) {
             $words[] = substr_count(implode($learn), $topStyle);
+            $count[] = count($learn);
         }
-
 
         $closestNumber = $this->getClosest($userTime, $totalCostTimes);
 
@@ -200,11 +202,17 @@ class ShortestPath
 
         $maxs = array_search(max($words), $words);
 
-        if ($key === $maxs) {
-            $finalOption = $options[$maxs][1];
-        } else {
-            $finalOption = $options[$key][1];
+        if($count[0] > 2){
+            if ($key === $maxs) {
+                $finalOption = $options[$maxs][1];
+            } else {
+                $finalOption = $options[$key][1];
+            }
+        } else{
+            $finalOption = end($options[0]);
         }
+
+
 
 
         return $finalOption;

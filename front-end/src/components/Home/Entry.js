@@ -7,6 +7,7 @@ import './Tiles'
 import Tiles from "./Tiles";
 import NormalTile from "./NormalTile";
 import CourseTile from "./CourseTile";
+import NoCollab from "./NoCollab";
 
 import axios from 'axios';
 
@@ -158,8 +159,7 @@ export class Entry extends Component {
 
 
 
-        const {isTeacher, isUser, isLoading, isAuthenticated, user} = this.props.auth;
-        // const {isTeacher,isUser, isLoading, isAuthenticated, user } = this.props.auth;
+        const {isTeacher, isUser, isLoading, isAuthenticated, user, nextActiveLoaded} = this.props.auth;
 
 
         let saveCourse = (e) => {
@@ -224,7 +224,7 @@ export class Entry extends Component {
         const {value} = this.state
         if (this.state.requestCompleted) {
             // {this.explainShortPath.map((course) => console.log(course) )}
-            console.log('recomm', this.state.selectedCourse)
+            console.log('recomm', this.state.completeDataSet)
 
         }
         const loadingSign = (
@@ -234,7 +234,6 @@ export class Entry extends Component {
                     color="#00BFFF"
                     height={80}
                     width={80}
-                    timeout={500} //3 secs
                 />
             </div>
         );
@@ -246,7 +245,7 @@ export class Entry extends Component {
 
             <div>
 
-                {!this.state.requestCompleted ? loadingSign :
+                {!this.state.requestCompleted && this.state.completeDataSet ? loadingSign :
                     <Container>
 
                         {welcome}
@@ -294,12 +293,17 @@ export class Entry extends Component {
                         <h2>Courses currently taking</h2>
 
                         { Object.values(this.state.completeDataSet).map((item, key) =>
-
                             <div>
-                                {/*{console.log(item.resource.none)}*/}
+                                {console.log(item.resource)}
                                <h3>{item.course}</h3>
                                <Row className="bottom-row">
-                                   {/*<Bar  data={data} options={options} />*/}
+
+                                   {item.none ?
+                                       <NoCourseTile
+                                           image={"/study-notebooks.jpg"}
+                                           title={item.none}
+                                       />
+                                       :null}
 
                                    {item.resource ?
                                        <NoCourseTile
@@ -320,7 +324,7 @@ export class Entry extends Component {
                                    button={'Start Course'}
                                    />
                                 : null}
-                                   {item.jarrard    ?
+                               {item.jarrard   ?
 
                                        <CourseTile
                                        image={"/study.jpg"}
@@ -332,6 +336,14 @@ export class Entry extends Component {
                                        filename={item.shortest_path.resource.name_of_file}
                                        email={user.email}
                                        button={'Start Course'}
+                                       />
+
+                                       : null}
+
+                                   {Array.isArray(item.jarrard) ?
+
+                                       <NoCollab
+                                           image={"/study-notebooks.jpg"}
                                        />
 
                                        : null}

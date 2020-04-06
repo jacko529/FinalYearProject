@@ -209,6 +209,7 @@ export class TeachHome extends Component {
                                 <TextInput label="Resource Name"  value={this.state.resourceName} onChange={this.handleNameChange.bind(this)}/>
                             </Col>
                             <Col md={12}>
+                                <p>Remember to keep track of the previous stage you previously uploaded</p>
                                 <TextInput label="Stage" type={'number'} value={this.state.stage} onChange={this.handleStageChange.bind(this)}/>
                             </Col>
                             <Col md={12}>

@@ -220,6 +220,7 @@ class MasterForm extends React.Component {
             headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` }
         };
         axios.post("/learning-style", this.state, token).then(response => {
+            window.location.href = '/me';
         }).catch(error => {
             console.log("this is error", error);
         });

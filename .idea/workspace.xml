@@ -3,57 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="78098f88-2b19-4108-a517-33c192de8add" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/networking/circle-cropped-el.png/fs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/networking/icon-memory-retention.png/fs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/networking/more.pdf/fs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/networking/policy.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/networking/screen2.png/fs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/networking/seen (1).pdf/fs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/networking/seen.pdf/fs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/networking/subnet.pdf/fs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/networking/test.pdf/fs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/programming/Arrays_Slides.pdf/fs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/programming/J_ch03.pdf/fs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/programming/conditionals.pdf/fs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/programming/j2.pdf/fs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/programming/java-a-beginners-guide-1720064-pages-12-15.pdf/fs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/programming/java_methods.pdf/fs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/programming/java_object_classes.pdf/fs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/programming/lecture5.pdf/fs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/programming/photo.jpeg/fs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/programming/policy.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/programming/quiz.png/fs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/programming/seen.pdf/fs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/programming/test.pdf/fs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/secondcourse/courseUpload.png/fs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/secondcourse/policy.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/buckets/webdesign/scree main.png/fs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/config/config.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/config/iam/format.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.minio.sys/format.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/networking/circle-cropped-el.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/networking/icon-memory-retention.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/networking/more.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/networking/screen2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/networking/seen (1).pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/networking/seen.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/networking/subnet.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/networking/test.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/programming/Arrays_Slides.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/programming/J_ch03.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/programming/conditionals.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/programming/j2.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/programming/java-a-beginners-guide-1720064-pages-12-15.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/programming/java_methods.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/programming/java_object_classes.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/programming/lecture5.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/programming/photo.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/programming/quiz.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/programming/seen.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/programming/test.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/secondcourse/courseUpload.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/webdesign/scree main.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -329,7 +278,7 @@
       <workItem from="1584882161151" duration="33776000" />
       <workItem from="1585404363152" duration="2287000" />
       <workItem from="1585486669785" duration="59837000" />
-      <workItem from="1586095840213" duration="37977000" />
+      <workItem from="1586095840213" duration="43627000" />
     </task>
     <servers />
   </component>
@@ -481,13 +430,13 @@
       <screen x="0" y="23" width="1440" height="827" />
     </state>
     <state x="458" y="94" key="com.intellij.troubleshooting.ui.CollectTroubleshootingInformationDialog/0.23.1440.827@0.23.1440.827" timestamp="1585574153257" />
-    <state x="378" y="196" width="919" height="546" key="find.popup" timestamp="1586184927402">
+    <state x="378" y="196" width="919" height="546" key="find.popup" timestamp="1586209000135">
       <screen x="0" y="23" width="1440" height="821" />
     </state>
     <state x="378" y="194" width="837" height="540" key="find.popup/0.23.1440.812@0.23.1440.812" timestamp="1583699220766" />
     <state x="378" y="194" width="823" height="476" key="find.popup/0.23.1440.814@0.23.1440.814" timestamp="1586126047217" />
     <state x="378" y="195" width="837" height="543" key="find.popup/0.23.1440.816@0.23.1440.816" timestamp="1586168457404" />
-    <state x="378" y="196" width="919" height="546" key="find.popup/0.23.1440.821@0.23.1440.821" timestamp="1586184927402" />
+    <state x="378" y="196" width="919" height="546" key="find.popup/0.23.1440.821@0.23.1440.821" timestamp="1586209000135" />
     <state x="378" y="196" width="837" height="547" key="find.popup/0.23.1440.822/-1920.23.1920.1057@0.23.1440.822" timestamp="1585756121364" />
     <state x="378" y="196" width="823" height="476" key="find.popup/0.23.1440.822@0.23.1440.822" timestamp="1585904643105" />
     <state x="378" y="196" width="843" height="477" key="find.popup/0.23.1440.823@0.23.1440.823" timestamp="1584956242170" />

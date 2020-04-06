@@ -32,7 +32,7 @@ class App extends Component {
 
     componentDidMount() {
         store.dispatch(loadUser());
-        store.dispatch(nextActiveLoading());
+        // store.dispatch(nextActiveLoading());
 
     }
 

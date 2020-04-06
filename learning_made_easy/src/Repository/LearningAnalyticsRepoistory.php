@@ -45,7 +45,7 @@ class LearningAnalyticsRepoistory
             "MATCH (userFinished:User)-[STUDYING]->(k:Course{name: '$courseName'})
             with userFinished
             match (userFinished)-[Consumed]->(k:LearningResource{stage: $stage})
-            RETURN count(userFinished) as finishedUser"
+            RETURN count(DISTINCT userFinished) as finishedUser"
         );
         foreach ($finished->records() as $record) {
             $doneCourse = $record->get('finishedUser');
