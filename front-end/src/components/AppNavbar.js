@@ -32,11 +32,12 @@ class AppNavbar extends Component {
     });
   };
 
+
   render() {
       const { isLoading, isLoaded, isAuthenticated, user } = this.props.auth;
 
 
-
+    console.log(user)
 
     let navOutput = 0;
     let navOutputs = 0;
@@ -47,13 +48,15 @@ class AppNavbar extends Component {
     {
          navOutput = 2;
     }
-
-    if(isLoaded && isAuthenticated){
-    if (!user.user_type.includes('ROLE_TEACHER')){
-        navOutputs = 5;
-    }else if(user.user_type.includes('ROLE_TEACHER')){
-            navOutputs = 4;
+    if(user !== null){
+        if(isLoaded && isAuthenticated){
+            if (!user.user_type.includes('ROLE_TEACHER')){
+                navOutputs = 5;
+            }else if(user.user_type.includes('ROLE_TEACHER')){
+                navOutputs = 4;
+            }
         }
+
     }
 
     return (
@@ -79,7 +82,7 @@ class AppNavbar extends Component {
                 sidenav={<li>Login, go full sreen!</li>}
             >
                 <NavItem href="">
-                    {(navOutput === 1) ?  <strong style={{color: 'darkgray'}}>{user ? `Welcome ${user.first_name}` : ''}</strong>
+                    {(navOutput === 1) ?  <strong style={{color: 'darkgray'}}>{user !== null? `Welcome ${user.first_name}` : ''}</strong>
                             : (navOutput === 2 ) ?  <LoginModal /> : ""}
                 </NavItem>
                 <NavItem >
