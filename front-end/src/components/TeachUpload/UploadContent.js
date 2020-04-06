@@ -146,8 +146,7 @@ export class TeachHome extends Component {
             'Intuitive learners prefer to take in information that is abstract, original, and oriented towards theory. They look at the big picture and try to grasp overall patterns. They like discovering possibilities and relationships and working with ideas.'
         ];
             if(isAuthenticated && !user.course_created.isArray){
-                // this.state.selectedCourse = user.course_created[0].name;
-                console.log(user.course_created);
+                this.state.selectedCourse = user.course_created[0].name;
 
             }
 

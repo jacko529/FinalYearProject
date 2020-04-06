@@ -26,6 +26,12 @@ class JaccardIndex
         $this->usersCourse = $course;
         $this->lastConsumedItem = $lastConsumedItem;
     }
+    public function clearAll()
+    {
+        $this->usersEmail = null;
+        $this->usersCourse = null;
+        $this->lastConsumedItem = null;
+    }
 
     public function findIndex()
     {
@@ -51,6 +57,7 @@ class JaccardIndex
         $this->learningResourceRepository->deleteSimlarReltionships();
         $this->learningResourceRepository->reRunMatchingProcess();
         $topIndex = $this->learningResourceRepository->jaradCollabortiveFiltering($email);
+
         foreach ($topIndex->records() as $newItem) {
             $returnedArrays[] = $newItem->get('name');
             $returnedArrays[] = $newItem->get('index');

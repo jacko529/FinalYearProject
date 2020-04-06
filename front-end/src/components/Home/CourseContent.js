@@ -29,14 +29,11 @@ const CourseContent = (props) => {
         };
 
         const body = JSON.stringify({ name_of_resource: props.location.state.title,
-                                             email: props.location.state.email,
-
-                                           }
-                                             );
+                                             email: props.location.state.email});
 
         axios.post('/consume',body,config )
             .then(res => {
-                // window.location.href = '/me';
+                window.location.href = '/me';
             });
         {const lop = 0}
         // this.props.add  = 0;

@@ -33,16 +33,16 @@ class MatchUser
 // if stage is 4 then consume the 3 previous
     public function match($email){
         $resource1 =[
-            "global 8"	,
-            "reflective 8"	,
-            "intutive 8"	,
-            "verbal 8"	,
+            "verbal"	,
+            "intuitive"	,
+            "global"	,
+            "reflective"	,
         ];
 
         $randIndex = array_rand($resource1);
 
         $this->client->run("MATCH (a:User { email: '$email' })
-                  MATCH (first:LearningResource {name_of_resource: '$resource1[$randIndex]'})
+                  MATCH (first:LearningResource {stage: '8', learning_type : '$resource1[$randIndex]'})
                  MERGE(a)-[r:Consumed]->(first)
                  return first");
 

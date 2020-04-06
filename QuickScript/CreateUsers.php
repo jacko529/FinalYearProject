@@ -22,7 +22,7 @@ class CreateUsers
     protected $course;
 
 
-    public function __construct($firstName, $lastname, $email, $password, $time, $roles)
+    public function __construct()
     {
 
         $this->client = ClientBuilder::create()
@@ -31,17 +31,17 @@ class CreateUsers
             ->build();
         $faker = \Faker\Factory::create();
 
-        $this->firstName = $firstName;
-        $this->lastname = $lastname;
-        $this->email = $email;
-        $this->password = $password;
-        $this->time = $time;
-        $this->roles = $roles;
+        $this->firstName = $faker->firstName;
+        $this->lastname = $faker->lastName;
+        $this->email = $faker->email;
+        $this->password = 'uniproject';
+        $this->time = $faker->numberBetween(25, 65);
+        $this->roles = '["ROLE_USER"]';
         $this->verbal = $faker->numberBetween(1, 7);
         $this->reflector = $faker->numberBetween(1, 8);
         $this->global = $faker->numberBetween(0, 8);
         $this->intuitive = $faker->numberBetween(0, 8);
-        $this->course = 'programming';
+        $this->course = 'Programming';
 
     }
 
@@ -50,7 +50,7 @@ class CreateUsers
     }
 
     public function createUser(){
-        $this->run("CREATE (n:User {firstName: '$this->firstName', surname: '$this->lastname', email: '$this->email',  password: '$this->password', roles: $this->roles, time: '$this->time'})");
+        $this->run("CREATE (n:User {firstName: \" .$this->firstName .\", surname:  \" .$this->lastname.\", email: '$this->email',  password: '$this->password', roles: $this->roles, time: '$this->time'})");
     }
 
     public function learningStyle(){

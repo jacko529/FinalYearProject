@@ -102,7 +102,7 @@ export class TeachHome extends Component {
                             m={6}
                             s={12}
                         >
-        {!analytics.includes('no courses') ?
+        {!analytics.includes("no courses") ?
       analytics.map((person) => (
 
           <Collection >

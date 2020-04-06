@@ -29,7 +29,9 @@ class FilterToAddS3Information
             // when they are in the middle of there course
         } elseif (array_key_exists('jarrard', $firstCourse[$index]) && array_key_exists('shortest_path', $firstCourse[$index])) {
             $firstCourse[$index]['shortest_path']['resource']['url'] = $this->s3->getS3(strtolower($course), $firstCourse[$index]['shortest_path']['resource']['name_of_file']);
-            $firstCourse[$index]['jarrard']['resource']['url'] =$this->s3->getS3(strtolower($course), $firstCourse[$index]['jarrard']['resource']['name_of_file']);
+            if(!$firstCourse[$index]){
+                $firstCourse[$index]['jarrard']['resource']['url'] =$this->s3->getS3(strtolower($course), $firstCourse[$index]['jarrard']['resource']['name_of_file']);
+            }
             // when it is a first course item in the journey
         } elseif (!array_key_exists('shortest_path', $firstCourse[$index]) && array_key_exists('jarrard', $firstCourse[$index])) {
             $firstCourse[$index]['jarrard']['resource']['url'] = $this->s3->getS3(strtolower($course), $firstCourse['jarrard']['resource']['name_of_file']);

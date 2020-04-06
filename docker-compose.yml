@@ -1,6 +1,7 @@
 version: "3"
 services:
   neo4j:
+    container_name: 'neo4j-final'
     image: "neo4j:3.5.14"
     ports:
       - "7474:7474"
@@ -9,14 +10,7 @@ services:
       - "default"
     environment:
      NEO4J_AUTH: neo4j/jack
-#  server:
-#    image: nginx:latest
-#    ports:
-#      - "80:80"
-#    volumes:
-#      - ./babaoonka.conf:/etc/nginx/conf.d/site.conf
-#    networks:
-#      - "default"
+     NEO4J_dbms_active__database=newgraph: neo4j.db
   php:
     depends_on:
       - "neo4j"

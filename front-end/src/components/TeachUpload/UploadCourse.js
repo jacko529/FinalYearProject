@@ -61,8 +61,7 @@ export class UploadCourse extends Component {
             console.log(this.state.value)
             axios.post('/course',data,config )
                 .then(res => {
-                    console.log(res.data);
-
+                    window.location.reload();
                 });
         }
 

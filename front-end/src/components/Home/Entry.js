@@ -315,6 +315,7 @@ export class Entry extends Component {
                                    course={item.course}
                                    time={item.shortest_path.resource.time}
                                    url={item.shortest_path.resource.url}
+                                   filename={item.shortest_path.resource.name_of_file}
                                    email={user.email}
                                    button={'Start Course'}
                                    />
@@ -328,6 +329,7 @@ export class Entry extends Component {
                                        course={item.course}
                                        time={item.jarrard.resource.time}
                                        url={item.jarrard.resource.url}
+                                       filename={item.shortest_path.resource.name_of_file}
                                        email={user.email}
                                        button={'Start Course'}
                                        />

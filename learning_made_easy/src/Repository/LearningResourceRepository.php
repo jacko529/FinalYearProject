@@ -67,7 +67,7 @@ class LearningResourceRepository
 
     public function jaradCollabortiveFiltering($email){
         return $this->client->run(
-            "MATCH (p:User {email: \"$email\"})-[:SIMILAR]->(other),
+            "MATCH (p:User {email: \"$email\"})-[:NARROWER_THAN]->(other),
             (other)-[:Consumed]->(LearningResource)
             WHERE not((p)-[:Consumed]->(LearningResource))
             RETURN LearningResource.name_of_resource as name , LearningResource.stage AS index"
@@ -76,19 +76,19 @@ class LearningResourceRepository
 
     public function reRunMatchingProcess(){
         return $this->client->run(
-        "MATCH (p:User)-[:Consumed]->(LearningResource)
-        WITH {item:id(p), categories: collect(id(LearningResource))} as userData
-        WITH collect(userData) as data
-        CALL algo.similarity.jaccard(data, {topK: 1, similarityCutoff: 0.1, write:true})
-        YIELD nodes, similarityPairs, write, writeRelationshipType, writeProperty, min, max, mean, stdDev, p25, p50, p75, p90, p95, p99, p999, p100
-        RETURN nodes, similarityPairs, write, writeRelationshipType, writeProperty, min, max, mean, p95"
+            "MATCH (p:User)-[:Consumed]->(LearningResource)
+            WITH {item:id(p), categories: collect(id(LearningResource))} as userData
+            WITH collect(userData) as data
+            CALL algo.similarity.overlap(data, {topK: 1, similarityCutoff: 0.1, write:true})
+            YIELD nodes, similarityPairs, write, writeRelationshipType, writeProperty, min, max, mean, stdDev, p25, p50, p75, p90, p95, p99, p999, p100
+            RETURN nodes, similarityPairs, write, writeRelationshipType, writeProperty, min, max, mean, p95"
         );
     }
 
 
     public function deleteSimlarReltionships(){
         return $this->client->run(
-            "match (:User)-[r:SIMILAR]->(:User) delete r"
+            "match (:User)-[r:NARROWER_THAN]->(:User) delete r"
         );
     }
 

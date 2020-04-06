@@ -14,7 +14,13 @@ const CourseTile = (props) => {
         e.preventDefault();
     }
     console.log('tile', props);
+    let contentFile = '';
 
+    if(!props.url){
+        contentFile = props.filename;
+    }else{
+        contentFile = props.url
+    }
     return (
 
         <Col   m={2}
@@ -24,7 +30,7 @@ const CourseTile = (props) => {
                    <Button><Link to={{
                         pathname:"/content",
                         state: {
-                            url: props.url,
+                            url: contentFile,
                             title: props.title,
                             email: props.email,
                             time: props.time

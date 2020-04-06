@@ -127,7 +127,7 @@ class LearningResourceController extends AbstractController
         $learningStyles = $this->userRepository->getLearningStyles($usersEmail);
         unset($learningStyles['active']);
         $lastConsumableItem = 0;
-        $comparingCourse = (empty($courses) ? ['No course information'] : $courses);
+        $comparingCourse = (empty($courses) ? ['resource' => ['name'=>'No course information']] : $courses);
         foreach ($comparingCourse as $index => $courseName) {
             $lastStageOfCourse = $this->learningResourceRepo->findLastStageOfCourse($courseName['name']);
             if (!empty($learningStyles) && $lastStageOfCourse > 0) {
@@ -135,8 +135,6 @@ class LearningResourceController extends AbstractController
                 arsort($learningStyles);
                 $topCategory = array_keys($learningStyles);
                 // match with first if it is the first
-                // todo change comsumable item for stage
-                // todo change if the second and it is not preferred
                 $latestConsumedItem = $this->learningResourceRepo->findLatestConsumedItem($courseName['name'], $usersEmail);
                 $lastItemStageOfPreferredLearningStageStage = $this->learningResourceRepo->findPreferredLatestStage(
                     $usersEmail,
@@ -196,6 +194,7 @@ class LearningResourceController extends AbstractController
                             'explain_short_path' => $this->shortestPath->explainShortPath(),
                             'jarrard' => $this->jaccardIndex->findIndex()
                         ];
+                        $this->jaccardIndex->clearAll();
                         $this->shortestPath->emptyReturn();
 
                         $firstCourse = $this->filterToAddS3Info->filter($index, $courseName['name'], $firstCourse);
@@ -222,7 +221,7 @@ class LearningResourceController extends AbstractController
                             'explain_short_path' => $this->shortestPath->explainShortPath(),
                             'jarrad' => $this->jaccardIndex->findIndex()
                         ];
-
+                        $this->jaccardIndex->clearAll();
                         $this->shortestPath->emptyReturn();
                         // if there are no other users in the system then this cannot work
 
