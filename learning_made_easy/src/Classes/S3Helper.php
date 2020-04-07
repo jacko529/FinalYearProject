@@ -57,7 +57,7 @@ class S3Helper
     {
         $new = str_replace(' ', '', $course);
         if (!$this->s3->doesBucketExist(strtolower($new))) {
-            $this->s3->createBucket(['ACL' => 'public-read', 'Bucket' => strtolower($new)]);
+            $this->s3->createBucket(['ACL' => 'public-read-write', 'Bucket' => strtolower($new)]);
         }
     }
 
@@ -75,7 +75,7 @@ class S3Helper
         $response = $this->s3->doesObjectExist($trimmedBucket, $key);
         if ($response) {
             $plainUrl = $this->s3->getObjectUrl($trimmedBucket, $key);
-            $url = str_replace('minio', 'localhost', strtolower($plainUrl));
+            $url = str_replace('minio', 'baboonka.com', strtolower($plainUrl));
         } else {
             $url = null;
         }

@@ -63,7 +63,9 @@ class CreateUsers
     public function addConstraint(){
         $this->run("CREATE CONSTRAINT ON (n:LearningResource) ASSERT n.name_of_resource IS UNIQUE");
     }
-
+    public function deletesee(){
+        $this->run("MATCH (d:User  {email: 'lop@gmail.com'}) detach delete d");
+    }
     public function addConstraints(){
         $this->run("CREATE CONSTRAINT ON (n:User) ASSERT n.email IS UNIQUE");
     }

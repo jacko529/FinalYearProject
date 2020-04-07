@@ -325,7 +325,7 @@ export class Entry extends Component {
                                    />
                                 : null}
                                    {item.jarrard  ?
-                                        <div>
+                                        <Fragment>
                                        {!Array.isArray(item.jarrard) ?
 
                                        <CourseTile
@@ -341,7 +341,7 @@ export class Entry extends Component {
                                        />
 
                                        : null}
-                                        </div>
+                                        </Fragment>
                                        : null}
 
                                    {Array.isArray(item.jarrard) ?
