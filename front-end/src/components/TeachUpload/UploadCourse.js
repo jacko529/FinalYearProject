@@ -1,54 +1,49 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import {
-    Button,
-    TextInput,
-    Container,
-    Row,
-    Col,
-    Form
-} from 'react-materialize';
-import {
-    Link
-} from "react-router-dom";
+import {Button, Col, Container, Row, TextInput} from 'react-materialize';
+import {Link} from "react-router-dom";
 import '../../Loader.css';
 import '../../SidePanel.css';
 
 import 'react-rangeslider/lib/index.css'
 import axios from 'axios';
 
-import { connect } from 'react-redux';
-import InformCards from "../Home/InformCards";
+import {connect} from 'react-redux';
 
 
 export class UploadCourse extends Component {
 
     state = {
-        requestCompleted:false,
+        requestCompleted: false,
         learning_styles: [],
         course: [],
         values: '',
         course_image: '',
+        error: ''
     };
+
     handleChange(event) {
         this.setState({values: event.target.value})
     }
+
     handleResourceChange(event) {
         this.setState({course_image: event.target.files[0]})
 
     }
+
     render() {
-        const {isTeacher,isUser, isLoading, isAuthenticated, user } = this.props.auth;
+        const {isTeacher, isUser, isLoading, isAuthenticated, user} = this.props.auth;
 
         let save = (e) => {
             const config = {
-                headers: { Authorization: `bearer ${localStorage.getItem('access_token')}` ,
+                headers: {
+                    Authorization: `bearer ${localStorage.getItem('access_token')}`,
                     'Accept': 'application/json',
                     'Content-Type': 'multipart/form-data',
                 }
             };
             e.preventDefault();
-            const body = JSON.stringify({ name: this.state.values });
+            const body = JSON.stringify({name: this.state.values});
 
 
             // const json = JSON.stringify(body);
@@ -58,19 +53,23 @@ export class UploadCourse extends Component {
             data.append('file', this.state.course_image);
 
 
-            console.log(this.state.value)
-            axios.post('/course',data,config )
+            console.log(this.state.value);
+            axios.post('/course', data, config)
                 .then(res => {
                     window.location.reload();
-                });
-        }
+                }).catch(err => {
+                this.setState({error: err.response.data.error});
+            });
+        };
 
         return (
-            <Container style={{textAlign:'center' , marginTop: '5rem'}}>
+            <Container style={{textAlign: 'center', marginTop: '5rem'}}>
 
                 <Col md={12}>
+                    <h3>{this.state.error}</h3>
                     <Row>
-                        <TextInput label="Course Name"  value={this.state.values} onChange={this.handleChange.bind(this)}/>
+                        <TextInput label="Course Name" value={this.state.values}
+                                   onChange={this.handleChange.bind(this)}/>
                     </Row>
                     <Row>
                         <TextInput
@@ -83,15 +82,14 @@ export class UploadCourse extends Component {
                     </Row>
 
                 </Col>
-                <Row style={{textAlign: 'center' , display: 'inherit'}}>
+                <Row style={{textAlign: 'center', display: 'inherit'}}>
                     <Button onClick={save}>Name Course</Button>
                 </Row>
-                <Row style={{textAlign: 'center' , display: 'inherit'}}>
+                <Row style={{textAlign: 'center', display: 'inherit'}}>
                     <Button>
                         <Link to="/upload-content">Upload course content</Link>
                     </Button>
                 </Row>
-
 
 
             </Container>
@@ -99,7 +97,6 @@ export class UploadCourse extends Component {
     }
 
 }
-
 
 
 const mapStateToProps = state => ({

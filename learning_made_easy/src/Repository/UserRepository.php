@@ -43,6 +43,18 @@ class UserRepository implements UserLoaderInterface
     }
 
 
+    public function findUser($email){
+        $courseGet = '';
+        $user = $this->clients->run(
+            "MATCH (user:User {email: '$email'})
+                    RETURN  user.email as email"
+        );
+        foreach ($user->records() as  $available) {
+            $courseGet =    $available->get('email');
+        }
+
+        return $courseGet;
+    }
 
     public function findCourseCreatedByUser( $email){
         $courseValue = [];
@@ -60,13 +72,33 @@ class UserRepository implements UserLoaderInterface
     }
 
 
-    public function updateLearningStyles($email, $global, $reflective, $intuitive, $verbal){
+    public function updateLearningStyles($email, $all){
+        $output = implode(', ', array_map(
+            function ($v, $k) { return sprintf("%s: %s", $k, $v); },
+            $all,
+            array_keys($all)
+        ));
         return $this->clients->run(
            "
            MATCH (n:LearningStyle {active: true})<-[HAS]-(u:User {email: '$email'})
            SET n += {active:false }
-           CREATE (LS:LearningStyle {active:true, global: '$global' , intuitive: '$intuitive', verbal: '$verbal', reflective: '$reflective' })
-           CREATE (LS)<-[:HAS]-(u) 
+           CREATE (LS:LearningStyle {active:true, $output })
+           CREATE (LS)<-[:HAS]-(u)
+           RETURN LS "
+        );
+    }
+
+    public function createLearningStyle($email, $all){
+        $output = implode(', ', array_map(
+            function ($v, $k) { return sprintf("%s: %s", $k, $v); },
+            $all,
+            array_keys($all)
+        ));
+        return $this->clients->run(
+            "
+           MATCH (u:User {email: '$email'})
+           CREATE (LS:LearningStyle {active:true, $output })
+           CREATE (LS)<-[:HAS]-(u)
            RETURN LS "
         );
     }

@@ -2,13 +2,14 @@
 
 up:
 	 docker-compose build
-	 docker-compose up
+	 docker-compose up -d
 
 permission:
 	 dcoker exec  php -i | grep php.ini && echo "extension=swoole.so" >> php.ini  && echo "'extension=inotify.so'" >> php.ini
 
 start:
 	docker-compose exec php bin/console swoole:server:run
+	docker-compose exec php bin/console swoole:server:reload
 
 composer:
 	docker-compose exec php composer install

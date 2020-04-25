@@ -1,7 +1,4 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import NavTab from './Nav/Tab';
+import React from 'react';
 import '../SidePanel.css';
 
 class Step1 extends React.Component {
@@ -10,7 +7,7 @@ class Step1 extends React.Component {
             return null
         }
         // The markup for the Step 1 UI
-        return(
+        return (
             <div className="form-group">
                 <label htmlFor="email">Email address</label>
                 <input

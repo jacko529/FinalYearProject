@@ -10,6 +10,7 @@ use App\Classes\ShortestPath;
 use App\Entity\LearningResource;
 use App\Repository\LearningResourceRepository;
 use App\Repository\UserRepository;
+use App\Validation\CourseContentValidator;
 use GraphAware\Neo4j\OGM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -29,6 +30,7 @@ class LearningResourceController extends AbstractController
     protected FilterToAddS3Information $filterToAddS3Info;
     protected FilterHelper $filterHelper;
     protected $s3;
+    protected CourseContentValidator $contentUpload;
     public function __construct(
         EntityManagerInterface $entityManager,
         TokenStorageInterface $tokenStorage,
@@ -37,7 +39,8 @@ class LearningResourceController extends AbstractController
         JaccardIndex $jaccardIndex,
         UserRepository $userRepository,
         FilterToAddS3Information $filterToAddS3Info,
-        FilterHelper $filterHelper
+        FilterHelper $filterHelper,
+        CourseContentValidator $contentValidator
     ) {
         $this->shortestPath = $shortestPath;
         $this->jaccardIndex = $jaccardIndex;
@@ -48,19 +51,17 @@ class LearningResourceController extends AbstractController
         $this->s3 = new S3Helper();
         $this->tokenStorage = $tokenStorage;
         $this->learningResourceRepo = $learningResourceRepo;
+        $this->contentUpload = $contentValidator;
     }
-
-
-
 
     /**
      *
      *   {
      *       "resourceName: networking 102",
-     *       "stage": "2",
-     *       "time": "5",
+     *       "stage": 2,
+     *       "time": 5,
      *       "learning_style": "third"
-     *       }
+     *
      *    }
      *
      * @param Request $request
@@ -69,17 +70,24 @@ class LearningResourceController extends AbstractController
      */
     public function index(Request $request)
     {
+        $user = $this->getUser();
         $requests = $request->request->all();
-
-
         $json = json_decode($requests['json'], true);
-        $this->s3->checkBucketsAgainstCourse($json['selectedCourse']);
         $file = $request->files->get('file');
+
+
         if ($file) {
             $fileName = $this->s3->upload($file, strtolower($json['selectedCourse']));
         } else {
             $fileName = $json['link'];
         }
+        $validate = $this->contentUpload->validate($json,  $user->getUsername(), $file);
+
+        if($validate !== false){
+            return  $this->json(['error' => $validate], 401);
+        }
+        $this->s3->checkBucketsAgainstCourse($json['selectedCourse']);
+
         $timestamp = date("Y-m-d H:i:s");
         $learningResource = new LearningResource(
             $json['resourceName'],
@@ -100,9 +108,12 @@ class LearningResourceController extends AbstractController
 
             );
         } elseif ($stage > 1) {
+
             $this->learningResourceRepo->connectWithPreviousLearningResource(
+                $json['selectedCourse'],
                 $json['resourceName'],
                 $previousStage,
+                ($stage + 1),
                 $json['time']
             );
         }
@@ -124,29 +135,36 @@ class LearningResourceController extends AbstractController
         // get the first user
         $usersEmail = $user->getEmail();
         $courses = $this->learningResourceRepo->findCourseStudiedByUser($usersEmail);
+
         $learningStyles = $this->userRepository->getLearningStyles($usersEmail);
+
         unset($learningStyles['active']);
+
         $lastConsumableItem = 0;
-        $comparingCourse = (empty($courses) ? ['resource' => ['name'=>'No course information']] : $courses);
+
+        $comparingCourse = (empty($courses) ? ['resource' => ['name' => 'No course information']] : $courses);
+
         foreach ($comparingCourse as $index => $courseName) {
+
             $lastStageOfCourse = $this->learningResourceRepo->findLastStageOfCourse($courseName['name']);
+
             if (!empty($learningStyles) && $lastStageOfCourse > 0) {
 
                 arsort($learningStyles);
                 $topCategory = array_keys($learningStyles);
                 // match with first if it is the first
                 $latestConsumedItem = $this->learningResourceRepo->findLatestConsumedItem($courseName['name'], $usersEmail);
-                $lastItemStageOfPreferredLearningStageStage = $this->learningResourceRepo->findPreferredLatestStage(
+                $stage = $this->learningResourceRepo->findPreferredLatestStage(
                     $usersEmail,
                     $courseName['name'],
-                    array_key_first($learningStyles)
+                    $learningStyles
                 );
 
-                if ($latestConsumedItem->records() && $lastItemStageOfPreferredLearningStageStage->records()) {
+                if ($latestConsumedItem->records() && is_array($stage)) {
                     $lastConsumableItem = intval($this->filterNeo4jResponse($latestConsumedItem, 'max'));
-                    $stage = $this->filterNeo4jResponse($lastItemStageOfPreferredLearningStageStage, 'stage');
                 }
                 // if this is nothing then do the first
+
                 if ($lastConsumableItem === 0) {
                     $firstMatchingCourses = $this->learningResourceRepo->matchFirstUnion(
                         $usersEmail,
@@ -166,7 +184,7 @@ class LearningResourceController extends AbstractController
 
                     $firstCourse = $this->filterToAddS3Info->filter($index, $courseName['name'], $firstCourse);
                 } elseif ($lastConsumableItem < $lastStageOfCourse) {
-                    if ($lastConsumableItem < $stage) {
+                    if ($lastConsumableItem < $stage['stage']) {
 
                         foreach ($latestConsumedItem->records() as $itemsConsumed) {
                             $this->itemsC[] = ($itemsConsumed->get('name'));
@@ -174,9 +192,9 @@ class LearningResourceController extends AbstractController
                         }
 
                         $this->shortestPath->setAll(
-                            $stage,
+                            $stage['stage'],
                             $user->getTime(),
-                            $topCategory[0],
+                            $stage['style'],
                             $usersEmail,
                             $courseName['name'],
                             $this->itemsC[0]
@@ -203,11 +221,10 @@ class LearningResourceController extends AbstractController
                             $this->itemsC[] = ($itemsConsumed->get('name'));
                             $this->itemsC[] = ($itemsConsumed->get('max'));
                         }
-                        dd('g');
                         $this->shortestPath->setAll(
                             $lastStageOfCourse,
                             $user->getTime(),
-                            $topCategory[0],
+                            $stage['style'],
                             $usersEmail,
                             $courseName['name'],
                             $this->itemsC[0]

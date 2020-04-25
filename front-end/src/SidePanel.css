@@ -1,68 +1,82 @@
 
-
-.navBar{
+.navBar {
     background-color: #051923;
 }
-.questionLabel{
-    display:block;
+
+.questionLabel {
+    display: block;
 }
-.questionLegend{
+
+.questionLegend {
     text-align: center;
 }
-.model{
-    max-height: 70%!important;
-    width: 55%!important;
+
+.model {
+    max-height: 70% !important;
+    width: 55% !important;
 }
-nav .brand-logo{
+
+nav .brand-logo {
     padding-left: 1rem;
 
 }
+
 a:hover {
-    color: cornflowerblue!important;
-    text-decoration: none!important;
+    color: cornflowerblue !important;
+    text-decoration: none !important;
 }
+
 .input[type="radio"] {
-    margin: 0 10px 0 10px!important;
+    margin: 0 10px 0 10px !important;
 }
-.bottom-row{
+
+.bottom-row {
     margin-top: 2rem;
 }
+
 [type="radio"]:not(:checked), [type="radio"]:checked {
-    position: initial!important;
-     opacity: 1!important;
-    pointer-events: none!important;
+    position: initial !important;
+    opacity: 1 !important;
+    pointer-events: none !important;
 }
-.questionLabel{
+
+.questionLabel {
     color: white;
 }
+
 .card-body {
     text-align: center;
 }
-.mainPanel{
+
+.mainPanel {
     width: 80%;
     background-color: #0582CA;
     height: 100vh;
     flex: 2;
 }
-.navbar-brand{
+
+.navbar-brand {
     color: #00A6FB;
 }
-.navbar-brand:hover{
-    color: #00A6FB!important;
-    text-decoration: none;
 
-}
-.nav-link{
-    color: #00A6FB;
-
-}
-.nav-link:hover{
-    color: #00A6FB!important;
+.navbar-brand:hover {
+    color: #00A6FB !important;
     text-decoration: none;
 
 }
 
-.container-flex{
+.nav-link {
+    color: #00A6FB;
+
+}
+
+.nav-link:hover {
+    color: #00A6FB !important;
+    text-decoration: none;
+
+}
+
+.container-flex {
     display: flex;
     -webkit-justify-content: space-around;
     justify-content: space-around;
@@ -71,20 +85,24 @@ a:hover {
     -webkit-align-items: stretch;
     align-items: stretch;
 }
-.hide-register{
+
+.hide-register {
     display: none;
 }
-.multi-step{
-   display: flex;
+
+.multi-step {
+    display: flex;
     flex-flow: column;
     align-items: center;
 
 }
-.multi-step-input{
+
+.multi-step-input {
     vertical-align: middle;
     margin: 5px 10px 5px 0px;
 }
-.multi-step-label{
+
+.multi-step-label {
     margin: 5px 10px 5px 0px;
 
 }

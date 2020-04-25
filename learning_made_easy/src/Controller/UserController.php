@@ -6,6 +6,7 @@ use App\Classes\FindTopLearningStyle;
 use App\Entity\User;
 use App\Repository\LearningResourceRepository;
 use App\Repository\UserRepository;
+use App\Validation\UserValidation;
 use GraphAware\Neo4j\OGM\EntityManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,6 +14,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Validator\Constraints\Email as EmailConstraint;
 
 
 class UserController extends AbstractController
@@ -23,11 +25,10 @@ class UserController extends AbstractController
     private UserPasswordEncoderInterface $userPasswordEncoder;
     protected TokenStorageInterface $tokenStorage;
     protected JWTEncoderInterface $jwtEncoder;
-    protected array $learningStyles = [];
     protected array $courses = [];
     protected UserRepository $userRepository;
-    protected array $arrayOfRelatedResources;
     protected FindTopLearningStyle $topLearningstyle;
+    protected UserValidation $registerValidation;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -35,7 +36,8 @@ class UserController extends AbstractController
         TokenStorageInterface $tokenStorage,
         JWTEncoderInterface $JWTEncoder,
         UserRepository $userRepository,
-        FindTopLearningStyle $topLearningstyle
+        FindTopLearningStyle $topLearningstyle,
+        UserValidation $registerValidation
     ) {
         $this->entityManager = $entityManager;
         $this->tokenStorage = $tokenStorage;
@@ -43,6 +45,7 @@ class UserController extends AbstractController
         $this->jwtEncoder = $JWTEncoder;
         $this->userRepository = $userRepository;
         $this->topLearningstyle = $topLearningstyle;
+        $this->registerValidation = $registerValidation;
     }
 
 
@@ -74,9 +77,13 @@ class UserController extends AbstractController
         );
     }
 
-    //@todo validation and cater for if email is not unique
     public function create(Request $request)
     {
+        $validate = $this->registerValidation->validate($request->request->all());
+        if($validate) {
+            return $this->json(['access_token' => $validate], 403);
+        }
+
         try {
             $user = new User();
             $user->setFirstName($request->get('first_name'));
@@ -85,7 +92,6 @@ class UserController extends AbstractController
             $user->setPassword($this->userPasswordEncoder->encodePassword($user, $request->get('password')));
             $user->setRoles(['ROLE_USER']);
             $user->getLearningStyles();
-            // @todo what if they are already a user
             $this->entityManager->persist($user);
             $this->entityManager->flush();
             $token = $this->jwtEncoder->encode(
@@ -95,10 +101,6 @@ class UserController extends AbstractController
                 ]
             );
             $reply = 'success';
-//            }else{
-//                $reply = 'failure';
-//                $token = 'A user already has this email address`';
-//            }
 
         } catch (Exception $exception) {
             return $this->json('A user already has this email address');

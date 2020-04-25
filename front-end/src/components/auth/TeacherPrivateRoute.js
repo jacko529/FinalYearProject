@@ -1,9 +1,9 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
+import {Redirect, Route} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 
-const TeacherPrivateRoute = ({ component: Component, auth, ...rest }) =>
+const TeacherPrivateRoute = ({component: Component, auth, ...rest}) =>
     (
         <Route {...rest} render={(props) => (
             auth.isAuthenticated && auth.isTeacher
@@ -14,7 +14,7 @@ const TeacherPrivateRoute = ({ component: Component, auth, ...rest }) =>
                 }}/>
         )}/>
 
-    )
+    );
 
 
 const mapStateToProps = state => ({

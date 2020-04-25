@@ -2,22 +2,13 @@ import React, {Component} from 'react';
 import AppNavBar from './components/AppNavbar'
 import {Provider} from 'react-redux';
 import store from './stores/store'
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
+import {BrowserRouter as Router} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 import {loadUser} from './actions/authActions'
-import {nextActiveLoading} from './actions/nextActiveActions'
 
 import ResolveRoutes from "./components/auth/ResolveRoutes"
-import {NonUser} from "./components/Home/NonUser";
-import Loader from "react-loader-spinner";
-
 
 
 class App extends Component {
@@ -29,8 +20,8 @@ class App extends Component {
     }
 
     state = {
-        time:false
-    }
+        time: false
+    };
 
 
     render() {
@@ -45,9 +36,9 @@ class App extends Component {
 
                 <Provider store={store}>
 
-                    <div className={'app'} >
+                    <div className={'app'}>
                         <AppNavBar/>
-                       <ResolveRoutes/>
+                        <ResolveRoutes/>
                     </div>
                 </Provider>
             </Router>

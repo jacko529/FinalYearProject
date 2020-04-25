@@ -5,7 +5,7 @@ import QuestionCount from 'QuestionCount';
 import AnswerOption from 'AnswerOption';
 
 
-function Exam(props){
+function Exam(props) {
 
     function renderAnswerOptions(key) {
         return (
@@ -19,16 +19,17 @@ function Exam(props){
             />
         );
     }
+
     return (
-      <div className="quiz">
-          <QuestionCount
-              counter={props.questionId}
-              total={props.questionTotal}/>
-          <Question content={props.question} />
-          <ul>
-              {props.answerOptions.map(renderAnswerOptions)}
-          </ul>
-      </div>
+        <div className="quiz">
+            <QuestionCount
+                counter={props.questionId}
+                total={props.questionTotal}/>
+            <Question content={props.question}/>
+            <ul>
+                {props.answerOptions.map(renderAnswerOptions)}
+            </ul>
+        </div>
     );
 }
 

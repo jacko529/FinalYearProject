@@ -40,6 +40,19 @@ class CourseRepository
         return $courseTrue;
     }
 
+    public function findCourse($name){
+        $courseGet = '';
+        $course = $this->client->run(
+            "MATCH (course:Course {name: '$name'})
+                    RETURN  course.name as course"
+        );
+        foreach ($course->records() as  $available) {
+            $courseGet =    $available->get('course');
+        }
+
+        return $courseGet;
+    }
+
     public function addCourseRelationship($email, $name){
         return $this->client->run(
             "MATCH (a:User { email: '$email' })

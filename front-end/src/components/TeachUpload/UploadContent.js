@@ -1,21 +1,7 @@
-import React, { Component } from 'react';
-import {
-    Container,
-    Form,
-    Col,
-    FormGroup,
-    Label,
-    Input,
-    FormText,
+import React, {Component} from 'react';
+import {Col, Container, Form, FormGroup, Input, Label,} from 'reactstrap';
 
-
-} from 'reactstrap';
-
-import {
-    TextInput,
-    Button,
-    Row,
-} from 'react-materialize';
+import {Button, Row, TextInput,} from 'react-materialize';
 
 import '../../Loader.css';
 import '../../SidePanel.css';
@@ -23,7 +9,7 @@ import '../../SidePanel.css';
 import 'react-rangeslider/lib/index.css'
 import axios from 'axios';
 
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 
 export class TeachHome extends Component {
@@ -38,16 +24,21 @@ export class TeachHome extends Component {
         link: '',
         selectedCourse: '',
         previousSelected: '',
-        previous: [],
+        error: '',
+        // previous: [],
         course_created: [],
         courseLoaded: false
     };
+
     componentDidMount() {
         const config = {
-            headers: { Authorization: `bearer ${localStorage.getItem('access_token')}` ,'Content-type': 'application/json'}
+            headers: {
+                Authorization: `bearer ${localStorage.getItem('access_token')}`,
+                'Content-type': 'application/json'
+            }
 
         };
-        axios.get('/courses',config )
+        axios.get('/courses', config)
             .then(res => {
                 this.setState({previous: res.data.data[0]});
                 this.setState({courseLoaded: true})
@@ -56,45 +47,56 @@ export class TeachHome extends Component {
     }
 
     handleCourse(event) {
-        this.setState({selectedCourse: event.target.value})
+        this.setState({selectedCourse: event.target.value});
         console.log(this.state.selectedCourse)
     }
+
     handleOneCourse(event) {
-        this.setState({selectedCourse: event.target.value})
+        this.setState({selectedCourse: event.target.value});
         console.log(this.state.selectedCourse)
     }
+
     handlePreviousSelected(event) {
         this.setState({previousSelected: event.target.value})
 
     }
+
     handleNameChange(event) {
         this.setState({resourceName: event.target.value})
     }
+
     handleStageChange(event) {
         this.setState({stage: event.target.value})
     }
+
     handleTimeChange(event) {
         this.setState({time: event.target.value})
     }
+
     handleLearningStyleChange(event) {
         this.setState({learningStyle: event.target.value})
     }
+
     handleResourceTypeChange(event) {
         this.setState({resourceType: event.target.value})
     }
+
     handleLinkChange(event) {
         this.setState({link: event.target.value})
     }
+
     handleResourceChange(event) {
         this.setState({resource: event.target.files[0]})
 
     }
+
     render() {
-        const {  isAuthenticated, user } = this.props.auth;
+        const {isAuthenticated, user} = this.props.auth;
 
         let save = (e) => {
             const config = {
-                headers: { Authorization: `bearer ${localStorage.getItem('access_token')}` ,
+                headers: {
+                    Authorization: `bearer ${localStorage.getItem('access_token')}`,
                     'Content-Type': 'multipart/form-data',
                     'Accept': 'application/json'
                 }
@@ -106,10 +108,9 @@ export class TeachHome extends Component {
                 stage: this.state.stage,
                 time: this.state.time,
                 learning_style: this.state.learningStyle,
-                previous: this.state.previousSelected,
+                // previous: this.state.previousSelected,
                 link: this.state.link
             };
-
 
 
             const json = JSON.stringify(obj);
@@ -120,35 +121,49 @@ export class TeachHome extends Component {
 
             e.preventDefault();
 
-            console.log(this.state.value)
-            axios.post('/coure-resources',data,config )
+            console.log(this.state.value);
+            axios.post('/coure-resources', data, config)
                 .then(res => {
                     window.location.reload();
 
-                });
+                }).catch(err => {
+                this.setState({error: err.response.data.error});
+            });
 
 
             console.log('account');
-        }
+        };
         const reflective = [
             'Reflective learners learn by thinking about information. They prefer to think things through and understand things before acting.'
+        ];
+
+        const active = [
+            'Active learners learn by doing something with information. They prefer to process information by talking about it and trying it out.'
         ];
 
         const verbal = [
             'Verbal learners prefer explanations with words – both written and spoken.'
         ];
-
+        const visual = [
+            'Visual learners prefer visual presentations of material – diagrams, charts, graphs, pictures.'
+        ];
         const global = [
             'Global learners prefer to organize information more holistically and in a seemingly random manner without seeing connections. They often appear scattered and disorganised in their thinking yet often arrive at a creative or correct end product.'
         ];
-
+        const sequential = [
+            'Sequential learners prefer to organize information in a linear, orderly fashion. They learn in logically sequenced steps and work with information in an organized and systematic way.'
+        ];
         const intuitive = [
             'Intuitive learners prefer to take in information that is abstract, original, and oriented towards theory. They look at the big picture and try to grasp overall patterns. They like discovering possibilities and relationships and working with ideas.'
         ];
-            if(isAuthenticated && !user.course_created.isArray){
-                this.state.selectedCourse = user.course_created[0].name;
 
-            }
+        const sensing = [
+            'Sensing learners prefer to take in information that is concrete and practical. They are oriented towards details, facts, and figures and prefer to use proven procedures. They are realistic and like practical applications.'
+        ];
+        if (isAuthenticated && !user.course_created.isArray) {
+            this.state.selectedCourse = user.course_created[0].name;
+
+        }
 
         return (
             <Container style={{textAlign: 'center', marginTop: '4rem'}}>
@@ -156,39 +171,60 @@ export class TeachHome extends Component {
                     <Form>
                         <Row form>
                             <Col md={12}>
+                                <h3>{this.state.error}  </h3>
                                 {isAuthenticated && !user.course_created.isArray ?
                                     <FormGroup>
                                         <Label for="course">Which course</Label>
-                                        <Input value={this.state.selectedCourse} onChange={this.handleCourse.bind(this)} type="select" name="select" id="learning_style">
-                                            {user.course_created.map((course) => <option key={course.name} value={course.name}>{course.name}</option>)}
+                                        <Input value={this.state.selectedCourse} onChange={this.handleCourse.bind(this)}
+                                               type="select" name="select" id="learning_style">
+                                            {user.course_created.map((course) => <option key={course.name}
+                                                                                         value={course.name}>{course.name}</option>)}
                                         </Input>
 
                                     </FormGroup>
-                                    : null }
+                                    : null}
 
                             </Col>
                             <Col md={12}>
                                 <FormGroup>
                                     <Label for="learning_style">Learning Style</Label>
-                                    <Input value={this.state.learningStyle} onChange={this.handleLearningStyleChange.bind(this)} type="select" name="select" id="learning_style">
+                                    <Input value={this.state.learningStyle}
+                                           onChange={this.handleLearningStyleChange.bind(this)} type="select"
+                                           name="select" id="learning_style">
                                         <option>verbal</option>
+                                        <option>visual</option>
                                         <option>intuitive</option>
+                                        <option>sensing</option>
                                         <option>reflective</option>
+                                        <option>active</option>
                                         <option>global</option>
+                                        <option>sequential</option>
                                     </Input>
                                 </FormGroup>
                             </Col>
-                            {this.state.learningStyle === 'verbal'?
-                                <p style={{marginLeft:'1rem'}}>{verbal}</p> :null
+                            {this.state.learningStyle === 'verbal' ?
+                                <p style={{marginLeft: '1rem'}}>{verbal}</p> : null
                             }
-                            {this.state.learningStyle === 'intuitive'?
-                                <p style={{marginLeft:'1rem'}}>{intuitive}</p> :null
+                            {this.state.learningStyle === 'intuitive' ?
+                                <p style={{marginLeft: '1rem'}}>{intuitive}</p> : null
                             }
-                            {this.state.learningStyle === 'reflective'?
-                                <p style={{marginLeft:'1rem'}}>{reflective}</p> :null
+                            {this.state.learningStyle === 'reflective' ?
+                                <p style={{marginLeft: '1rem'}}>{reflective}</p> : null
                             }
-                            {this.state.learningStyle === 'global'?
-                                <p style={{marginLeft:'1rem'}}>{global}</p> :null
+                            {this.state.learningStyle === 'global' ?
+                                <p style={{marginLeft: '1rem'}}>{global}</p> : null
+                            }
+                            {this.state.learningStyle === 'active' ?
+                                <p style={{marginLeft: '1rem'}}>{active}</p> : null
+                            }
+                            {this.state.learningStyle === 'sequential' ?
+                                <p style={{marginLeft: '1rem'}}>{sequential}</p> : null
+                            }
+                            {this.state.learningStyle === 'sensing' ?
+                                <p style={{marginLeft: '1rem'}}>{sensing}</p> : null
+                            }
+                            {this.state.learningStyle === 'visual' ?
+                                <p style={{marginLeft: '1rem'}}>{visual}</p> : null
                             }
 
 
@@ -206,20 +242,25 @@ export class TeachHome extends Component {
                             {/*        : null }*/}
                             {/*</Col>*/}
                             <Col md={12}>
-                                <TextInput label="Resource Name"  value={this.state.resourceName} onChange={this.handleNameChange.bind(this)}/>
+                                <TextInput label="Resource Name" value={this.state.resourceName}
+                                           onChange={this.handleNameChange.bind(this)}/>
                             </Col>
                             <Col md={12}>
                                 <p>Remember to keep track of the previous stage you previously uploaded</p>
-                                <TextInput label="Stage" type={'number'} value={this.state.stage} onChange={this.handleStageChange.bind(this)}/>
+                                <TextInput label="Stage" type={'number'} value={this.state.stage}
+                                           onChange={this.handleStageChange.bind(this)}/>
                             </Col>
                             <Col md={12}>
-                                <TextInput label="Time" type={'number'} value={this.state.time} onChange={this.handleTimeChange.bind(this)}/>
+                                <TextInput label="Time" type={'number'} value={this.state.time}
+                                           onChange={this.handleTimeChange.bind(this)}/>
                             </Col>
 
                             <Col md={12}>
                                 <FormGroup>
                                     <Label for="resource_type">Resource</Label>
-                                    <Input type="select" value={this.state.resourceType} onChange={this.handleResourceTypeChange.bind(this)} name="select" id="resource_type">
+                                    <Input type="select" value={this.state.resourceType}
+                                           onChange={this.handleResourceTypeChange.bind(this)} name="select"
+                                           id="resource_type">
                                         <option>file/pdf</option>
                                         <option>video link</option>
                                     </Input>
@@ -240,7 +281,8 @@ export class TeachHome extends Component {
                                 <Col md={12}>
                                     <FormGroup>
                                         <Label for="course_name">Video link</Label>
-                                        <Input type="text" value={this.state.link} onChange={this.handleLinkChange.bind(this)}  placeholder="Video link" />
+                                        <Input type="text" value={this.state.link}
+                                               onChange={this.handleLinkChange.bind(this)} placeholder="Video link"/>
                                     </FormGroup>
                                 </Col>
 
@@ -257,7 +299,6 @@ export class TeachHome extends Component {
     }
 
 }
-
 
 
 const mapStateToProps = state => ({

@@ -1,54 +1,72 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
 
-html, body {margin:0;padding:0;height:100%;}
-.app{
-    font-family: 'Montserrat' ;
-    background: #373B44;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #4286f4, #373B44);  /* Chrome 10-25, Safari 5.1-6 */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.app {
+    font-family: 'Montserrat';
+    background: #373B44; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4286f4, #373B44); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #4286f4, #373B44); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
-.graphType{
+
+.graphType {
     width: 100vh;
 }
-#mobile-nav{
+
+#mobile-nav {
     background-color: #051923;
 }
+
 #root {
-    background: #373B44;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #4286f4, #373B44);  /* Chrome 10-25, Safari 5.1-6 */
+    background: #373B44; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4286f4, #373B44); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #4286f4, #373B44); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-html { height: 100%; }
-body { min-height: 100%!important;
-    background: #373B44;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #4286f4, #373B44);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #4286f4, #373B44);}
 
-.navy{
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100% !important;
+    background: #373B44; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4286f4, #373B44); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4286f4, #373B44);
+}
+
+.navy {
     background-color: #051923;
 }
 
-.timeDiv{
-    display: none;
-}
-.courseDiv{
+.timeDiv {
     display: none;
 }
 
-.btn{
-    border-radius: 0px!important;
+.courseDiv {
+    display: none;
+}
+
+.btn {
+    border-radius: 0px !important;
     background-color: #051923;
     color: #00A6FB;
 }
-.btn:hover{
-    background-color:white!important;
-    color: #00A6FB!important;
+
+.btn:hover {
+    background-color: white !important;
+    color: #00A6FB !important;
 }
-.form-control{
-    border-radius: 0px!important;
+
+.form-control {
+    border-radius: 0px !important;
 }
+
 /* Absolute Center Spinner */
 .loader {
     /*filter: blur(15px);*/
@@ -63,50 +81,60 @@ body { min-height: 100%!important;
     bottom: 0;
     right: 0;
 }
-#goo-loader{
+
+#goo-loader {
     width: 100px;
 }
 
 /*.input-field>label{*/
 /*    color: antiquewhite!important;*/
 /*}*/
-.select-wrapper input.select-dropdown{
-    color: white!important;
-    border-bottom: 1px solid white!important;
+.select-wrapper input.select-dropdown {
+    color: white !important;
+    border-bottom: 1px solid white !important;
 }
-.normal{
-    filter: blur(0px)!important;
+
+.normal {
+    filter: blur(0px) !important;
 }
+
 input[type=radio] {
     margin-right: 2rem;
 }
-#graph-id1-graph-wrapper{
-    border: 2px solid #051923!important;
-}
-#graph-id2-graph-wrapper{
-    border: 2px solid #051923!important;
 
-}
-#graph-id3-graph-wrapper{
-    border: 2px solid #051923!important;
-
-}
-.card{
-    border-radius: 0px!important;
-}
-.list-group-item{
-    border-radius: 0px!important;
+#graph-id1-graph-wrapper {
+    border: 2px solid #051923 !important;
 }
 
-.modal-content{
-    border-radius: 0px!important;
+#graph-id2-graph-wrapper {
+    border: 2px solid #051923 !important;
+
 }
-.card-title{
+
+#graph-id3-graph-wrapper {
+    border: 2px solid #051923 !important;
+
+}
+
+.card {
+    border-radius: 0px !important;
+}
+
+.list-group-item {
+    border-radius: 0px !important;
+}
+
+.modal-content {
+    border-radius: 0px !important;
+}
+
+.card-title {
     color: white;
     background-color: rgba(0, 0, 10, 0.3);
 
-    padding: 5px!important;
+    padding: 5px !important;
 }
+
 /*.parent{*/
 
 /*    position: relative;*/

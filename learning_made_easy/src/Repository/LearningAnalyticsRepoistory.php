@@ -18,13 +18,6 @@ class LearningAnalyticsRepoistory
     }
 
 
-//    public function getFinalStageForCourse(){
-//        $count = $this->client->run(
-//            "MATCH (n:User)-[STUDYING]->(k:Course{name: '$courseName'})
-//             RETURN count(n)-1 as count"
-//        );
-//    }
-
     public function howManyPerCourse($courseName)
     {
         $finalCount = 0;

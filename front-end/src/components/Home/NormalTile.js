@@ -1,32 +1,30 @@
 import React from 'react';
 
-import { Button, Card, CardTitle,Icon, Row, Col } from 'react-materialize';
+import {Button, Card, CardTitle, Icon} from 'react-materialize';
 
 import '../../SidePanel.css';
 
-import {
-    Link
-} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const Tiles = (props) => {
     let save = (e) => {
         e.preventDefault();
         console.log('account');
-    }
+    };
 
     return (
 
-            <Card
-                actions={[
-                    <Button  onClick={save}><Link to="/quiz">{props.button}</Link></Button>
-                ]}
-                header={<CardTitle image={props.image}>{props.title}</CardTitle>}
-                revealIcon={<Icon>more_vert</Icon>}
+        <Card
+            actions={[
+                <Button onClick={save}><Link to="/quiz">{props.button}</Link></Button>
+            ]}
+            header={<CardTitle image={props.image}>{props.title}</CardTitle>}
+            revealIcon={<Icon>more_vert</Icon>}
 
-            >
-               {props.subtitle}
+        >
+            {props.subtitle}
 
-            </Card>
+        </Card>
     );
 };
 

@@ -7,6 +7,7 @@ use App\Entity\LearningStyle;
 use App\Repository\UserRepository;
 use GraphAware\Neo4j\OGM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -35,8 +36,13 @@ class LearningQuizController extends AbstractController
         $this->learningStyle = new LearningStyle();
         $allQuestions = $request->request->all();
         $learningStyles = new CalculateLearningQuiz($allQuestions);
-        $output = $learningStyles->trigger();
+        try {
+            $output = $learningStyles->trigger();
+            $learningStyles->clear();
 
+        }catch (Exception $exception){
+            return $this->json('You did not complete the quiz');
+        }
         $token = $this->tokenStorage->getToken();
         if ($token instanceof TokenInterface) {
             $user = $token->getUser();
@@ -46,20 +52,10 @@ class LearningQuizController extends AbstractController
         if ($currentLearningStyles) {
             $this->userRepository->updateLearningStyles(
                 $userEmail,
-                $output['global'],
-                $output['reflector'],
-                $output['intuitive'],
-                $output['verbal']
+                $output
             );
         } else {
-            $this->learningStyle->setGlobal($output['global']);
-            $this->learningStyle->setIntuitive($output['intuitive']);
-            $this->learningStyle->setReflector($output['reflector']);
-            $this->learningStyle->setVerbal($output['verbal']);
-            $this->learningStyle->setActive(true);
-            $this->learningStyle->setUser($user);
-            $this->entityManager->persist($this->learningStyle);
-            $this->entityManager->flush();
+            $this->userRepository->createLearningStyle($userEmail, $output);
         }
 
 

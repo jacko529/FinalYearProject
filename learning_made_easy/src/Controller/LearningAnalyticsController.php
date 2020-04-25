@@ -64,8 +64,4 @@ class LearningAnalyticsController extends AbstractController
         }
         return $this->json($courseInformation);
     }
-
-
-
-    // get user
 }

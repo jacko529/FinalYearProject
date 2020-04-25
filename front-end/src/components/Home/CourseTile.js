@@ -1,40 +1,39 @@
 import React from 'react';
 
 
-import { Button, Card, CardTitle,Icon, Row, Col } from 'react-materialize';
+import {Button, Card, CardTitle, Col, Icon} from 'react-materialize';
 import 'materialize-css'
 import '../../SidePanel.css';
 
-import {
-    Link
-} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const CourseTile = (props) => {
     let save = (e) => {
         e.preventDefault();
-    }
+    };
     console.log('tile', props);
     let contentFile = '';
 
-    if(!props.url){
+    if (!props.url) {
         contentFile = props.filename;
-    }else{
+    } else {
         contentFile = props.url
     }
     return (
 
-        <Col   m={2}
-               s={6}>
+        <Col m={2}
+             s={6}>
             <Card
                 actions={[
-                   <Button><Link to={{
-                        pathname:"/content",
+                    <Button><Link to={{
+                        pathname: "/content",
                         state: {
                             url: contentFile,
                             title: props.title,
                             email: props.email,
                             time: props.time
-                        }}}> {props.button}</Link></Button>
+                        }
+                    }}> {props.button}</Link></Button>
                 ]}
                 header={<CardTitle image={props.image}>{props.title}</CardTitle>}
                 revealIcon={<Icon>more_vert</Icon>}

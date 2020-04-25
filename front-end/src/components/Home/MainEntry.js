@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {Button, Container, Select, Collection, Range, CollectionItem, Row, Col} from 'react-materialize';
+import {Button, Col, Collection, CollectionItem, Container, Range, Row, Select} from 'react-materialize';
 import 'materialize-css'
 import '../../Loader.css';
 import '../../SidePanel.css';
@@ -53,14 +53,14 @@ export class Entry extends Component {
                 if (!res.data['shortest_path'] && !res.data['jarrard'] && !res.data['none']) {
                     this.setState({course: res.data[0]});
                     // if there is nothing done yet (new user)
-                }else if(res.data['none']){
+                } else if (res.data['none']) {
                     this.setState({noCourse: res.data['none']});
-                }else if (res.data['shortest_path'] && !res.data['jarrard']){
+                } else if (res.data['shortest_path'] && !res.data['jarrard']) {
                     this.setState({course: res.data['shortest_path'][0]});
                     this.setState({explainShortPath: res.data['explain_short_path'][0]});
 
                 } else {
-                    console.log('request', res.data['explain_short_path'][0])
+                    console.log('request', res.data['explain_short_path'][0]);
                     this.setState({course: res.data['shortest_path'][0]});
                     this.setState({recommendation: res.data['jarrard'][0]});
                     this.setState({explainShortPath: res.data['explain_short_path'][0]});
@@ -150,8 +150,6 @@ export class Entry extends Component {
         };
 
 
-
-
         const {isTeacher, isUser, isLoading, isAuthenticated, user} = this.props.auth;
         // const {isTeacher,isUser, isLoading, isAuthenticated, user } = this.props.auth;
 
@@ -173,7 +171,7 @@ export class Entry extends Component {
                     this.setState({courseDisappear: true});
 
                 });
-        }
+        };
         let save = (e) => {
             const config = {
                 headers: {
@@ -190,7 +188,7 @@ export class Entry extends Component {
                 });
 
 
-        }
+        };
 
         const welcome = (
             <Fragment>
@@ -212,10 +210,10 @@ export class Entry extends Component {
         );
 
 
-        const {value} = this.state
+        const {value} = this.state;
         if (this.state.requestCompleted) {
             // {this.explainShortPath.map((course) => console.log(course) )}
-            console.log('recomm', Object.keys(this.state.explainShortPath).length )
+            console.log('recomm', Object.keys(this.state.explainShortPath).length)
         }
         const loadingSign = (
             <div className={this.state.requestCompleted ? 'normal' : 'loader  '} style={{textAlign: 'center'}}>
@@ -315,7 +313,7 @@ export class Entry extends Component {
                                         button={'Start Course'}
                                     /> : null}
 
-                                {this.state.recommendation.length > 0  ?
+                                {this.state.recommendation.length > 0 ?
 
                                     <CourseTile
                                         image={"/study-notebooks.jpg"}
@@ -328,7 +326,7 @@ export class Entry extends Component {
                                     /> : null}
                                 <Col>
                                     <h3>Explain your path </h3>
-                                    <h4 style={{color: 'white'}}>This are the top  learning paths which are based
+                                    <h4 style={{color: 'white'}}>This are the top learning paths which are based
                                         around the time your spefifed at the beginning of the course</h4>
                                     <h5 style={{color: 'white'}}>You can look into your top learning paths by selecting
                                         the graph, these graphs where selected by finding the shortest path based around
@@ -358,55 +356,55 @@ export class Entry extends Component {
 
                         {Object.keys(user.learning_styles).length < 1 ?
 
-                            <div className="bottom-row" >
+                            <div className="bottom-row">
                                 <Row
                                 >
-                                            {/*<Col m={6}*/}
-                                            {/*     s={6} className={timeClass}>*/}
-                                                <h1>Student Information</h1>
-                                                <h4>First enter your time you want to spend on the course</h4>
-                                                <Range
-                                                    value={this.state.rangeValue}
-                                                    onChange={this.handleRangeSlider.bind(this)}
-                                                    max="100"
-                                                    min="0"
-                                                    name="points"
-                                                />
-                                                {user.time === '' ? <Button onClick={save}>That's enough time</Button> : null}
-                                            {/*</Col>*/}
+                                    {/*<Col m={6}*/}
+                                    {/*     s={6} className={timeClass}>*/}
+                                    <h1>Student Information</h1>
+                                    <h4>First enter your time you want to spend on the course</h4>
+                                    <Range
+                                        value={this.state.rangeValue}
+                                        onChange={this.handleRangeSlider.bind(this)}
+                                        max="100"
+                                        min="0"
+                                        name="points"
+                                    />
+                                    {user.time === '' ? <Button onClick={save}>That's enough time</Button> : null}
+                                    {/*</Col>*/}
 
-                                        {/*<Col m={6}*/}
-                                        {/*     s={6} className={courseClass}>*/}
-                                        {/*    <h4>Now select the course you wish to take</h4>*/}
+                                    {/*<Col m={6}*/}
+                                    {/*     s={6} className={courseClass}>*/}
+                                    {/*    <h4>Now select the course you wish to take</h4>*/}
 
-                                            <Select
-                                                label="Choose your option"
-                                                options={{
-                                                    classes: '',
-                                                    dropdownOptions: {
-                                                        alignment: 'left',
-                                                        autoTrigger: true,
-                                                        closeOnClick: true,
-                                                        constrainWidth: true,
-                                                        container: null,
-                                                        coverTrigger: true,
-                                                        hover: false,
-                                                        inDuration: 150,
-                                                        onCloseEnd: null,
-                                                        onCloseStart: null,
-                                                        onOpenEnd: null,
-                                                        onOpenStart: null,
-                                                        outDuration: 250
-                                                    }
-                                                }}
-                                                value={this.state.selectedCourse}
-                                                onChange={this.handleCourse.bind(this)}
-                                            >
-                                                <option value={this.state.coursesCanChoose}>
-                                                    {this.state.coursesCanChoose}
-                                                </option>
-                                            </Select>
-                                        {/*</Col>*/}
+                                    <Select
+                                        label="Choose your option"
+                                        options={{
+                                            classes: '',
+                                            dropdownOptions: {
+                                                alignment: 'left',
+                                                autoTrigger: true,
+                                                closeOnClick: true,
+                                                constrainWidth: true,
+                                                container: null,
+                                                coverTrigger: true,
+                                                hover: false,
+                                                inDuration: 150,
+                                                onCloseEnd: null,
+                                                onCloseStart: null,
+                                                onOpenEnd: null,
+                                                onOpenStart: null,
+                                                outDuration: 250
+                                            }
+                                        }}
+                                        value={this.state.selectedCourse}
+                                        onChange={this.handleCourse.bind(this)}
+                                    >
+                                        <option value={this.state.coursesCanChoose}>
+                                            {this.state.coursesCanChoose}
+                                        </option>
+                                    </Select>
+                                    {/*</Col>*/}
 
 
                                     <Button onClick={saveCourse}>Choose this course</Button>
@@ -414,13 +412,13 @@ export class Entry extends Component {
                                     <h1>Student Learning Course</h1>
 
 
-                                        <NormalTile
-                                            image={"/brainprocess.jpg"}
-                                            title={user.first_name + ' ' + user.surname}
-                                            subtitle={'Take this quiz to get your results'}
-                                            description={'It will help'}
-                                            button={'TakeQuiz'}
-                                        />
+                                    <NormalTile
+                                        image={"/brainprocess.jpg"}
+                                        title={user.first_name + ' ' + user.surname}
+                                        subtitle={'Take this quiz to get your results'}
+                                        description={'It will help'}
+                                        button={'TakeQuiz'}
+                                    />
 
                                 </Row>
                             </div> : null

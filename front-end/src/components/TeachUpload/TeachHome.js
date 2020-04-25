@@ -1,32 +1,20 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import {
-    Collection,
-    CollectionItem,
-    Container,
-    Row,
-    Col,
-    CardTitle,
-    Icon,
-    CardPanel,
-    Card
-} from 'react-materialize';
-import {
-    Link
-} from "react-router-dom";
+import {Card, CardTitle, Col, Collection, CollectionItem, Container, Icon, Row} from 'react-materialize';
+import {Link} from "react-router-dom";
 import '../../Loader.css';
 import '../../SidePanel.css';
 
 import 'react-rangeslider/lib/index.css'
 import axios from 'axios';
 
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 
 export class TeachHome extends Component {
 
     state = {
-        requestCompleted:false,
+        requestCompleted: false,
         courseAnalytics: [],
         course: [],
         values: '',
@@ -37,11 +25,14 @@ export class TeachHome extends Component {
 
 
         const config = {
-            headers: { Authorization: `bearer ${localStorage.getItem('access_token')}` ,'Content-type': 'application/json'}
+            headers: {
+                Authorization: `bearer ${localStorage.getItem('access_token')}`,
+                'Content-type': 'application/json'
+            }
 
         };
 
-        axios.get('/course-analytics',config )
+        axios.get('/course-analytics', config)
             .then(res => {
                 this.setState({courseAnalytics: res.data});
                 this.setState({requestCompleted: true});
@@ -54,15 +45,15 @@ export class TeachHome extends Component {
     render() {
         // const {isTeacher,isUser, isLoading, isAuthenticated, user } = this.props.auth;
 
-        let analytics= [];
+        let analytics = [];
 
-        if(this.state.requestCompleted){
-             analytics = [this.state.courseAnalytics];
-             console.log(analytics)
+        if (this.state.requestCompleted) {
+            analytics = [this.state.courseAnalytics];
+            console.log(analytics)
         }
 
         return (
-            <Container style={{textAlign:'center' , marginTop: '5rem'}}>
+            <Container style={{textAlign: 'center', marginTop: '5rem'}}>
                 <Row>
                     <Col
                         m={2}
@@ -102,41 +93,41 @@ export class TeachHome extends Component {
                             m={6}
                             s={12}
                         >
-        {!analytics.includes("no courses") ?
-      analytics.map((person) => (
+                            {!analytics.includes("no courses") ?
+                                analytics.map((person) => (
 
-          <Collection >
-              <div>
-                  {person.courses.map((pet) => (
-                    <CollectionItem>
-                         Course {pet.course}
-                         <ul>
-                             <li> Has {pet.count} students </li>
-                             <li> {pet.finished} have finished the course</li>
-                             {/*<li> The average time of finishing is  {pet.avg_time_wanted}  </li>*/}
-                             <li> The most common learning style was  {pet.most_popular_learning_style}  </li>
-                         </ul>
-                        {/*<p>The most common learning style was {pet.avg_time_wanted} minutes</p>*/}
+                                    <Collection>
+                                        <div>
+                                            {person.courses.map((pet) => (
+                                                <CollectionItem>
+                                                    Course {pet.course}
+                                                    <ul>
+                                                        <li> Has {pet.count} students</li>
+                                                        <li> {pet.finished} have finished the course</li>
+                                                        {/*<li> The average time of finishing is  {pet.avg_time_wanted}  </li>*/}
+                                                        <li> The most common learning style
+                                                            was {pet.most_popular_learning_style}  </li>
+                                                    </ul>
+                                                    {/*<p>The most common learning style was {pet.avg_time_wanted} minutes</p>*/}
 
-                    </CollectionItem>
+                                                </CollectionItem>
 
-                  ))}
-                      </div>
+                                            ))}
+                                        </div>
 
-          </Collection>
-      )) : null}
+                                    </Collection>
+                                )) : null}
 
-                  {/*{Object.keys(this.state.courseAnalytics).map((key) => {*/}
-                  {/*    return this.state.courseAnalytics[key].map((station) => {*/}
-                  {/*        console.log(station);*/}
-                  {/*        // you should return something here*/}
-                  {/*    })*/}
-                  {/*})}*/}
-
+                            {/*{Object.keys(this.state.courseAnalytics).map((key) => {*/}
+                            {/*    return this.state.courseAnalytics[key].map((station) => {*/}
+                            {/*        console.log(station);*/}
+                            {/*        // you should return something here*/}
+                            {/*    })*/}
+                            {/*})}*/}
 
 
                         </Col>
-                    </Row>: null
+                    </Row> : null
 
                 }
 
@@ -145,7 +136,6 @@ export class TeachHome extends Component {
     }
 
 }
-
 
 
 const mapStateToProps = state => ({

@@ -4,9 +4,6 @@
 namespace App;
 
 
-use Symfony\Component\Config\Definition\Exception\Exception;
-use Symfony\Component\VarDumper\Exception\ThrowingCasterException;
-
 class CalculateLearningQuiz
 {
 
@@ -28,18 +25,10 @@ class CalculateLearningQuiz
         $this->mainArray = $mainArray;
     }
 
-    public function validate()
-    {
-        foreach ($this->mainArray as $value => $item) {
-            if (empty($item)) {
-                throw new \Exception('You never finished the quiz   ');
-            }
-        }
-    }
-
     public function trigger()
     {
         // remove q from key
+
         $this->validate();
         $keys = str_replace('q', '', array_keys($this->mainArray));
         $results = array_combine($keys, array_values($this->mainArray));
@@ -77,43 +66,32 @@ class CalculateLearningQuiz
         );
 
         $globalCalculated = $this->calculateAandB($this->global);
-        $global = $this->findPreference($globalCalculated, 'global');
+        $global = $this->findPreference($globalCalculated, 'global', 'sequential');
 
         $verbalCalculated = $this->calculateAandB($this->verbal);
-        $verbal = $this->findPreference($verbalCalculated, 'verbal');
+        $verbal = $this->findPreference($verbalCalculated, 'verbal', 'visual');
 
         $intuitiveCalculated = $this->calculateAandB($this->intuitive);
-        $intuitive = $this->findPreference($intuitiveCalculated, 'intuitive');
+        $intuitive = $this->findPreference($intuitiveCalculated, 'intuitive', 'sensing');
 
         $reflectorCalculated = $this->calculateAandB($this->reflector);
-        $reflector = $this->findPreference($reflectorCalculated, 'reflector');
+        $reflector = $this->findPreference($reflectorCalculated, 'reflective', 'active');
 
         $now = $this->compareHighestPreference($global, $intuitive, $verbal, $reflector);
-
         arsort($now, SORT_REGULAR);
 
         return $now;
     }
 
-
-    public function findPreference($array, $type)
+    public function validate()
     {
-        $largest = max($this->a, $this->b) - min($this->a, $this->b);
-        $array[$type] = $largest;
-        return $array;
+        unset($this->mainArray['error']);
+        foreach ($this->mainArray as $value => $item) {
+            if (empty($item)) {
+                throw new \Exception('You never finished the quiz');
+            }
+        }
     }
-
-    public function compareHighestPreference($array, $array1, $array2, $array3)
-    {
-        $first = array_slice($array, -1, 1, true);
-        $second = array_slice($array1, -1, 1, true);
-        $third = array_slice($array2, -1, 1, true);
-        $forth = array_slice($array3, -1, 1, true);
-
-        $forth = array_merge($first, $second, $third, $forth);
-        return $forth;
-    }
-
 
     public function calculateAandB($array)
     {
@@ -136,5 +114,35 @@ class CalculateLearningQuiz
         return $array;
     }
 
+    public function findPreference($array, $type, $alternative)
+    {
+        $largest = max($this->a, $this->b) - min($this->a, $this->b);
+        if ($array['answerA'] > $array['answerb']) {
+            $finalType = $alternative;
+        } else {
+            $finalType = $type;
+        }
+        $array[$finalType] = $largest;
+        return $array;
+    }
+
+    public function compareHighestPreference($array, $array1, $array2, $array3)
+    {
+        $first = array_slice($array, -1, 1, true);
+        $second = array_slice($array1, -1, 1, true);
+        $third = array_slice($array2, -1, 1, true);
+        $forth = array_slice($array3, -1, 1, true);
+        // more b's reflective - more a's active
+        $forth = array_merge($first, $second, $third, $forth);
+        return $forth;
+    }
+
+    public function clear()
+    {
+        $this->global = [];
+        $this->intuitive = [];
+        $this->reflector = [];
+        $this->verbal = [];
+    }
 
 }

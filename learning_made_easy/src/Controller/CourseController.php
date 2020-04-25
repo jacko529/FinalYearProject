@@ -6,6 +6,7 @@ use App\Classes\S3Helper;
 use App\Entity\Course;
 use App\Entity\User;
 use App\Repository\CourseRepository;
+use App\Validation\CourseValidator;
 use Aws\S3\Exception\S3Exception;
 use Aws\S3\S3Client;
 use GraphAware\Neo4j\OGM\EntityManagerInterface;
@@ -17,14 +18,17 @@ class CourseController extends AbstractController
     protected EntityManagerInterface $entityManager;
     protected CourseRepository $courseRepository;
     protected $s3;
+    protected CourseValidator $validator;
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        CourseRepository $courseRepository
+        CourseRepository $courseRepository,
+        CourseValidator $validator
     ) {
         $this->s3 = new S3Helper();
         $this->entityManager = $entityManager;
         $this->courseRepository = $courseRepository;
+        $this->validator = $validator;
     }
 
 
@@ -107,9 +111,16 @@ class CourseController extends AbstractController
     public function create(Request $request)
     {
         $requests = $request->request->all();
+        $user = $this->getUser();
+
         $json = json_decode($requests['json'], true);
+        $validate = $this->validator->validate($json, $request->files->get('file'),  $user->getUsername());
+        if($validate !== false){
+            return  $this->json(['error' => $validate], 401);
+        }
         $this->s3->checkBucketsAgainstCourse($json['name']);
         $file = $request->files->get('file');
+
         $fileName = $this->s3->upload($file, $json['name']);
 
         $timestamp = date("Y-m-d H:i:s");

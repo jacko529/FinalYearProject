@@ -3,11 +3,47 @@
   <component name="ChangeListManager">
     <list default="true" id="78098f88-2b19-4108-a517-33c192de8add" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuickScript/CreateUsers.php" beforeDir="false" afterPath="$PROJECT_DIR$/QuickScript/CreateUsers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuickScript/start.php" beforeDir="false" afterPath="$PROJECT_DIR$/QuickScript/start.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/baboonka.conf" beforeDir="false" afterPath="$PROJECT_DIR$/docker/baboonka.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/App.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/App.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/Loader.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/Loader.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/SidePanel.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/SidePanel.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/actions/authActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/actions/authActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/actions/errorActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/actions/errorActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/AppNavbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/AppNavbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/Exam/Exam.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Exam/Exam.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/Exam/Question.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Exam/Question.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/Exam/QuestionCount.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Exam/QuestionCount.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/Home/CourseContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Home/CourseContent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/Home/CourseTile.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Home/CourseTile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/src/components/Home/Entry.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Home/Entry.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/Home/InformCards.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Home/InformCards.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/Home/MainEntry.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Home/MainEntry.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/Home/NoCollab.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Home/NoCollab.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/Home/NoCourseTile.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Home/NoCourseTile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/Home/NonUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Home/NonUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/Home/NormalTile.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Home/NormalTile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/Home/Tiles.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Home/Tiles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/Mutliple/MasterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Mutliple/MasterForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/Mutliple/Multistep.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Mutliple/Multistep.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/SideNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/SideNav.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/TeachUpload/TeachHome.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/TeachUpload/TeachHome.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/TeachUpload/UploadContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/TeachUpload/UploadContent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/TeachUpload/UploadCourse.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/TeachUpload/UploadCourse.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/LoginModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/LoginModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/Logout.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/Logout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/PrivateRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/PrivateRoute.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/RegisterModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/RegisterModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/ResolveRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/ResolveRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/auth/TeacherPrivateRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/auth/TeacherPrivateRoute.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/reducers/authReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/reducers/authReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/reducers/errorReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/reducers/errorReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/reducers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/stores/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/stores/store.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -283,6 +319,7 @@
       <workItem from="1585404363152" duration="2287000" />
       <workItem from="1585486669785" duration="59837000" />
       <workItem from="1586095840213" duration="47567000" />
+      <workItem from="1587022416198" duration="47357000" />
     </task>
     <servers />
   </component>
@@ -325,14 +362,14 @@
       <screen x="0" y="23" width="1440" height="816" />
     </state>
     <state x="436" y="240" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.816@0.23.1440.816" timestamp="1583491739824" />
-    <state x="458" y="193" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1585942665104">
-      <screen x="0" y="23" width="1440" height="821" />
+    <state x="458" y="193" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1587310999227">
+      <screen x="0" y="23" width="1440" height="823" />
     </state>
     <state x="458" y="191" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1440.812@0.23.1440.812" timestamp="1582488168119" />
     <state x="458" y="192" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1440.816@0.23.1440.816" timestamp="1582751540785" />
     <state x="458" y="193" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1440.821@0.23.1440.821" timestamp="1585942665104" />
     <state x="458" y="193" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1440.822@0.23.1440.822" timestamp="1582274941355" />
-    <state x="458" y="193" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1440.823@0.23.1440.823" timestamp="1582995803630" />
+    <state x="458" y="193" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1440.823@0.23.1440.823" timestamp="1587310999227" />
     <state x="368" y="85" key="#phpunit.xml" timestamp="1582270929821">
       <screen x="0" y="23" width="1440" height="822" />
     </state>
@@ -406,14 +443,14 @@
       <screen x="0" y="23" width="1440" height="816" />
     </state>
     <state width="1398" height="261" key="GridCell.Tab.3.right/0.23.1440.816@0.23.1440.816" timestamp="1583133773636" />
-    <state x="378" y="254" key="NewPhpClassDialog" timestamp="1585942617453">
-      <screen x="0" y="23" width="1440" height="821" />
+    <state x="378" y="255" key="NewPhpClassDialog" timestamp="1587300573739">
+      <screen x="0" y="23" width="1440" height="823" />
     </state>
     <state x="378" y="252" key="NewPhpClassDialog/0.23.1440.812@0.23.1440.812" timestamp="1582387927661" />
     <state x="378" y="253" key="NewPhpClassDialog/0.23.1440.816@0.23.1440.816" timestamp="1582752926528" />
     <state x="378" y="254" key="NewPhpClassDialog/0.23.1440.821@0.23.1440.821" timestamp="1585942617453" />
     <state x="378" y="255" key="NewPhpClassDialog/0.23.1440.822@0.23.1440.822" timestamp="1583359136441" />
-    <state x="378" y="255" key="NewPhpClassDialog/0.23.1440.823@0.23.1440.823" timestamp="1584955197721" />
+    <state x="378" y="255" key="NewPhpClassDialog/0.23.1440.823@0.23.1440.823" timestamp="1587300573739" />
     <state x="538" y="361" key="NewPhpFileDialog" timestamp="1582752831081">
       <screen x="0" y="23" width="1440" height="816" />
     </state>
@@ -425,17 +462,17 @@
     <state x="397" y="261" key="com.intellij.ide.util.TipDialog/0.23.1440.816@0.23.1440.816" timestamp="1584093972767" />
     <state x="397" y="262" key="com.intellij.ide.util.TipDialog/0.23.1440.821@0.23.1440.821" timestamp="1585487311166" />
     <state x="397" y="263" key="com.intellij.ide.util.TipDialog/0.23.1440.823@0.23.1440.823" timestamp="1584882175652" />
-    <state x="375" y="51" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1583094649548">
+    <state x="375" y="51" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1587325740552">
       <screen x="0" y="23" width="1440" height="823" />
     </state>
     <state x="375" y="51" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1440.812@0.23.1440.812" timestamp="1582582482571" />
-    <state x="375" y="51" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1440.823@0.23.1440.823" timestamp="1583094649548" />
+    <state x="375" y="51" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1440.823@0.23.1440.823" timestamp="1587325740552" />
     <state x="458" y="94" key="com.intellij.troubleshooting.ui.CollectTroubleshootingInformationDialog" timestamp="1585574153257">
       <screen x="0" y="23" width="1440" height="827" />
     </state>
     <state x="458" y="94" key="com.intellij.troubleshooting.ui.CollectTroubleshootingInformationDialog/0.23.1440.827@0.23.1440.827" timestamp="1585574153257" />
-    <state x="378" y="196" width="919" height="546" key="find.popup" timestamp="1586209000135">
-      <screen x="0" y="23" width="1440" height="821" />
+    <state x="378" y="197" width="843" height="480" key="find.popup" timestamp="1587819378238">
+      <screen x="0" y="23" width="1440" height="828" />
     </state>
     <state x="378" y="194" width="837" height="540" key="find.popup/0.23.1440.812@0.23.1440.812" timestamp="1583699220766" />
     <state x="378" y="194" width="823" height="476" key="find.popup/0.23.1440.814@0.23.1440.814" timestamp="1586126047217" />
@@ -443,17 +480,21 @@
     <state x="378" y="196" width="919" height="546" key="find.popup/0.23.1440.821@0.23.1440.821" timestamp="1586209000135" />
     <state x="378" y="196" width="837" height="547" key="find.popup/0.23.1440.822/-1920.23.1920.1057@0.23.1440.822" timestamp="1585756121364" />
     <state x="378" y="196" width="823" height="476" key="find.popup/0.23.1440.822@0.23.1440.822" timestamp="1585904643105" />
-    <state x="378" y="196" width="843" height="477" key="find.popup/0.23.1440.823@0.23.1440.823" timestamp="1584956242170" />
-    <state x="385" y="169" width="670" height="671" key="search.everywhere.popup" timestamp="1586166736324">
-      <screen x="0" y="23" width="1440" height="816" />
+    <state x="378" y="196" width="843" height="477" key="find.popup/0.23.1440.823@0.23.1440.823" timestamp="1587323835613" />
+    <state x="378" y="197" width="919" height="550" key="find.popup/0.23.1440.826@0.23.1440.826" timestamp="1586974726713" />
+    <state x="378" y="197" width="843" height="480" key="find.popup/0.23.1440.827@0.23.1440.827" timestamp="1587817640481" />
+    <state x="378" y="197" width="843" height="480" key="find.popup/0.23.1440.828@0.23.1440.828" timestamp="1587819378238" />
+    <state x="385" y="171" width="670" height="682" key="search.everywhere.popup" timestamp="1587407414013">
+      <screen x="0" y="23" width="1440" height="827" />
     </state>
     <state x="385" y="168" width="670" height="667" key="search.everywhere.popup/0.23.1440.812@0.23.1440.812" timestamp="1586108069216" />
     <state x="385" y="169" width="670" height="671" key="search.everywhere.popup/0.23.1440.814@0.23.1440.814" timestamp="1585410189122" />
     <state x="385" y="169" width="670" height="671" key="search.everywhere.popup/0.23.1440.816@0.23.1440.816" timestamp="1586166736324" />
     <state x="385" y="170" width="670" height="676" key="search.everywhere.popup/0.23.1440.821@0.23.1440.821" timestamp="1585689041842" />
     <state x="385" y="170" width="670" height="677" key="search.everywhere.popup/0.23.1440.822@0.23.1440.822" timestamp="1585902552607" />
-    <state x="385" y="170" width="670" height="676" key="search.everywhere.popup/0.23.1440.823@0.23.1440.823" timestamp="1582996358817" />
-    <state x="385" y="171" width="670" height="682" key="search.everywhere.popup/0.23.1440.827@0.23.1440.827" timestamp="1585574157026" />
+    <state x="385" y="170" width="670" height="676" key="search.everywhere.popup/0.23.1440.823@0.23.1440.823" timestamp="1587329643795" />
+    <state x="385" y="171" width="670" height="682" key="search.everywhere.popup/0.23.1440.827@0.23.1440.827" timestamp="1587407414013" />
+    <state x="385" y="171" width="670" height="681" key="search.everywhere.popup/0.23.1440.828@0.23.1440.828" timestamp="1587391657066" />
     <state x="407" y="23" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1586163470418">
       <screen x="0" y="23" width="1440" height="816" />
     </state>

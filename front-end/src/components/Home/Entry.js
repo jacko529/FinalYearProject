@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {Button, Container, Select, Collection, Range, CollectionItem, Row, Col} from 'react-materialize';
+import {Button, Col, Collection, CollectionItem, Container, Range, Row, Select} from 'react-materialize';
 import 'materialize-css'
 import '../../Loader.css';
 import '../../SidePanel.css';
@@ -52,20 +52,20 @@ export class Entry extends Component {
         axios.get('/next-active', config)
             .then(res => {
                 // if it is the first course
-                 this.setState({completeDataSet: res.data});
-                 console.log(this.state.completeDataSet)
+                this.setState({completeDataSet: res.data});
+                console.log(this.state.completeDataSet);
 
                 if (!res.data['shortest_path'] && !res.data['jarrard'] && !res.data['none']) {
                     this.setState({course: res.data[0]});
-                   // if there is nothing done yet (new user)
-               }else if(res.data['none']){
-                   this.setState({noCourse: res.data['none']});
-               }else if (res.data['shortest_path'] && !res.data['jarrard']){
-                   this.setState({course: res.data['shortest_path'][0]});
-                   this.setState({explainShortPath: res.data['explain_short_path'][0]});
+                    // if there is nothing done yet (new user)
+                } else if (res.data['none']) {
+                    this.setState({noCourse: res.data['none']});
+                } else if (res.data['shortest_path'] && !res.data['jarrard']) {
+                    this.setState({course: res.data['shortest_path'][0]});
+                    this.setState({explainShortPath: res.data['explain_short_path'][0]});
 
-               } else {
-                    console.log('request', res.data['explain_short_path'][0])
+                } else {
+                    console.log('request', res.data['explain_short_path'][0]);
                     this.setState({course: res.data['shortest_path'][0]});
                     this.setState({recommendation: res.data['jarrard'][0]});
                     this.setState({explainShortPath: res.data['explain_short_path'][0]});
@@ -157,8 +157,6 @@ export class Entry extends Component {
         };
 
 
-
-
         const {isTeacher, isUser, isLoading, isAuthenticated, user, nextActiveLoaded} = this.props.auth;
 
 
@@ -179,7 +177,7 @@ export class Entry extends Component {
                     this.setState({courseDisappear: true});
 
                 });
-        }
+        };
         let save = (e) => {
             const config = {
                 headers: {
@@ -196,7 +194,7 @@ export class Entry extends Component {
                 });
 
 
-        }
+        };
 
         const welcome = (
             <Fragment>
@@ -221,7 +219,7 @@ export class Entry extends Component {
         );
 
 
-        const {value} = this.state
+        const {value} = this.state;
         if (this.state.requestCompleted) {
             // {this.explainShortPath.map((course) => console.log(course) )}
             console.log('recomm', this.state.completeDataSet)
@@ -251,146 +249,146 @@ export class Entry extends Component {
                         {welcome}
 
                         {Object.keys(user.learning_styles).length > 1 ?
-                        <div>
-                        <h2>Other courses you can take</h2>
-                        <Select
-                            label="Choose your option"
-                            options={{
-                                classes: '',
-                                dropdownOptions: {
-                                    alignment: 'left',
-                                    autoTrigger: true,
-                                    closeOnClick: true,
-                                    constrainWidth: true,
-                                    container: null,
-                                    coverTrigger: true,
-                                    hover: false,
-                                    inDuration: 150,
-                                    onCloseEnd: null,
-                                    onCloseStart: null,
-                                    onOpenEnd: null,
-                                    onOpenStart: null,
-                                    outDuration: 250
-                                }
-                            }}
-                            value={this.state.selectedCourse}
-                            onChange={this.handleCourse.bind(this)}
-                        >
+                            <div>
+                                <h2>Other courses you can take</h2>
+                                <Select
+                                    label="Choose your option"
+                                    options={{
+                                        classes: '',
+                                        dropdownOptions: {
+                                            alignment: 'left',
+                                            autoTrigger: true,
+                                            closeOnClick: true,
+                                            constrainWidth: true,
+                                            container: null,
+                                            coverTrigger: true,
+                                            hover: false,
+                                            inDuration: 150,
+                                            onCloseEnd: null,
+                                            onCloseStart: null,
+                                            onOpenEnd: null,
+                                            onOpenStart: null,
+                                            outDuration: 250
+                                        }
+                                    }}
+                                    value={this.state.selectedCourse}
+                                    onChange={this.handleCourse.bind(this)}
+                                >
 
-                            { this.state.coursesCanChoose.map((item, key) =>
-                                <option value={item}>
-                                    {item}
-                                </option>
-                            )}
+                                    {this.state.coursesCanChoose.map((item, key) =>
+                                        <option value={item}>
+                                            {item}
+                                        </option>
+                                    )}
 
 
-                        </Select>
-                        <div style={{textAlign:"center"}}>
-                        <Button onClick={saveCourse}>Choose this course</Button>
-                        </div>
-                        </div>
-                        : null}
+                                </Select>
+                                <div style={{textAlign: "center"}}>
+                                    <Button onClick={saveCourse}>Choose this course</Button>
+                                </div>
+                            </div>
+                            : null}
                         <h2>Courses currently taking</h2>
 
-                        { Object.values(this.state.completeDataSet).map((item, key) =>
+                        {Object.values(this.state.completeDataSet).map((item, key) =>
                             <div>
                                 {console.log(item.resource)}
-                               <h3>{item.course}</h3>
-                               <Row className="bottom-row">
+                                <h3>{item.course}</h3>
+                                <Row className="bottom-row">
 
-                                   {item.none ?
-                                       <NoCourseTile
-                                           image={"/study-notebooks.jpg"}
-                                           title={item.none}
-                                       />
-                                       :null}
+                                    {item.none ?
+                                        <NoCourseTile
+                                            image={"/study-notebooks.jpg"}
+                                            title={item.none}
+                                        />
+                                        : null}
 
-                                   {item.resource ?
-                                       <NoCourseTile
-                                           image={"/study-notebooks.jpg"}
-                                           title={item.resource.none}
-                                       />
-                                       :null}
-                            {item.shortest_path ?
-                               <CourseTile
-                                   image={item.course_image}
-                                   title={item.shortest_path.resource.name_of_resource}
-                                   stage={item.shortest_path.resource.stage}
-                                   course={item.course}
-                                   time={item.shortest_path.resource.time}
-                                   url={item.shortest_path.resource.url}
-                                   filename={item.shortest_path.resource.name_of_file}
-                                   email={user.email}
-                                   button={'Start Course'}
-                                   />
-                                : null}
-                                   {item.jarrard  ?
+                                    {item.resource ?
+                                        <NoCourseTile
+                                            image={"/study-notebooks.jpg"}
+                                            title={item.resource.none}
+                                        />
+                                        : null}
+                                    {item.shortest_path ?
+                                        <CourseTile
+                                            image={item.course_image}
+                                            title={item.shortest_path.resource.name_of_resource}
+                                            stage={item.shortest_path.resource.stage}
+                                            course={item.course}
+                                            time={item.shortest_path.resource.time}
+                                            url={item.shortest_path.resource.url}
+                                            filename={item.shortest_path.resource.name_of_file}
+                                            email={user.email}
+                                            button={'Start Course'}
+                                        />
+                                        : null}
+                                    {item.jarrard ?
                                         <Fragment>
-                                       {!Array.isArray(item.jarrard) ?
+                                            {!Array.isArray(item.jarrard) ?
 
-                                       <CourseTile
-                                       image={"/study.jpg"}
-                                       title={item.jarrard.resource.name_of_resource}
-                                       stage={item.jarrard.resource.stage}
-                                       course={item.course}
-                                       time={item.jarrard.resource.time}
-                                       url={item.jarrard.resource.url}
-                                       filename={item.shortest_path.resource.name_of_file}
-                                       email={user.email}
-                                       button={'Start Course'}
-                                       />
+                                                <CourseTile
+                                                    image={"/study.jpg"}
+                                                    title={item.jarrard.resource.name_of_resource}
+                                                    stage={item.jarrard.resource.stage}
+                                                    course={item.course}
+                                                    time={item.jarrard.resource.time}
+                                                    url={item.jarrard.resource.url}
+                                                    filename={item.shortest_path.resource.name_of_file}
+                                                    email={user.email}
+                                                    button={'Start Course'}
+                                                />
 
-                                       : null}
+                                                : null}
                                         </Fragment>
-                                       : null}
+                                        : null}
 
-                                   {Array.isArray(item.jarrard) ?
+                                    {Array.isArray(item.jarrard) ?
 
-                                       <NoCollab
-                                           image={"/study-notebooks.jpg"}
-                                       />
+                                        <NoCollab
+                                            image={"/study-notebooks.jpg"}
+                                        />
 
-                                       : null}
+                                        : null}
 
-                               </Row>
+                                </Row>
                                 {item.explain_short_path ?
-                               <Col>
-                                   <h3>Explain your path </h3>
-                                   <h4 style={{color: 'white'}}>This are the top  learning paths which are based
-                                       around the time your spefifed at the beginning of the course</h4>
-                                   <h5 style={{color: 'white'}}>You can look into your top learning paths by selecting
-                                       the graph, these graphs where selected by finding the shortest path based around
-                                       how long it takes to get from one resource to the next</h5>
-                                   <Graph
-                                       id="graph-id" // id is mandatory, if no id is defined rd3g will throw an error
-                                       data={item.explain_short_path.first}
-                                       config={myConfig}
-                                       onClickNode={onClickNodeFirst}
-                                       onDoubleClickNode={onDoubleClickNodeFirst}
-                                       onRightClickNode={onRightClickNodeFirst}
-                                       onClickGraph={onClickGraphFirst}
-                                       onClickLink={onClickLinkFirst}
-                                       onRightClickLink={onRightClickLinkFirst}
-                                       onMouseOverNode={onMouseOverNodeFirst}
-                                       onMouseOutNode={onMouseOutNodeFirst}
-                                       onMouseOverLink={onMouseOverLinkFirst}
-                                       onMouseOutLink={onMouseOutLinkFirst}
-                                       onNodePositionChange={onNodePositionChangeFirst}
-                                   />
+                                    <Col>
+                                        <h3>Explain your path </h3>
+                                        <h4 style={{color: 'white'}}>This are the top learning paths which are based
+                                            around the time your spefifed at the beginning of the course</h4>
+                                        <h5 style={{color: 'white'}}>You can look into your top learning paths by
+                                            selecting
+                                            the graph, these graphs where selected by finding the shortest path based
+                                            around
+                                            how long it takes to get from one resource to the next</h5>
+                                        <Graph
+                                            id="graph-id" // id is mandatory, if no id is defined rd3g will throw an error
+                                            data={item.explain_short_path.first}
+                                            config={myConfig}
+                                            onClickNode={onClickNodeFirst}
+                                            onDoubleClickNode={onDoubleClickNodeFirst}
+                                            onRightClickNode={onRightClickNodeFirst}
+                                            onClickGraph={onClickGraphFirst}
+                                            onClickLink={onClickLinkFirst}
+                                            onRightClickLink={onRightClickLinkFirst}
+                                            onMouseOverNode={onMouseOverNodeFirst}
+                                            onMouseOutNode={onMouseOutNodeFirst}
+                                            onMouseOverLink={onMouseOverLinkFirst}
+                                            onMouseOutLink={onMouseOutLinkFirst}
+                                            onNodePositionChange={onNodePositionChangeFirst}
+                                        />
 
-                               </Col>
-                                    :null}
-                           </div>
+                                    </Col>
+                                    : null}
+                            </div>
                         )}
-
-
 
 
                         {Object.keys(user.learning_styles).length < 1 ?
 
                             <div className="bottom-row" style={{textAlign: 'center'}}>
                                 <Row
-                                style={{display:'block'}}>
+                                    style={{display: 'block'}}>
                                     <h2>Student Learning Course</h2>
                                     <hr style={{background: 'white'}}></hr>
 
@@ -409,7 +407,7 @@ export class Entry extends Component {
 
                                     <Col l={6}
                                          m={6}
-                                         s={12} className={timeClass}  style={{marginBottom: '3rem'}}>
+                                         s={12} className={timeClass} style={{marginBottom: '3rem'}}>
 
                                         <h2>Student Information</h2>
                                         <h4>First enter your time you want to spend on the course</h4>
@@ -454,7 +452,7 @@ export class Entry extends Component {
                                             onChange={this.handleCourse.bind(this)}
                                         >
 
-                                            { this.state.coursesCanChoose.map((item, key) =>
+                                            {this.state.coursesCanChoose.map((item, key) =>
                                                 <option key={key} value={item}>
                                                     {item}
                                                 </option>
@@ -469,37 +467,38 @@ export class Entry extends Component {
                             </div> : null
 
 
-
-
                         }
                         {Object.keys(user.learning_styles).length > 0 ?
                             <div>
                                 <Row>
-                            <Col sm={12} md={6} lg={6}>
-                                <h3>Take the quiz again</h3>
-                                <Tiles
-                                    image={"/audo.jpg"}
-                                    title={user.first_name + ' ' + user.surname}
-                                    learning_styles={user.learning_styles}
-                                    subtitle={'Here are your results'}
-                                    description={'It will help'}
-                                    button={'TakeQuiz'}
-                                />
-                            </Col>
-                            <Col l={6}
-                            m={6}
-                            s={12} className={timeClass}  style={{marginBottom: '3rem'}}>
-                            <h4>You can edit your overall time wanting to spend on a course</h4>
-                            <Range
-                            value={this.state.rangeValue}
-                            onChange={this.handleRangeSlider.bind(this)}
-                            max="100"
-                            min="0"
-                            name="points"
-                            />
-                          <Button onClick={save}>That's enough time</Button>
+                                    <Col sm={12} md={6} lg={6}>
+                                        <h3>Take the quiz again</h3>
+                                        <Tiles
+                                            image={"/audo.jpg"}
+                                            title={user.first_name + ' ' + user.surname}
+                                            learning_styles={user.learning_styles}
+                                            subtitle={'Here are your results'}
+                                            description={'It will help'}
+                                            button={'TakeQuiz'}
+                                        />
+                                    </Col>
 
-                            </Col>
+                                    <Col l={6}
+                                         m={6}
+                                         s={12} className={timeClass} style={{marginBottom: '3rem'}}>
+                                        <h4>Your current time preference is {user.time} minutes</h4>
+
+                                        <h4>You can edit your overall time wanting to spend on a course</h4>
+                                        <Range
+                                            value={this.state.rangeValue}
+                                            onChange={this.handleRangeSlider.bind(this)}
+                                            max="100"
+                                            min="0"
+                                            name="points"
+                                        />
+                                        <Button onClick={save}>That's enough time</Button>
+
+                                    </Col>
                                 </Row>
                             </div>
 

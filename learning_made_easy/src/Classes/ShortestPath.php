@@ -47,11 +47,13 @@ class ShortestPath
                 $this->usersTopCategory
             );
         }else{
+
             $shortestPath = $this->learningResourceRepository->KshortestPath(
                 $this->lastConsumedItem,
                 $this->stage,
                 $this->usersTopCategory
             );
+
         }
 
         foreach ($shortestPath->records() as $newItem) {
@@ -60,7 +62,6 @@ class ShortestPath
             $this->journeyCosts[] = $newItem->get('costs');
             $totalCost[] = $newItem->get('totalCost');
         }
-
         if($flag){
             $test = $this->learningResourceRepository->matchNext(
                 end($this->returnedArrays[0]),
@@ -70,6 +71,7 @@ class ShortestPath
             );
 
         }else{
+
             $final = $this->findTimeAndStyle($this->usersTime, $totalCost, $this->usersTopCategory, $this->returnedArrays);
 
             $test = $this->learningResourceRepository->matchNext(

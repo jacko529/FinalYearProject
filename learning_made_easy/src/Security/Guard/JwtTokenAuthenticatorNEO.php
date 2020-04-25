@@ -87,7 +87,6 @@ class JwtTokenAuthenticatorNEO extends AbstractGuardAuthenticator
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
         return new JsonResponse('Hello!', 401);
-
     }
 
 
