@@ -76,12 +76,16 @@ class LearningAnalyticsRepoistory
     public function topResourcesPerCourse($course){
         $allCourses = [];
         $resources = $this->client->run(
-            "MATCH (userFinished:User)-[STUDYING]->(k:Course{name: 'Programming'})
+//            "MATCH (userFinished:User)-[STUDYING]->(k:Course{name: 'Programming'})
+//            with userFinished
+//            Match (c:Course {name: '$course'})-[:TimeDifficulty*]->(learning:LearningResource)
+//            with learning
+//            match (userFinished)-[r:Consumed]->(learning)
+//            RETURN learning.name_of_resource as resource, learning.stage as stage, count(distinct(r)) AS num
+           "MATCH (userFinished:User)-[:STUDYING]->(k:Course{name: '$course'})
             with userFinished
-            Match (c:Course {name: '$course'})-[:TimeDifficulty*]->(learning:LearningResource)
-            with learning
-            match (userFinished)-[r:Consumed]->(learning)
-            RETURN learning.name_of_resource as resource, learning.stage as stage, count(distinct(r)) AS num
+            match (userFinished)-[e:Consumed]->(k:LearningResource)
+            RETURN k.name_of_resource, count(distinct(e)) AS num
             ORDER BY num DESC limit 4"
         );
         foreach ($resources->records() as $record) {

@@ -267,7 +267,7 @@ class LearningResourceRepository
     public function lastStage($course){
         $stage  = 0;
         $clientQuery = $this->client->run(
-            "MATCH (s:Course {name: 'Programming'})-[:TimeDifficulty*]->(n:LearningResource)
+            "MATCH (s:Course {name: '$course'})-[:TimeDifficulty*]->(n:LearningResource)
             RETURN max(n.stage) as stage"
         );
         foreach($clientQuery->records()  as $query){
