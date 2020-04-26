@@ -303,7 +303,7 @@ class LearningResourceRepository
             $array = $array[0];
         }
 
-        return array_merge(...$array);
+        return $array;
     }
 
     public function findResource($name)
@@ -324,8 +324,8 @@ class LearningResourceRepository
     {
         $lastStage = 0;
         $query = $this->client->run(
-            "MATCH (course:Course {name: '$course'})-[:TimeDifficulty*]->(n:LearningResource)
-             RETURN max(n.stage) as stage"
+                "MATCH (course:Course {name: '$course'})-[:TimeDifficulty*]->(n:LearningResource)
+                 RETURN max(n.stage) as stage"
         );
         foreach ($query->records() as $record) {
             $lastStage = $record->values();

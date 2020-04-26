@@ -75,7 +75,7 @@ class S3Helper
         $response = $this->s3->doesObjectExist($trimmedBucket, $key);
         if ($response) {
             $plainUrl = $this->s3->getObjectUrl($trimmedBucket, $key);
-            $url = str_replace('minio', 'localhost:9000', strtolower($plainUrl));
+            $url = str_replace('minio', 'baboonka.com', strtolower($plainUrl));
         } else {
             $url = null;
         }

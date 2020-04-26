@@ -54,7 +54,7 @@ class LearningAnalyticsController extends AbstractController
                 'count' => $this->learningAnalyticsRepo->howManyPerCourse($courses),
                 'finished' => $this->learningAnalyticsRepo->howManyPeopleFinishedCourse($courses, $lastStageOfCourse),
 //                'avg_time_wanted' => round($this->learningAnalyticsRepo->averageTimePeopleWantOnCourse($courses), 2),
-                'most_popular_route' => '',
+                'most_popular_resources' => $this->learningAnalyticsRepo->topResourcesPerCourse($courses),
                 'most_popular_learning_style' => $this->learningAnalyticsRepo->topStyleOfEachCourse($courses)
             ];
         }
