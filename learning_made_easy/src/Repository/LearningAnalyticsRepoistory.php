@@ -89,7 +89,7 @@ class LearningAnalyticsRepoistory
             ORDER BY num DESC limit 4"
         );
         foreach ($resources->records() as $record) {
-            $allCourses[] = [$record->get('resource'), $record->get('stage'),  $record->get('num')];
+            $allCourses[] = ['resource' => $record->get('resource'),'stage' =>  $record->get('stage'),'number' =>   $record->get('num')];
         }
         return $allCourses;
     }
