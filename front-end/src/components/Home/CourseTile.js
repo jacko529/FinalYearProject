@@ -41,6 +41,7 @@ const CourseTile = (props) => {
             >
                 Title - {props.title}<br></br>
                 Course - {props.course}<br></br>
+                Type - {props.learning_type}<br></br>
                 Stage - {props.stage}<br></br>
                 Should take - {props.time} minutes<br></br>
 

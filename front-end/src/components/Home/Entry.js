@@ -314,6 +314,7 @@ export class Entry extends Component {
                                             image={item.course_image}
                                             title={item.shortest_path.resource.name_of_resource}
                                             stage={item.shortest_path.resource.stage}
+                                            learning_type={item.shortest_path.resource.learning_type}
                                             course={item.course}
                                             time={item.shortest_path.resource.time}
                                             url={item.shortest_path.resource.url}
@@ -330,6 +331,7 @@ export class Entry extends Component {
                                                     image={"/study.jpg"}
                                                     title={item.jarrard.resource.name_of_resource}
                                                     stage={item.jarrard.resource.stage}
+                                                    learning_type={item.jarrard.resource.learning_type}
                                                     course={item.course}
                                                     time={item.jarrard.resource.time}
                                                     url={item.jarrard.resource.url}

@@ -98,23 +98,39 @@ class LearningResourceController extends AbstractController
         );
         $this->entityManager->persist($learningResource);
         $this->entityManager->flush();
+        $lastStageInCourse =  $this->learningResourceRepo->lastStage( $json['selectedCourse']);
         $stage = intval($json['stage']);
         $previousStage = $stage - 1;
-        if ($stage <= 1) {
+        if ($stage <= 1 &&  $lastStageInCourse <= 1) {
+
             $this->learningResourceRepo->connectWithFirstLearningResource(
                 $json['time'],
                 $json['selectedCourse'],
                 $json['resourceName']
 
             );
-        } elseif ($stage > 1) {
-
+        }
+        elseif ($stage <= 1 && $lastStageInCourse >= 1 ){
             $this->learningResourceRepo->connectWithPreviousLearningResource(
-                $json['selectedCourse'],
+                $lastStageInCourse,
+                false,
                 $json['resourceName'],
                 $previousStage,
                 ($stage + 1),
-                $json['time']
+                $json['time'],
+                $json['selectedCourse']
+            );
+        }
+        elseif ($stage > 1) {
+
+            $this->learningResourceRepo->connectWithPreviousLearningResource(
+                $lastStageInCourse,
+                true,
+                $json['resourceName'],
+                $previousStage,
+                ($stage + 1),
+                $json['time'],
+                $json['selectedCourse']
             );
         }
         return $this->json('successful');

@@ -19,6 +19,7 @@ services:
     volumes:
       - "./back/apoc-3.5.0.8-all.jar:/var/lib/neo4j/plugins/apoc-3.5.0.8-all.jar"
       - "./back/neo4j-graph-algorithms-3.5.14.0-standalone.jar:/var/lib/neo4j/plugins/neo4j-graph-algorithms-3.5.14.0-standalone.jar"
+      - "./movie.graphml:/var/lib/neo4j/import/movie.graphml"
   php:
     depends_on:
       - "neo4j"

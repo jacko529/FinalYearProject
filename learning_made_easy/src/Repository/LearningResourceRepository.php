@@ -17,19 +17,27 @@ class LearningResourceRepository
         $this->client = $client;
     }
 
-    public function connectWithPreviousLearningResource($course, $nameOfCurrent, $stage, $postStage, $timeBetween)
+    public function connectWithPreviousLearningResource($lastStage, $previousActive, $nameOfCurrent, $stage, $postStage, $timeBetween, $course)
     {
-        $lastStage = $this->lastStage($course);
 
-        $this->client->run(
-            "MATCH (a:LearningResource),(b:LearningResource)
+        if($previousActive){
+
+            $this->client->run(
+                "MATCH (a:LearningResource),(b:LearningResource)
              WHERE a.stage = $stage AND b.name_of_resource = '" . $nameOfCurrent . "'
              MERGE (a)-[ti:TimeDifficulty { time: $timeBetween }]->(b)"
-        );
+            );
+        }else{
+            $this->connectWithFirstLearningResource(
+                $timeBetween,
+                $course,
+                $nameOfCurrent
+            );
 
-
+        }
         //if it is
         if($postStage < $lastStage ){
+
             // if i had a new node in stage 3 - with a tme of 6 mins - connect to all the previous ones - to connect to the
             // ones in front i need to
             // target each node in front - find the leading relationship property - connect to said property
