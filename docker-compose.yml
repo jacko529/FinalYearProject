@@ -42,19 +42,19 @@ services:
       - "3306:3306"
     networks:
       - "default"
-  frontend:
-    build:
-      context: "."
-      dockerfile: "docker/frontend.Dockerfile"
-    expose:
-      - "4000"
-    ports:
-      - "4000:3000"
-    volumes:
-      - "./front-end/src:/usr/src/app/src"
-      - "./front-end/public:/usr/src/app/public"
-    networks:
-      - "default"
+#  frontend:
+#    build:
+#      context: "."
+#      dockerfile: "docker/frontend.Dockerfile"
+#    expose:
+#      - "4000"
+#    ports:
+#      - "4000:3000"
+#    volumes:
+#      - "./front-end/src:/usr/src/app/src"
+#      - "./front-end/public:/usr/src/app/public"
+#    networks:
+#      - "default"
   minio:
     image: "3sidedcube/minio"
     networks:
