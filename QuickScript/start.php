@@ -19,7 +19,8 @@ require_once 'CreateUsers.php';
 
 //
 $match = new CreateUsers();
-$match->deletesee();
+$match->deleteAll();
+$match->test();
 $match->addConstraint();
 $match->addConstraints();
 //$mo = $match->checkStage("global stage 2");

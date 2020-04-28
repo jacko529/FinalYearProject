@@ -27,7 +27,6 @@ class CalculateLearningQuiz
 
     public function trigger()
     {
-        // remove q from key
 
         $this->validate();
         $keys = str_replace('q', '', array_keys($this->mainArray));
@@ -64,22 +63,21 @@ class CalculateLearningQuiz
             },
             ARRAY_FILTER_USE_KEY
         );
-
         $globalCalculated = $this->calculateAandB($this->global);
-        $global = $this->findPreference($globalCalculated, 'global', 'sequential');
+        $global = $this->findPreference($globalCalculated, 'global');
 
         $verbalCalculated = $this->calculateAandB($this->verbal);
-        $verbal = $this->findPreference($verbalCalculated, 'verbal', 'visual');
+        $verbal = $this->findPreference($verbalCalculated, 'verbal');
 
         $intuitiveCalculated = $this->calculateAandB($this->intuitive);
-        $intuitive = $this->findPreference($intuitiveCalculated, 'intuitive', 'sensing');
+        $intuitive = $this->findPreference($intuitiveCalculated, 'intuitive');
 
         $reflectorCalculated = $this->calculateAandB($this->reflector);
-        $reflector = $this->findPreference($reflectorCalculated, 'reflective', 'active');
+        $reflector = $this->findPreference($reflectorCalculated, 'reflective');
 
         $now = $this->compareHighestPreference($global, $intuitive, $verbal, $reflector);
-        arsort($now, SORT_REGULAR);
 
+        arsort($now, SORT_REGULAR);
         return $now;
     }
 
@@ -114,28 +112,22 @@ class CalculateLearningQuiz
         return $array;
     }
 
-    public function findPreference($array, $type, $alternative)
-    {
+    public function findPreference($array, $type){
         $largest = max($this->a, $this->b) - min($this->a, $this->b);
-        if ($array['answerA'] > $array['answerb']) {
-            $finalType = $alternative;
-        } else {
-            $finalType = $type;
-        }
-        $array[$finalType] = $largest;
+        $array[$type] = $largest;
         return $array;
     }
 
-    public function compareHighestPreference($array, $array1, $array2, $array3)
-    {
+    public function compareHighestPreference($array, $array1, $array2, $array3){
         $first = array_slice($array, -1, 1, true);
         $second = array_slice($array1, -1, 1, true);
         $third = array_slice($array2, -1, 1, true);
         $forth = array_slice($array3, -1, 1, true);
-        // more b's reflective - more a's active
-        $forth = array_merge($first, $second, $third, $forth);
+
+        $forth = array_merge($first,$second, $third, $forth);
         return $forth;
     }
+
 
     public function clear()
     {

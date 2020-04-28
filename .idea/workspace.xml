@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="78098f88-2b19-4108-a517-33c192de8add" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuickScript/start.php" beforeDir="false" afterPath="$PROJECT_DIR$/QuickScript/start.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/Home/CourseTile.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Home/CourseTile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/TeachUpload/TeachHome.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/TeachUpload/TeachHome.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,6 +157,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="PHP" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/back" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -282,7 +281,7 @@
       <workItem from="1585404363152" duration="2287000" />
       <workItem from="1585486669785" duration="59837000" />
       <workItem from="1586095840213" duration="47567000" />
-      <workItem from="1587022416198" duration="66767000" />
+      <workItem from="1587022416198" duration="69960000" />
     </task>
     <servers />
   </component>
