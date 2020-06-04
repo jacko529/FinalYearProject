@@ -8,11 +8,15 @@ use App\Repository\CourseRepository;
 
 class CourseValidator
 {
+
+
     protected $courseRepo;
+
     public function __construct(CourseRepository $couresRepository)
     {
         $this->courseRepo = $couresRepository;
     }
+
     public function validate($userRequestArray, $file, $email){
         // check properties
         if (!array_diff(['name'], array_keys($userRequestArray))) {
@@ -38,4 +42,5 @@ class CourseValidator
             return 'Unsupported file type';
         }
         return false;
-    }}
+    }
+}

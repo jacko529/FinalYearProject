@@ -206,7 +206,7 @@ export class Entry extends Component {
                         First select a preference in course consumption time
                     </CollectionItem>
                     <CollectionItem>
-                        Then select the a course
+                        Then select the course
                     </CollectionItem>
                     <CollectionItem>
                         Find out your learning style

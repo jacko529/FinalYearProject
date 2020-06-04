@@ -15,7 +15,6 @@ class App extends Component {
 
     componentDidMount() {
         store.dispatch(loadUser());
-        // store.dispatch(nextActiveLoading());
 
     }
 
@@ -25,9 +24,6 @@ class App extends Component {
 
 
     render() {
-        let links = true;
-        //
-        // setTimeout(function() {  this.setState({time: true}); }.bind(this), 1600);
 
 
         return (

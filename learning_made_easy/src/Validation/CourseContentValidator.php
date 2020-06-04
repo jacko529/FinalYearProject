@@ -4,13 +4,13 @@
 namespace App\Validation;
 
 
-use App\Repository\CourseRepository;
 use App\Repository\LearningResourceRepository;
 
 class CourseContentValidator
 {
 
-    protected $learningResourceRepo;
+    protected LearningResourceRepository $learningResourceRepo;
+
     public function __construct(LearningResourceRepository $learningResourceRepo)
     {
         $this->learningResourceRepo = $learningResourceRepo;

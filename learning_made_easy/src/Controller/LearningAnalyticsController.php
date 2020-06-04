@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Repository\LearningAnalyticsRepoistory;
 use App\Repository\LearningResourceRepository;
-use App\Repository\UserRepository;
 use GraphAware\Neo4j\OGM\EntityManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,7 +39,6 @@ class LearningAnalyticsController extends AbstractController
         $courseInformation = [];
         // get the most popular route
         // get most common learning style
-
         $user = $this->getUser();
         $userEmail = $user->getUsername();
         $coursesCreated = $this->learningAnalyticsRepo->coursesCreate($userEmail);

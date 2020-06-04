@@ -1,4 +1,4 @@
 neo4j:
     connections:
         default:
-            dsn: '%env(resolve:NEO4J_DEFAULT_CONNECTION_DSN)%'
+            dsn: 'bolt://neo4j:jack@neo4j:7687'

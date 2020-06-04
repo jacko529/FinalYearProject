@@ -17,6 +17,70 @@ class LearningResourceRepository
         $this->client = $client;
     }
 
+
+    public function createStage($stage)
+    {
+        $this->client->run(
+          "CREATE (n:Stage { stage: '$stage' })"
+        );
+
+    }
+
+    public function createLearningResource($resourceArray){
+        $this->client->run(
+            "CREATE (n:LearningResource { $resourceArray })"
+        );
+    }
+
+    public function mergeWithFrontAndBack($resourceArray)
+    {
+        $this->client->run(
+            "CREATE (n:LearningResource { $resourceArray })"
+        );
+    }
+
+    public function mergeWithStage($learningResource, $timeBetween, $stage){
+        $this->client->run(
+            "MERGE ($learningResource)-[ti:TimeDifficulty { time: $timeBetween }]->($stage)"
+        );
+
+    }
+
+    public function checkIfStageThere($stage){
+        return $this->client->run(
+                "MATCH (stage: Stage: {name: $stage})
+                   return stage"
+        );
+    }
+
+    public function testLearningObject($stage,$timeBetween, $learningNodeArray){
+
+        if ($this->checkIfStageThere($stage)){
+            $this->createStage($stage);
+        }
+
+        if ($stage < 1){
+            // create stage node in front if there is no stage
+            // only create one stage
+            $this->createLearningResource($learningNodeArray);
+            $this->mergeWithStage($learningNodeArray,$timeBetween, $stage);
+            // merge with in front node with time
+        }
+        // create stage in front
+         $this->createStage($stage);
+        // create node
+        // merge with back - without time - timedifficulty relationship
+        // merge front - with time - timedifficulty relationship
+
+    }
+
+    public function secondTest(){
+        // create node in a line
+        // $this->testStage($stage);
+        // connect to said new stage node
+    }
+
+
     public function connectWithPreviousLearningResource($lastStage, $previousActive, $nameOfCurrent, $stage, $postStage, $timeBetween, $course)
     {
 

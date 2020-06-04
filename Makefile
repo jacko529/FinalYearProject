@@ -17,5 +17,5 @@ composer:
 create-user:
 	cd QuickScript && php start.php
 
-crate:
+create:
 	curl -X POST -H 'Content-type: application/json' http://neo4j:jack@127.0.0.1:7474/db/data/cypher -d '{ "query" : "CREATE (n:Person { name : {name} }) RETURN n", "params" : {"name" : "Andres"}}

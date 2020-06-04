@@ -24,7 +24,6 @@ class FilterToAddS3Information
 
 
         if (!array_key_exists('jarrard', $firstCourse[$index]) && array_key_exists('shortest_path', $firstCourse[$index])) {
-            //todo test youtube url
             $firstCourse[$index]['shortest_path']['resource']['url'] = $this->s3->getS3(strtolower($course), $firstCourse[$index]['shortest_path']['resource']['name_of_file']);
             // when they are in the middle of there course
         } elseif (array_key_exists('jarrard', $firstCourse[$index]) && array_key_exists('shortest_path', $firstCourse[$index])) {
@@ -37,7 +36,6 @@ class FilterToAddS3Information
             $firstCourse[$index]['jarrard']['resource']['url'] = $this->s3->getS3(strtolower($course), $firstCourse['jarrard']['resource']['name_of_file']);
             // when it is a first course item in the journey
         } elseif (!array_key_exists('jarrard', $firstCourse[$index]) && !array_key_exists('shortest_path', $firstCourse)){
-            //todo add name of file done
             $url = $this->s3->getS3(strtolower($course), $firstCourse[$index]['resource']['name_of_file']);
             ($url !== null) ? $firstCourse[$index]['resource']['url'] = $url : null;
         }

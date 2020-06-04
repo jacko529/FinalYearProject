@@ -28,4 +28,8 @@ class FilterHelper
         return $firstCourse;
     }
 
+    public static function extractRequired($properties){
+
+    }
+
 }

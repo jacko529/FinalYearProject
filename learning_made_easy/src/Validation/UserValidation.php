@@ -8,6 +8,7 @@ class UserValidation
 {
 
     protected $userRepo;
+
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepo = $userRepository;

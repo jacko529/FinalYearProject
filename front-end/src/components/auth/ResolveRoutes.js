@@ -60,7 +60,6 @@ export class ResolveRoutes extends Component {
 
 const mapStateToProps = state => ({
     auth: state.auth,
-    // next: state.nextActiveLoaded,
 
 });
 

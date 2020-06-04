@@ -31,30 +31,19 @@ services:
       - "default"
     volumes:
       - "./learning_made_easy:/var/www/html"
-  db:
-    image: mariadb:latest
-    environment:
-      - MYSQL_DATABASE=test
-      - MYSQL_ROOT_PASSWORD=test
-      - MYSQL_USER=test
-      - MYSQL_PASSWORD=test
+  frontend:
+    build:
+      context: "."
+      dockerfile: "docker/frontend.Dockerfile"
+    expose:
+      - "4000"
     ports:
-      - "3306:3306"
+      - "4000:3000"
+    volumes:
+      - "./front-end/src:/usr/src/app/src"
+      - "./front-end/public:/usr/src/app/public"
     networks:
       - "default"
-#  frontend:
-#    build:
-#      context: "."
-#      dockerfile: "docker/frontend.Dockerfile"
-#    expose:
-#      - "4000"
-#    ports:
-#      - "4000:3000"
-#    volumes:
-#      - "./front-end/src:/usr/src/app/src"
-#      - "./front-end/public:/usr/src/app/public"
-#    networks:
-#      - "default"
   minio:
     image: "3sidedcube/minio"
     networks:

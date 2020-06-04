@@ -18,11 +18,13 @@ require_once 'CreateUsers.php';
 //}
 
 //
-$match = new CreateUsers();
-$match->deleteAll();
-$match->test();
-$match->addConstraint();
-$match->addConstraints();
+try {
+    $match = new CreateUsers();
+}catch (Exception $exception){
+    echo $exception->getMessage();
+}
+
+
 //$mo = $match->checkStage("global stage 2");
 //$stage = $mo->getRecords();
 //foreach($stage as $mod){

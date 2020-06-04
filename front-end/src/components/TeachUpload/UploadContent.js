@@ -192,13 +192,9 @@ export class TeachHome extends Component {
                                            onChange={this.handleLearningStyleChange.bind(this)} type="select"
                                            name="select" id="learning_style">
                                         <option>verbal</option>
-                                        <option>visual</option>
                                         <option>intuitive</option>
-                                        <option>sensing</option>
                                         <option>reflective</option>
-                                        <option>active</option>
                                         <option>global</option>
-                                        <option>sequential</option>
                                     </Input>
                                 </FormGroup>
                             </Col>
